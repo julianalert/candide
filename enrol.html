@@ -8,160 +8,174 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Join the founding list — Candide, Doha">
 <meta property="og:description" content="Twenty places in Candide’s first term. Founding families hear first when dates, venue and fees are confirmed.">
-<meta name="theme-color" content="#fff8ea">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/styles.css">
-<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="star" viewBox="-10 -10 20 20"><path fill="currentColor" d="M0,-8 C0.9,-3 3,-0.9 8,0 C3,0.9 0.9,3 0,8 C-0.9,3 -3,0.9 -8,0 C-3,-0.9 -0.9,-3 0,-8 Z"/></symbol>
-  <symbol id="tick" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
-</svg>
-
-<header class="wrap nav">
-  <a class="brand" href="index.html"><span class="spark"><svg aria-hidden="true"><use href="#star"/></svg></span>Candide</a>
-  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
-    <span class="sr-only">Menu</span>
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14"/></svg>
-  </button>
-  <nav id="nav-links" class="nav-links" aria-label="Main">
-    <a href="programme.html">Programme</a>
-    <a href="index.html#method">Method</a>
-    <a href="index.html#parents">For parents</a>
-    <a href="index.html#faq">FAQ</a>
-    <a class="pill" href="enrol.html" aria-current="page">Join the founding list →</a>
+<header class="topbar">
+  <a class="identity" href="index.html">
+    <span class="logo" aria-hidden="true">C</span>
+    <span class="identity-text">
+      <span class="identity-name">Candide</span>
+      <span class="identity-sub">AI academy · Doha</span>
+    </span>
+  </a>
+  <nav class="tabs" aria-label="Main">
+    <a class="tab" href="index.html">Overview</a>
+    <a class="tab" href="programme.html">Programme</a>
+    <a class="tab" href="index.html#method">Method</a>
+    <a class="tab" href="index.html#parents">For parents</a>
+    <a class="tab" href="index.html#faq">Questions</a>
   </nav>
+  <div class="topbar-actions">
+    <span class="context">Founding term · Doha</span>
+    <a class="btn btn-primary" href="enrol.html" aria-current="page">Join the list</a>
+  </div>
 </header>
 
-<main id="main" class="wrap enrol">
+<main id="main" class="page">
 
-  <div class="enrol-intro">
-    <span class="eyebrow">✦ Doha · Founding term</span>
-    <h1>Be one of Candide’s first twenty families.</h1>
-    <p class="lead">Join the founding list and you’ll hear first when dates, venue and fees are confirmed, before places open to anyone else.</p>
-  </div>
-
-  <div class="form-card">
-    <form id="founding-form">
-      <h2>Join the founding list</h2>
-      <p class="form-intro">Tell us a little about your family. It takes about a minute.</p>
-
-      <div class="preview-flag" hidden>Preview: this form isn’t connected yet. Add a form endpoint in <code>assets/site.js</code> to start receiving sign-ups.</div>
-
-      <div class="field-row">
-        <div class="field">
-          <label for="f-name">Your first name</label>
-          <input id="f-name" name="parent_name" autocomplete="given-name" required>
-        </div>
-        <div class="field">
-          <label for="f-age">Child’s age</label>
-          <select id="f-age" name="child_age" required>
-            <option value="">Select age</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-            <option value="6-7">6–7 (tell me when the younger group opens)</option>
-          </select>
-        </div>
+  <div class="stack">
+    <div class="page-head">
+      <div class="page-intro">
+        <h1>Join the founding list</h1>
+        <p class="page-sub">Be one of Candide’s first twenty families. You’ll hear first when dates, venue and fees are confirmed, before places open to anyone else.</p>
       </div>
-
-      <div class="field">
-        <label for="f-email">Email</label>
-        <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
-      </div>
-
-      <div class="field">
-        <label for="f-phone">WhatsApp or phone <span class="hint">(optional)</span></label>
-        <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+974 …">
-      </div>
-
-      <div class="field">
-        <label for="f-when">When would suit you best?</label>
-        <select id="f-when" name="preferred_time">
-          <option>Either works</option>
-          <option>A weekday after school (Sun–Thu)</option>
-          <option>The weekend (Fri–Sat)</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label for="f-area">Your neighbourhood or your child’s school <span class="hint">(optional, helps us choose a venue)</span></label>
-        <input id="f-area" name="area_or_school">
-      </div>
-
-      <div class="field">
-        <label for="f-notes">Anything we should know? <span class="hint">(optional)</span></label>
-        <textarea id="f-notes" name="notes" rows="3" placeholder="Interests, experience, questions…"></textarea>
-      </div>
-
-      <label class="check">
-        <input type="checkbox" name="taster_interest" value="yes">
-        <span>I’d be interested in a taster workshop before the term starts.</span>
-      </label>
-
-      <div class="hp" aria-hidden="true">
-        <label>Leave this field empty <input name="_gotcha" tabindex="-1" autocomplete="off"></label>
-      </div>
-
-      <button class="btn primary submit" type="submit">Join the founding list →</button>
-      <div class="form-status" role="alert" hidden></div>
-      <p class="micro">No payment today. We’ll only use these details to contact you about Candide.</p>
-    </form>
-
-    <div class="success" id="founding-success" tabindex="-1" hidden>
-      <h2>You’re on the founding list ✓</h2>
-      <p>Thank you. We’ll write to <b data-email></b> as soon as the dates, venue and fees are confirmed.</p>
     </div>
-  </div>
 
-  <div class="enrol-details">
-    <ul class="checks">
-      <li>
-        <span class="tick"><svg aria-hidden="true"><use href="#tick"/></svg></span>
-        <div><b>Ages 8–12</b><span>Children of a similar age are grouped together.</span></div>
-      </li>
-      <li>
-        <span class="tick"><svg aria-hidden="true"><use href="#tick"/></svg></span>
-        <div><b>Eight weekly sessions</b><span>90 minutes each, in person in Doha.</span></div>
-      </li>
-      <li>
-        <span class="tick"><svg aria-hidden="true"><use href="#tick"/></svg></span>
-        <div><b>Small groups</b><span>8–10 children with a lead educator and an assistant.</span></div>
-      </li>
-      <li>
-        <span class="tick"><svg aria-hidden="true"><use href="#tick"/></svg></span>
-        <div><b>Create Your Own Universe</b><span>A creature, a story and a trailer, ending with a showcase for parents. <a class="link" href="programme.html">See the programme</a></span></div>
-      </li>
-    </ul>
+    <div class="enrol-grid">
 
-    <div class="next">
-      <h2>What happens next</h2>
-      <ol>
-        <li>You join the list. It’s free and doesn’t commit you to anything.</li>
-        <li>We send you the dates, venue and fees as soon as they’re confirmed.</li>
-        <li>You decide whether to take a place, before enrolment opens more widely.</li>
-      </ol>
+      <!-- Form -->
+      <div class="card">
+        <div class="card-head">
+          <h2 class="card-title">Your details</h2>
+          <span class="meta">Takes about a minute · no payment today</span>
+        </div>
+
+        <form id="founding-form" class="form-body">
+          <div class="notice notice-warn preview-flag" hidden><span>Preview · this form isn’t connected yet. Add a form endpoint in <code>assets/site.js</code> to start receiving sign-ups.</span></div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="f-name">Your first name</label>
+              <input class="input" id="f-name" name="parent_name" autocomplete="given-name" required>
+            </div>
+            <div class="field">
+              <label class="label" for="f-age">Child’s age</label>
+              <select class="input" id="f-age" name="child_age" required>
+                <option value="">Select an age</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option value="6-7">6–7 · tell me when the younger group opens</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="f-email">Email</label>
+              <input class="input" id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+            </div>
+            <div class="field">
+              <label class="label" for="f-phone">WhatsApp or phone <span class="hint">· optional</span></label>
+              <input class="input" id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+974 …">
+            </div>
+          </div>
+
+          <fieldset class="field">
+            <legend class="label">When would suit you best? <span class="hint">· weekdays are Sun → Thu, after school</span></legend>
+            <div class="segmented" style="margin-top:6px">
+              <label><input type="radio" name="preferred_time" value="Either works" checked><span>Either</span></label>
+              <label><input type="radio" name="preferred_time" value="Weekday after school (Sun–Thu)"><span>Weekday</span></label>
+              <label><input type="radio" name="preferred_time" value="Weekend (Fri–Sat)"><span>Weekend</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label class="label" for="f-area">Your neighbourhood or your child’s school <span class="hint">· optional, helps us choose a venue</span></label>
+            <input class="input" id="f-area" name="area_or_school">
+          </div>
+
+          <div class="field">
+            <label class="label" for="f-notes">Anything we should know? <span class="hint">· optional</span></label>
+            <textarea class="input" id="f-notes" name="notes" rows="3" placeholder="Interests, experience, questions…"></textarea>
+          </div>
+
+          <label class="check">
+            <input type="checkbox" name="taster_interest" value="yes">
+            <span>I’d be interested in a taster workshop before the term starts</span>
+          </label>
+
+          <div class="hp" aria-hidden="true">
+            <label>Leave this field empty <input name="_gotcha" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <div class="form-foot">
+            <button class="btn btn-primary" type="submit">Join the founding list</button>
+            <span class="meta">We’ll only use these details to contact you about Candide.</span>
+          </div>
+          <div class="notice form-status" role="alert" hidden></div>
+        </form>
+
+        <div class="success" id="founding-success" tabindex="-1" hidden>
+          <h2>✓ You’re on the founding list</h2>
+          <p>Thank you. We’ll write to <b data-email></b> as soon as the dates, venue and fees are confirmed.</p>
+        </div>
+      </div>
+
+      <!-- Context -->
+      <div class="stack">
+        <div class="card">
+          <div class="card-head">
+            <h2 class="card-title">The founding term</h2>
+            <a class="link-arrow" href="programme.html">See the programme →</a>
+          </div>
+          <dl class="list">
+            <div class="kv-row"><dt>Programme</dt><dd>Create your own universe</dd></div>
+            <div class="kv-row"><dt>Ages</dt><dd>8–12</dd></div>
+            <div class="kv-row"><dt>Sessions</dt><dd>8 × 90 min, weekly</dd></div>
+            <div class="kv-row"><dt>Group size</dt><dd>8–10 children</dd></div>
+            <div class="kv-row"><dt>Adults per session</dt><dd>2</dd></div>
+            <div class="kv-row"><dt>Place</dt><dd>Doha, in person</dd></div>
+            <div class="kv-row"><dt>Dates, venue, fees</dt><dd>Shared with the list first</dd></div>
+          </dl>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2 class="card-title">What happens next</h2>
+          </div>
+          <ol class="list">
+            <li class="item-row"><span class="mono">01</span><div class="grow"><b>You join the list</b><span class="meta">It’s free and doesn’t commit you to anything.</span></div></li>
+            <li class="item-row"><span class="mono">02</span><div class="grow"><b>We send you the details</b><span class="meta">Dates, venue and fees, as soon as they’re confirmed.</span></div></li>
+            <li class="item-row"><span class="mono">03</span><div class="grow"><b>You decide</b><span class="meta">Take a place or not, before enrolment opens more widely.</span></div></li>
+          </ol>
+        </div>
+      </div>
+
     </div>
   </div>
 
 </main>
 
-<footer class="site-footer">
-  <div class="wrap foot">
-    <span>© 2026 Candide AI Academy · Doha, Qatar</span>
-    <nav class="foot-links" aria-label="Footer">
-      <a href="programme.html">Programme</a>
-      <a href="index.html#method">Method</a>
-      <a href="index.html#parents">For parents</a>
-      <a href="index.html#faq">FAQ</a>
-      <a href="enrol.html">Join the founding list</a>
-    </nav>
-  </div>
+<footer class="footer">
+  <span>© 2026 Candide AI Academy · Doha, Qatar</span>
+  <nav aria-label="Footer">
+    <a href="programme.html">Programme</a>
+    <a href="index.html#method">Method</a>
+    <a href="index.html#parents">For parents</a>
+    <a href="index.html#faq">Questions</a>
+    <a href="enrol.html">Join the founding list</a>
+  </nav>
 </footer>
 
 <script src="assets/site.js" defer></script>

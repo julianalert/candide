@@ -3,28 +3,6 @@
 // While this is empty the form runs in preview mode and sends nothing.
 const FORM_ENDPOINT = '';
 
-// ---------- Mobile menu ----------
-
-const toggle = document.querySelector('.nav-toggle');
-const links = document.querySelector('#nav-links');
-
-if (toggle && links) {
-  const setOpen = (open) => {
-    links.classList.toggle('is-open', open);
-    toggle.setAttribute('aria-expanded', String(open));
-  };
-
-  toggle.addEventListener('click', () => setOpen(!links.classList.contains('is-open')));
-  links.addEventListener('click', (e) => {
-    if (e.target.closest('a')) setOpen(false);
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') setOpen(false);
-  });
-}
-
-// ---------- Founding-list form ----------
-
 const form = document.querySelector('#founding-form');
 
 if (form) {
