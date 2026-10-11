@@ -3,6 +3,28 @@
 // While this is empty the form runs in preview mode and sends nothing.
 const FORM_ENDPOINT = '';
 
+// ---------- Video ----------
+// The page shows a thumbnail that links to YouTube. Pressing play swaps in the
+// player, so YouTube's player code is only loaded for people who watch.
+
+document.querySelectorAll('a.video[data-video-id]').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // let "open in new tab" work
+
+    e.preventDefault();
+    const player = document.createElement('iframe');
+    player.className = 'video';
+    player.src = `https://www.youtube-nocookie.com/embed/${link.dataset.videoId}?autoplay=1&rel=0`;
+    player.title = link.dataset.videoTitle;
+    player.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    player.allowFullscreen = true;
+    link.replaceWith(player);
+    player.focus();
+  });
+});
+
+// ---------- Founding-list form ----------
+
 const form = document.querySelector('#founding-form');
 
 if (form) {
