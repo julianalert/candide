@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Request a pilot — Candide</title>
+<meta name="description" content="Request a Candide pilot for your school: the classroom AI platform, ten 45-minute missions for ages 8 to 11, teacher onboarding and a data sheet for parents.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Request a pilot — Candide">
+<meta property="og:description" content="Tell us about your school and we’ll set up a pilot: the platform, the ten missions, teacher onboarding and the data sheet.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="brand">
+    <a class="identity" href="/">
+      <img class="wordmark" src="assets/logo.svg" alt="Candide" width="107" height="22">
+    </a>
+  </div>
+  <nav class="tabs" aria-label="Main">
+    <a class="tab" href="/">Overview</a>
+    <a class="tab" href="/missions">Missions</a>
+    <a class="tab" href="/#safety">Safety</a>
+    <a class="tab" href="/#schools">For schools</a>
+    <a class="tab" href="/#faq">Questions</a>
+  </nav>
+  <div class="topbar-actions">
+    <a class="btn btn-primary" href="/pilot" aria-current="page"><span>Request <span class="long">a </span>pilot</span></a>
+  </div>
+</header>
+
+<main id="main" class="page">
+
+  <div class="stack">
+    <div class="page-head">
+      <div class="page-intro">
+        <h1>Request a pilot</h1>
+        <p class="page-sub">We’re running pilots with a small number of schools this term. Tell us about yours and we’ll come back within a few days with a plan, the data sheet and the price.</p>
+      </div>
+    </div>
+
+    <div class="enrol-grid">
+
+      <!-- Form -->
+      <div class="card">
+        <div class="card-head">
+          <h2 class="card-title">Your school</h2>
+          <span class="meta">Takes about two minutes · no commitment</span>
+        </div>
+
+        <form id="pilot-form" class="form-body">
+          <div class="notice notice-warn preview-flag" hidden><span>Preview · this form isn’t connected yet. Add a form endpoint in <code>assets/site.js</code> to start receiving requests.</span></div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="f-school">School name</label>
+              <input class="input" id="f-school" name="school" autocomplete="organization" required>
+            </div>
+            <div class="field">
+              <label class="label" for="f-city">City and country</label>
+              <input class="input" id="f-city" name="city_country" placeholder="Doha, Qatar" required>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="f-name">Your name</label>
+              <input class="input" id="f-name" name="contact_name" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label class="label" for="f-role">Your role</label>
+              <select class="input" id="f-role" name="role" required>
+                <option value="">Select a role</option>
+                <option>Head or deputy head</option>
+                <option>Class teacher</option>
+                <option>Computing or ICT lead</option>
+                <option>Curriculum lead</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="f-email">School email</label>
+              <input class="input" id="f-email" name="email" type="email" autocomplete="email" placeholder="you@school.edu" required>
+            </div>
+            <div class="field">
+              <label class="label" for="f-phone">Phone or WhatsApp <span class="hint">· optional</span></label>
+              <input class="input" id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+974 …">
+            </div>
+          </div>
+
+          <fieldset class="field">
+            <legend class="label">Year groups you have in mind <span class="hint">· ages 8 to 11</span></legend>
+            <div class="actions" style="margin-top:6px;gap:18px">
+              <label class="check"><input type="checkbox" name="year_groups" value="Year 3"><span>Year 3</span></label>
+              <label class="check"><input type="checkbox" name="year_groups" value="Year 4"><span>Year 4</span></label>
+              <label class="check"><input type="checkbox" name="year_groups" value="Year 5"><span>Year 5</span></label>
+              <label class="check"><input type="checkbox" name="year_groups" value="Year 6"><span>Year 6</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="label" for="f-classes">Classes in the pilot</label>
+              <select class="input" id="f-classes" name="classes" required>
+                <option value="">Select</option>
+                <option>1 class</option>
+                <option>2 or 3 classes</option>
+                <option>4 or more classes</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <fieldset class="field">
+              <legend class="label">Children’s devices</legend>
+              <div class="segmented" style="margin-top:6px">
+                <label><input type="radio" name="devices" value="Chromebooks" checked><span>Chromebooks</span></label>
+                <label><input type="radio" name="devices" value="iPads"><span>iPads</span></label>
+                <label><input type="radio" name="devices" value="Laptops"><span>Laptops</span></label>
+                <label><input type="radio" name="devices" value="Mixed or none yet"><span>Mixed</span></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="field">
+            <label class="label" for="f-notes">Anything we should know? <span class="hint">· optional</span></label>
+            <textarea class="input" id="f-notes" name="notes" rows="3" placeholder="Curriculum links, timing, questions about safety or data…"></textarea>
+          </div>
+
+          <label class="check">
+            <input type="checkbox" name="data_sheet" value="yes" checked>
+            <span>Send me the one-page data sheet straight away</span>
+          </label>
+
+          <div class="hp" aria-hidden="true">
+            <label>Leave this field empty <input name="_gotcha" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <div class="form-foot">
+            <button class="btn btn-primary" type="submit">Request a pilot</button>
+            <span class="meta">We’ll only use these details to talk to you about Candide.</span>
+          </div>
+          <div class="notice form-status" role="alert" hidden></div>
+        </form>
+
+        <div class="success" id="pilot-success" tabindex="-1" hidden>
+          <h2>✓ Request received</h2>
+          <p>Thank you. We’ll write to <b data-email></b> within a few days with a pilot plan for your school.</p>
+        </div>
+      </div>
+
+      <!-- Context -->
+      <div class="stack">
+        <div class="card">
+          <div class="card-head">
+            <h2 class="card-title">The pilot</h2>
+            <a class="link-arrow" href="/missions">See the missions →</a>
+          </div>
+          <dl class="list">
+            <div class="kv-row"><dt>Format</dt><dd>Online platform, run in your classroom</dd></div>
+            <div class="kv-row"><dt>Missions</dt><dd>10 available · pick 3 to 5</dd></div>
+            <div class="kv-row"><dt>Ages</dt><dd>8–11</dd></div>
+            <div class="kv-row"><dt>Children per session</dt><dd>Up to 30</dd></div>
+            <div class="kv-row"><dt>Devices</dt><dd>One per child, any browser</dd></div>
+            <div class="kv-row"><dt>Child accounts</dt><dd>None</dd></div>
+            <div class="kv-row"><dt>Hosting</dt><dd>EU</dd></div>
+            <div class="kv-row"><dt>Price</dt><dd>Per school, invoiced once</dd></div>
+          </dl>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2 class="card-title">What happens next</h2>
+          </div>
+          <ol class="list">
+            <li class="item-row"><span class="mono">01</span><div class="grow"><b>You tell us about your school</b><span class="meta">This form. No commitment.</span></div></li>
+            <li class="item-row"><span class="mono">02</span><div class="grow"><b>We set up your school</b><span class="meta">We create it on the platform and invite your teachers by email.</span></div></li>
+            <li class="item-row"><span class="mono">03</span><div class="grow"><b>You run the first mission</b><span class="meta">With one of us on a call if you’d like. You decide afterwards whether to carry on.</span></div></li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <span>© 2026 Candide AI · Doha, Qatar</span>
+  <nav aria-label="Footer">
+    <a href="/missions">Missions</a>
+    <a href="/#safety">Safety</a>
+    <a href="/#schools">For schools</a>
+    <a href="/#faq">Questions</a>
+    <a href="/pilot">Request a pilot</a>
+    <a href="https://app.candideai.com/teacher">Teacher sign in</a>
+  </nav>
+</footer>
+
+<script src="assets/site.js" defer></script>
+</body>
+</html>

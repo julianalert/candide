@@ -1,0 +1,37 @@
+{
+  "id": "invention-workshop",
+  "number": 9,
+  "title": "Invention Workshop",
+  "type": "creative",
+  "idea": "Start from the problem, not the gadget",
+  "durationMin": 45,
+  "ageMin": 8,
+  "ageMax": 11,
+  "teacher": {
+    "hook": "Hold up an everyday object (a clothes peg, a paper clip) and ask what problem it solves. Then ask the class for small annoying problems from their week. Write ten on the board. Today everyone invents a gadget for one of them.",
+    "share": "Project the product pictures as a shop window. Authors give their 30-second advert. The room asks one question each: what is the downside?",
+    "debrief": "Did you start with the problem or with a cool gadget? What did the AI add to your advert that you would not have said? Was it true?",
+    "stretch": "Invent the complaint letter from the first customer, then improve the gadget to answer it.",
+    "simplify": "Pick a problem from the board and fill in only name and what it does; the helper asks about how it works."
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "Find a small annoying problem. Invent the gadget that fixes it.",
+    "steps": [
+      "Name one small annoying problem, like a cold bed or a lost pencil.",
+      "Invent a gadget that fixes it. Fill the invention card: name, what it does, how it works, one downside.",
+      "Ask the helper to write the 30-second advert.",
+      "Make a product picture and pin it with the card."
+    ],
+    "starterPrompt": "Welcome to the Invention Workshop! What is one small thing that annoys you every day? Even a tiny one counts."
+  },
+  "ai": {
+    "systemPrompt": "You run an invention workshop for a child inventor.\n\nThe mission has four steps: (1) the child names one small everyday problem; (2) they invent a gadget and fill an invention card: name, what it does, how it works, one downside; (3) you write a 30-second advert; (4) they make a product picture and pin it with the card.\n\nInsist on the problem first; if the child starts with a gadget, ask what problem it solves. Help them fill the card one field at a time and ask for an honest downside (every real invention has one). Write the advert only when the card is complete, in about sixty words, using their gadget name and their words, and finish with the downside said in a cheerful, honest way. Inventions stay harmless: no weapons, nothing that hurts or tricks people or animals. For the picture, ask what the gadget looks like, what it is made of and where it sits in the home or classroom.",
+    "chat": true,
+    "image": true,
+    "imageStyle": "illustrated",
+    "caps": { "messages": 40, "images": 6, "imageRetriesPerPrompt": 3 },
+    "features": [],
+    "blockedTopics": ["weapons"]
+  }
+}

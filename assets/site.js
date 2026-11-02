@@ -1,4 +1,4 @@
-// Where the founding-list form sends its data. Paste a form endpoint URL here
+// Where the pilot-request form sends its data. Paste a form endpoint URL here
 // (Formspree, Basin, Getform or your own API: anything that accepts a JSON POST).
 // While this is empty the form runs in preview mode and sends nothing.
 const FORM_ENDPOINT = '';
@@ -23,14 +23,14 @@ document.querySelectorAll('a.video[data-video-id]').forEach((link) => {
   });
 });
 
-// ---------- Founding-list form ----------
+// ---------- Pilot-request form ----------
 
-const form = document.querySelector('#founding-form');
+const form = document.querySelector('#pilot-form');
 
 if (form) {
   const status = form.querySelector('.form-status');
   const button = form.querySelector('button[type="submit"]');
-  const success = document.querySelector('#founding-success');
+  const success = document.querySelector('#pilot-success');
 
   const say = (message, kind) => {
     status.textContent = message;

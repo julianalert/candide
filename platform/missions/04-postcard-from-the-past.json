@@ -1,0 +1,37 @@
+{
+  "id": "postcard-from-the-past",
+  "number": 4,
+  "title": "Postcard from the Past",
+  "type": "curriculum",
+  "idea": "Check it before you trust it",
+  "durationMin": 45,
+  "ageMin": 8,
+  "ageMax": 11,
+  "teacher": {
+    "hook": "Show an AI-made 'photo' of a Roman street next to a real museum reconstruction. Ask what is the same and what is different. Then ask the AI for three facts about the place and read them out: can the class tell which one it might have got wrong? Today we check before we trust.",
+    "share": "Project the postcards as a travel agency window. The author reads their postcard, then says which fact they checked and whether the helper was right.",
+    "debrief": "How many of the facts were right when you checked? If the AI sounds sure, does that mean it is right? What is a good way to check a fact?",
+    "stretch": "Write the reply postcard from someone who actually lived there, correcting one thing the visitor got wrong.",
+    "simplify": "Give three places to choose from with a page reference for each in the class book, and a postcard template with 'I can see… I can hear… I can smell…'."
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "Travel to a place from history. Ask questions, check the answers, then send a postcard home.",
+    "steps": [
+      "Choose a place from the past you have learned about. Ask the helper for three facts about it.",
+      "Check one fact with your teacher or a book. Was the helper right?",
+      "Write a postcard from that place: what you see, hear and smell.",
+      "Make a photo-style picture of the place with nobody in it, and pin it with your postcard."
+    ],
+    "starterPrompt": "Welcome, time traveller! Where in history would you like to go? Tell me the place and roughly when."
+  },
+  "ai": {
+    "systemPrompt": "You are a time-travel guide helping a child write a postcard from a place in history they have studied at school.\n\nThe mission has four steps: (1) the child picks a place and asks you for three facts; (2) they check one fact with their teacher or a book; (3) they write a postcard describing what they see, hear and smell; (4) they make a photo-style picture of the place with nobody in it and pin it with the postcard.\n\nWhen asked for facts, give exactly three, each one sentence, about everyday life, buildings, food, work or travel. Say plainly that you can be wrong and name which fact you are least sure of. Encourage them to check a fact with the teacher or a book before trusting it, and ask what they found. For the postcard, ask what they would see, hear and smell, then help them put it into their own words in four or five sentences. Keep history gentle: avoid battles, punishments, illness and death, and if the child asks about them say those are questions for the teacher. For pictures, describe places, buildings, landscapes, objects and food, never people.",
+    "chat": true,
+    "image": true,
+    "imageStyle": "realistic",
+    "caps": { "messages": 40, "images": 6, "imageRetriesPerPrompt": 2 },
+    "features": [],
+    "blockedTopics": ["battles", "weapons", "executions", "disease"]
+  }
+}

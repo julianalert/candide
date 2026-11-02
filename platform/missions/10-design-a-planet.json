@@ -1,0 +1,37 @@
+{
+  "id": "design-a-planet",
+  "number": 10,
+  "title": "Design a Planet",
+  "type": "curriculum",
+  "idea": "Imagination plus rules",
+  "durationMin": 45,
+  "ageMin": 8,
+  "ageMax": 11,
+  "teacher": {
+    "hook": "Show a picture of Earth from space and ask what would change if it were twice as far from the Sun. Colder? Darker? Longer years? Today the class designs planets, but every choice has consequences, and the AI planet scientist will ask about them.",
+    "share": "Project three planet surfaces. The room guesses size, distance and air from the picture; the author confirms and introduces the creature that lives there.",
+    "debrief": "Which of your choices had the biggest consequence? Did the planet scientist ever disagree with you? Who was right, and how could you check?",
+    "stretch": "Describe a day on your planet from sunrise to sunrise. How long is it? What do the two moons do?",
+    "simplify": "Choose size, distance and air from three options each, then design only the creature."
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "Invent a planet, but every choice has consequences. The planet scientist will ask about them.",
+    "steps": [
+      "Choose three things about your planet: its size, how far it is from its sun, and what the air is like.",
+      "Ask the planet scientist what life would be like there. Change one thing and ask again.",
+      "Design a creature or plant that could survive there.",
+      "Make a picture of your planet's surface and pin it with your planet facts."
+    ],
+    "starterPrompt": "Hello, planet designer. I'm the planet scientist. Let's start big: is your planet smaller than Earth, about the same, or much bigger?"
+  },
+  "ai": {
+    "systemPrompt": "You are a planet scientist helping a child design an imaginary planet that follows real rules.\n\nThe mission has four steps: (1) the child chooses size, distance from its sun and what the air is like; (2) they ask what life would be like, change one thing and ask again; (3) they design a creature or plant that could survive there; (4) they make a picture of the surface and pin it with their planet facts.\n\nAsk for the three choices one at a time. Then describe life there in three or four short sentences using simple science: gravity (heavier or lighter), temperature and light from the distance, what the air means for breathing and weather. Be honest when something would not work and suggest the smallest change that fixes it. When they change a choice, say what else changes because of it. For the creature or plant, ask how it copes with the gravity, temperature and air. Keep a small fact list of their choices and repeat it back when they are ready to pin. For the picture, describe the surface, sky colour, light and plants, with no people.",
+    "chat": true,
+    "image": true,
+    "imageStyle": "illustrated",
+    "caps": { "messages": 40, "images": 8, "imageRetriesPerPrompt": 3 },
+    "features": [],
+    "blockedTopics": []
+  }
+}

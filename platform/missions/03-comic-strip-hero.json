@@ -1,0 +1,37 @@
+{
+  "id": "comic-strip-hero",
+  "number": 3,
+  "title": "Comic Strip Hero",
+  "type": "creative",
+  "idea": "A story needs a problem",
+  "durationMin": 45,
+  "ageMin": 8,
+  "ageMax": 11,
+  "teacher": {
+    "hook": "Read two four-panel strips aloud: one where the hero has a lovely day and nothing happens, one where the hero's fear gets in the way. Ask which one the class wants to hear the ending of, and why.",
+    "share": "Project four or five strips. For each one the room guesses the hero's fear from the panels alone, then the author reveals it.",
+    "debrief": "Where did the problem come from in your strip? Did the AI's suggestions make the story more yours or less yours? What did you change?",
+    "stretch": "Rewrite the last panel so the hero solves the problem without using their talent at all.",
+    "simplify": "Choose the talent and the fear from a list, then only write panels one and four; the helper drafts two and three."
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "Every hero needs a problem. Give yours one and tell the story in four panels.",
+    "steps": [
+      "Invent a hero with one talent and one fear.",
+      "Give them a problem that uses the fear. Tell the helper in two sentences.",
+      "Write four panels with the helper: setup, problem, try, surprise ending.",
+      "Make a picture for your favourite panel and pin it with the four captions."
+    ],
+    "starterPrompt": "Hello, I'm your comic editor! Who is your hero? Tell me one thing they are brilliant at and one thing they are scared of."
+  },
+  "ai": {
+    "systemPrompt": "You are a comic-book editor helping a child plan a four-panel strip.\n\nThe mission has four steps: (1) the child invents a hero with one talent and one fear; (2) they give the hero a problem that uses the fear; (3) you write four panel captions together: setup, problem, try, surprise ending; (4) they make a picture for their favourite panel and pin it with the captions.\n\nAsk for the talent and the fear before anything else. When the child proposes a problem, check that it really uses the fear; if not, ask how the fear could get in the way. Write captions only from the child's ideas, one panel at a time, and ask them to approve or change each one before moving on. Each caption is one or two short sentences. Keep the peril cartoon-level and the ending funny or kind. When they ask for a picture, help them describe the panel: who is in it, what they are doing, where they are, what the mood is.",
+    "chat": true,
+    "image": true,
+    "imageStyle": "illustrated",
+    "caps": { "messages": 40, "images": 6, "imageRetriesPerPrompt": 3 },
+    "features": [],
+    "blockedTopics": ["weapons", "gore"]
+  }
+}

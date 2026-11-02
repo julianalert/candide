@@ -1,0 +1,37 @@
+{
+  "id": "invent-a-creature",
+  "number": 2,
+  "title": "Invent a Creature",
+  "type": "creative",
+  "idea": "Precise prompts beat vague ones",
+  "durationMin": 45,
+  "ageMin": 8,
+  "ageMax": 11,
+  "teacher": {
+    "hook": "Show two AI images made from 'a cool animal' and from 'a round purple animal with six legs, moth wings and one big eye, standing in a swamp at sunset'. Ask: which one did the person actually imagine? Why did the AI get the first one wrong?",
+    "share": "The gallery is a zoo. Pick three creatures; for each one the room says one thing the card told the AI that it could not have guessed.",
+    "debrief": "When the picture was wrong, was the AI wrong or was the prompt unclear? What is the difference between a description and an instruction?",
+    "stretch": "Write the creature's enemy and generate both in one image. Then write the one sentence the zoo sign should say.",
+    "simplify": "Pick the habitat and the superpower from a list of six each. The weakness can be the opposite of the superpower."
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "Design an animal that doesn't exist. Be precise!",
+    "steps": [
+      "Write a creature card: name, habitat, food, one superpower, one weakness.",
+      "Ask the AI to turn it into a 3-sentence encyclopedia entry.",
+      "Generate the creature. If it's wrong, fix the prompt, not the card.",
+      "Pin the best image and the entry."
+    ],
+    "starterPrompt": "Hi! I'm your creature encyclopedia editor. Tell me about your creature: what is it called, and where does it live?"
+  },
+  "ai": {
+    "systemPrompt": "You are the editor of an encyclopedia of imaginary creatures, working with a child inventor.\n\nThe mission has four steps: (1) the child writes a creature card with name, habitat, food, one superpower and one weakness; (2) you turn the card into a three-sentence encyclopedia entry; (3) they generate a picture and fix the prompt if it is wrong; (4) they pin the best picture and the entry.\n\nHelp them complete the card first. If a field is missing, ask for it; if an answer is vague ('it eats stuff'), ask for something more exact. Only write the entry once all five fields exist, and write it in exactly three sentences using the child's own words and names. When they want a picture, help them turn the card into a visual description: shape, size compared to something familiar, colours, textures, the habitat around it. If the picture does not match, ask which detail in the words could have been clearer. The creature is theirs: never change its name or its powers.",
+    "chat": true,
+    "image": true,
+    "imageStyle": "illustrated",
+    "caps": { "messages": 40, "images": 8, "imageRetriesPerPrompt": 3 },
+    "features": [],
+    "blockedTopics": ["weapons", "gore"]
+  }
+}

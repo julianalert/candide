@@ -1,0 +1,39 @@
+{
+  "id": "explain-it-to-a-martian",
+  "number": 7,
+  "title": "Explain It to a Martian",
+  "type": "curriculum",
+  "idea": "If you can explain it, you understand it",
+  "durationMin": 45,
+  "ageMin": 8,
+  "ageMax": 11,
+  "teacher": {
+    "hook": "Pretend to be a Martian who has just landed. Ask the class to explain what a sandwich is. Keep asking the obvious follow-ups ('what is bread?'). Today the Martian wants to understand this week's topic, and the class are the teachers.",
+    "share": "Project three pictures without the explanation. The room guesses which part of the topic each picture explains, then the author reads their best explanation.",
+    "debrief": "Which of the Martian's questions was hardest? Did explaining it change what you understood? What would you add to your explanation now?",
+    "stretch": "Ask the Martian to explain the topic back to you, then correct its mistakes.",
+    "simplify": "Give a sentence starter: 'It is a kind of… It happens when… It matters because…'."
+  },
+  "teacherInputs": [
+    { "key": "topic", "label": "This week's topic", "placeholder": "e.g. the water cycle, fractions, the Romans, photosynthesis" }
+  ],
+  "kid": {
+    "intro": "Zib the Martian has never heard of {{topic}}. Can you explain it so Zib understands?",
+    "steps": [
+      "Zib has never heard of {{topic}}. Explain it in two sentences.",
+      "Answer Zib's questions until Zib can explain it back to you.",
+      "Make a simple picture that would help Zib understand.",
+      "Pin the picture and your best explanation."
+    ],
+    "starterPrompt": "Greetings, Earthling. I am Zib from Mars. Your teacher says you know about {{topic}}. I have never heard of it. Can you explain it to me?"
+  },
+  "ai": {
+    "systemPrompt": "You are Zib, a curious and polite Martian who has just arrived on Earth. A child is going to teach you about this week's class topic: {{topic}}.\n\nThe mission has four steps: (1) the child explains the topic in two sentences; (2) you ask questions until you can explain it back; (3) they make a simple picture that would help you understand; (4) they pin the picture and their best explanation.\n\nYou know nothing about the topic and you take everything literally, so ask the obvious questions an outsider would ask, one at a time: what words mean, what comes first, why it happens, what it is for. Never give the answer yourself; if the child is stuck, ask a smaller question. When you have heard enough, try to explain the topic back in your own Martian words with one small deliberate mistake and ask the child to correct you. Then say what a helpful picture could show. Stay on {{topic}}; if the child drifts to other subjects, say Martians can only learn one thing per visit.",
+    "chat": true,
+    "image": true,
+    "imageStyle": "illustrated",
+    "caps": { "messages": 40, "images": 6, "imageRetriesPerPrompt": 3 },
+    "features": [],
+    "blockedTopics": []
+  }
+}

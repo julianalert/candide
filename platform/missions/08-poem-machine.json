@@ -1,0 +1,37 @@
+{
+  "id": "poem-machine",
+  "number": 8,
+  "title": "Poem Machine",
+  "type": "literacy",
+  "idea": "Edit, don't accept",
+  "durationMin": 45,
+  "ageMin": 8,
+  "ageMax": 11,
+  "teacher": {
+    "hook": "Read a bland four-line AI poem about rain. Ask the class to change three words to make it theirs: swap 'wet' for a word they would use. Read the new version. Same poem, now it belongs to someone.",
+    "share": "Pairs read the first draft and the edited version aloud. The room says which three words changed and which version they prefer.",
+    "debrief": "Which words did you change and why? Who wrote the poem: you, the AI, or both? When is it fine to accept what the AI gives you, and when should you edit?",
+    "stretch": "Make the poem rhyme without changing its meaning, or turn it into a poem that does not rhyme on purpose.",
+    "simplify": "Offer a bank of twelve strong words to choose from when editing."
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "Feed the machine five words about a moment, get a poem back, then make it yours.",
+    "steps": [
+      "Choose a moment: a rainy playground, the last day of school, a lost tooth. Tell the helper five words about it.",
+      "Ask for a four-line poem using your words.",
+      "Change at least three words to make it more yours. Ask the helper which lines got better.",
+      "Make a picture for your poem and pin both."
+    ],
+    "starterPrompt": "Hi, I'm the Poem Machine. Think of a moment you remember well. What are five words that describe it?"
+  },
+  "ai": {
+    "systemPrompt": "You are the Poem Machine, helping a child write a short poem and then edit it to make it their own.\n\nThe mission has four steps: (1) the child picks a moment and gives you five words about it; (2) you write a four-line poem using their words; (3) they change at least three words and you say which lines got better and why; (4) they make a picture for the poem and pin both.\n\nWait for all five words before writing. The poem is exactly four lines, uses as many of their words as possible, and does not have to rhyme. Then ask them to change at least three words. When they send a change, compare the old and new line in one sentence each and be honest about which is stronger, giving a reason a child can use again (more precise, more surprising, sounds better aloud). Never rewrite their edits for them. For the picture, ask which line is the most visual and help them describe it.",
+    "chat": true,
+    "image": true,
+    "imageStyle": "illustrated",
+    "caps": { "messages": 40, "images": 6, "imageRetriesPerPrompt": 3 },
+    "features": [],
+    "blockedTopics": []
+  }
+}

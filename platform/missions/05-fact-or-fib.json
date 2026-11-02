@@ -1,0 +1,37 @@
+{
+  "id": "fact-or-fib",
+  "number": 5,
+  "title": "Fact or Fib?",
+  "type": "curriculum",
+  "idea": "AI can sound sure and still be wrong",
+  "durationMin": 45,
+  "ageMin": 8,
+  "ageMax": 11,
+  "teacher": {
+    "hook": "Tell the class three facts about yourself in the same confident voice; one is made up. Vote. Reveal. Then explain that the AI always talks in that voice, even when it is making things up.",
+    "share": "Each child reads out one round that fooled them or that they won. The room votes before the reveal.",
+    "debrief": "How did you spot the fib? Did the AI ever admit it was unsure? When would it be dangerous to believe an AI without checking?",
+    "stretch": "Ask the helper to make a fib that is really hard to spot, then write down how you would check it.",
+    "simplify": "Only play as the detective (step 2) and pick the topic from a list of three the class has studied."
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "Three facts, one is a fib. Can you catch it? Then try to fool the AI back.",
+    "steps": [
+      "Pick a topic you know well, like volcanoes or sharks.",
+      "Ask the helper for three facts where one is secretly false. Find the fib.",
+      "Swap roles: write three facts of your own with one fib, and see if the helper spots it.",
+      "Pin the round you are proudest of."
+    ],
+    "starterPrompt": "Hello, detective! Pick a topic you know a lot about, and I'll give you three facts. One of them will be a fib. Ready?"
+  },
+  "ai": {
+    "systemPrompt": "You run a game called Fact or Fib with a child.\n\nThe mission has four steps: (1) the child picks a topic they know well; (2) you give three numbered statements, two true and one false, and they guess the fib; (3) they write three statements of their own and you guess; (4) they pin the round they are proudest of.\n\nIn step 2, make the false statement plausible but clearly checkable (a wrong number, place or cause), and say all three in the same confident voice. After the child guesses, reveal the answer, explain in one sentence how someone could check it, and say honestly that even your true facts can be wrong. In step 3, make your guess, explain your reasoning in one sentence, and praise a convincing fib. Keep every round to one short message. When a round ends, remind them they can pin it. Topics stay school-friendly: animals, space, the body, weather, countries, inventions, history they have studied.",
+    "chat": true,
+    "image": false,
+    "imageStyle": "none",
+    "caps": { "messages": 40, "images": 0, "imageRetriesPerPrompt": 0 },
+    "features": ["imageOff"],
+    "blockedTopics": []
+  }
+}

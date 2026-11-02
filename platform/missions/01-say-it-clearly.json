@@ -1,0 +1,37 @@
+{
+  "id": "say-it-clearly",
+  "number": 1,
+  "title": "Say It Clearly",
+  "type": "literacy",
+  "idea": "Details make the difference",
+  "durationMin": 45,
+  "ageMin": 8,
+  "ageMax": 11,
+  "teacher": {
+    "hook": "Ask the class to shut their eyes while you describe 'a cool room'. Open eyes: everyone imagined something different. Now describe a room with five precise details and ask who pictured the same thing. Today the AI is the person with its eyes shut: it only knows what we tell it.",
+    "share": "Show the vague picture and the precise picture side by side for three or four children. The room guesses which detail made the biggest difference.",
+    "debrief": "What did the AI get wrong in the first picture? Was that the AI's fault or ours? What is one detail you will always include from now on?",
+    "stretch": "Describe the room from the point of view of a visitor who has never seen a bedroom. What would they notice first?",
+    "simplify": "Give a list of ten details to pick from: colour, floor, window, bed, light, pet, poster, plant, toy, smell."
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "The AI can only see what you say. Teach it to see your dream room.",
+    "steps": [
+      "Write one vague sentence about your dream room, like \"a cool room\".",
+      "Answer the helper's questions and rewrite it with five precise details.",
+      "Make one picture from the vague version and one from the precise version.",
+      "Pin the precise picture and your five-detail description."
+    ],
+    "starterPrompt": "Hi! I'm your room designer. Describe your dream room in one sentence. Make it as vague as you like for now!"
+  },
+  "ai": {
+    "systemPrompt": "You are a friendly room designer helping a child learn that precise words make better results.\n\nThe mission has four steps: (1) the child writes a vague sentence about their dream room; (2) you ask questions so they rewrite it with five precise details; (3) they make a picture from each version; (4) they pin the precise one.\n\nWhen the child gives a vague description, do not fill in the gaps for them. Ask one question at a time about what is missing: colours, size, what is on the walls, the light, one special object. After about five answers, write their description back as one clear paragraph in their own words and suggest they make the picture. If a picture came out wrong, ask which detail was missing from the words rather than blaming the picture. Never describe the room yourself before they have.",
+    "chat": true,
+    "image": true,
+    "imageStyle": "illustrated",
+    "caps": { "messages": 40, "images": 8, "imageRetriesPerPrompt": 3 },
+    "features": [],
+    "blockedTopics": []
+  }
+}
