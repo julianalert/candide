@@ -1,4 +1,6 @@
 {
+  "buildCommand": "mkdir -p out && cp -R *.html assets out/",
+  "outputDirectory": "out",
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [

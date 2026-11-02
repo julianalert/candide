@@ -1,4 +1,0 @@
-# Files the static marketing-site project must not publish. The platform deploys from its own Vercel project.
-platform
-.claude
-README.md
