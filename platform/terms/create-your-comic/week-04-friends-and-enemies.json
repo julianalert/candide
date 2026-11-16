@@ -1,0 +1,60 @@
+{
+  "id": "comic-04-friends-and-enemies",
+  "term": "create-your-comic",
+  "week": 4,
+  "title": "Friends and enemies",
+  "phase": "Build the world and the story",
+  "skill": "AI as a brainstorm partner: AI suggests, you decide.",
+  "output": "1 or 2 more characters",
+  "durationMin": 60,
+  "paperOnly": false,
+  "teacher": {
+    "warmUp": "Quick game: name a hero and sidekick from a book you know. Why does a hero need a friend?",
+    "miniLesson": "Demo: ask the AI for five sidekick ideas for your own hero. Show how you pick one, mix two, or reject them all. The AI suggests; you decide. Ages 10–11 also create a villain: what does the villain want, and why is it a problem for the hero?",
+    "studio": "Children ask the helper for five ideas, choose or mix, write a short character card and make the character in the same style as their hero, reusing their style words from week 3.",
+    "shareSave": "Two or three children introduce their sidekick (and villain). Ask: did you take the AI’s idea, mix it, or invent your own? Everyone pins their new character cards and pictures.",
+    "printables": []
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "Every hero needs a friend, and sometimes an enemy. The AI can suggest ideas, but you decide.",
+    "steps": [
+      "Ask the helper for five sidekick ideas for your hero.",
+      "Pick one, mix two, or reject them all and invent your own.",
+      "Make your sidekick in your comic style.",
+      "Pin your sidekick card and picture."
+    ],
+    "starterPrompt": "Hi! Let’s find your hero a friend. Remind me who your hero is, and I’ll suggest five sidekick ideas. You choose!"
+  },
+  "tracks": {
+    "8-9": {
+      "aiNotes": "Sidekick only this term, no villain. Keep ideas simple and friendly."
+    },
+    "10-11": {
+      "steps": [
+        "Ask the helper for five sidekick ideas, then five villain ideas.",
+        "For each, pick one, mix two, or invent your own.",
+        "Make your sidekick and your villain in your comic style.",
+        "Pin both character cards and pictures."
+      ],
+      "aiNotes": "The child also creates a villain. Villains are cartoon-level: mischievous, greedy or misguided, never cruel or frightening. Help them say what the villain wants."
+    }
+  },
+  "ai": {
+    "blockedTopics": [
+      "gore",
+      "realistic weapons",
+      "horror meant to frighten"
+    ],
+    "features": [],
+    "systemPrompt": "You are the studio helper in a children’s comic club. This week the child creates a sidekick (and, for older children, a villain) for their hero, using you as a brainstorm partner.\n\nWhen asked, give exactly five short, varied ideas as a numbered list, one line each, based on the child’s hero. Then ask which they like, whether they want to mix two, or whether they’ll invent their own. Never choose for them. When they have decided, help them write a character card in their words: name, look, personality, special skill, weakness, and how they know the hero. Then help them describe the character for a picture in the same style as their hero.",
+    "chat": true,
+    "image": true,
+    "imageStyle": "illustrated",
+    "caps": {
+      "messages": 40,
+      "images": 10,
+      "imageRetriesPerPrompt": 2
+    }
+  }
+}

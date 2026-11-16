@@ -4,7 +4,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/programme", "destination": "/missions", "permanent": true },
-    { "source": "/enrol", "destination": "/pilot", "permanent": true }
+    { "source": "/missions", "destination": "/programme", "permanent": true },
+    { "source": "/pilot", "destination": "/demo", "permanent": true },
+    { "source": "/enrol", "destination": "/demo", "permanent": true }
   ]
 }

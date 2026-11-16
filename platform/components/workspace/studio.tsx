@@ -56,6 +56,27 @@ export function Studio({ mission, displayName, messages, pinnedMessageIds, remai
 
   const canPicture = mission.imageEnabled && remaining.images > 0;
 
+  if (!mission.chatEnabled) {
+    return (
+      <>
+        <div className="ws-panel-head">
+          <span className="section-label">Studio</span>
+          <span className="meta">Paper week</span>
+        </div>
+        <div className="ws-panel-body">
+          <div className="paper-week">
+            <h2 className="card-title" style={{ fontSize: 22 }}>
+              {mission.starterPrompt}
+            </h2>
+            <p style={{ fontSize: 16, color: "var(--color-grey-700)" }}>
+              There&rsquo;s no AI helper this week. Follow the steps on paper, and look at your board to remember your hero, your characters, your places and your story.
+            </p>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <div className="ws-panel-head">
@@ -134,7 +155,7 @@ export function Studio({ mission, displayName, messages, pinnedMessageIds, remai
             <span>
               This session has ended. Well done, {displayName}.{" "}
               <a href={galleryUrl} target="_blank" rel="noreferrer">
-                Your class gallery →
+                Your club gallery →
               </a>
             </span>
           </div>

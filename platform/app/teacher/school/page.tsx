@@ -2,7 +2,7 @@ import Link from "next/link";
 import { deleteSession, inviteTeacher } from "@/app/teacher/actions";
 import { ConfirmForm } from "@/components/confirm-form";
 import { sessionIsOver } from "@/lib/caps";
-import { formatDateTime } from "@/lib/format";
+import { formatDateTime, weekLabel } from "@/lib/format";
 import { requireAdmin } from "@/lib/teacher";
 import type { Profile, School } from "@/lib/types";
 
@@ -12,6 +12,7 @@ type SessionSummary = {
   id: string;
   started_at: string;
   ended_at: string | null;
+  week: number | null;
   title: string | null;
   class: { name: string; teacher: { display_name: string | null } | null } | null;
 };
@@ -24,7 +25,7 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
     supabase.from("profiles").select("*").eq("school_id", profile.school_id).order("display_name"),
     supabase
       .from("sessions")
-      .select("id, started_at, ended_at, title:mission_snapshot->>title, class:classes(name, teacher:profiles(display_name))")
+      .select("id, started_at, ended_at, week, title:mission_snapshot->>title, class:classes(name, teacher:profiles(display_name))")
       .order("started_at", { ascending: false })
       .limit(100),
   ]);
@@ -129,9 +130,9 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
               {sessions.map((session) => (
                 <div key={session.id} className="item-row">
                   <div className="grow">
-                    <b>{session.title ?? "Mission"}</b>
+                    <b>{weekLabel(session.week, session.title ?? undefined)}</b>
                     <span className="meta">
-                      {session.class?.name ?? "Class"} · {session.class?.teacher?.display_name ?? "Teacher"} · {formatDateTime(session.started_at)}
+                      {session.class?.name ?? "Club"} · {session.class?.teacher?.display_name ?? "Teacher"} · {formatDateTime(session.started_at)}
                     </span>
                   </div>
                   {sessionIsOver(session) ? <span className="chip">Ended</span> : <span className="chip chip-live">Live</span>}

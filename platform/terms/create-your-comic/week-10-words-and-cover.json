@@ -1,0 +1,54 @@
+{
+  "id": "comic-10-words-and-cover",
+  "term": "create-your-comic",
+  "week": 10,
+  "title": "Words and cover",
+  "phase": "Make the pages",
+  "skill": "Knowing what AI is bad at: writing text inside pictures.",
+  "output": "Complete draft and cover",
+  "durationMin": 60,
+  "paperOnly": false,
+  "teacher": {
+    "warmUp": "Show an AI picture that tried to write a word. Can you read it? Why do you think AI is bad at letters?",
+    "miniLesson": "Show speech bubbles, narration boxes and sound effects. Children type all the words themselves; the AI never writes inside a picture. Demo a cover: the hero in an exciting pose with space at the top for the title, which the child adds.",
+    "studio": "Children write every speech bubble, narration box and sound effect, page by page, then make their cover picture with empty space for the title and their name. The page layout editor arrives later; for now they type their words page by page and pin them.",
+    "shareSave": "Two or three children read one page aloud with their words. Everyone pins their words and their cover.",
+    "printables": []
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "Your comic needs words, and you write them all. AI is bad at writing inside pictures.",
+    "steps": [
+      "Write the speech bubbles for each panel, page by page.",
+      "Add narration boxes and sound effects (BOOM! WHOOSH!).",
+      "Make your cover picture with empty space for your title.",
+      "Pin your words and your cover. Choose your title and sign as the author."
+    ],
+    "starterPrompt": "Time for words! Which page are you writing first? Tell me who speaks in panel 1."
+  },
+  "tracks": {
+    "8-9": {
+      "aiNotes": "Short speech bubbles, a few words each."
+    },
+    "10-11": {
+      "aiNotes": "A full script with narration boxes. Help the dialogue fit each character’s personality."
+    }
+  },
+  "ai": {
+    "blockedTopics": [
+      "gore",
+      "realistic weapons",
+      "horror meant to frighten"
+    ],
+    "features": [],
+    "systemPrompt": "You are the studio helper in a children’s comic club. This week the child writes all the words of their comic and makes the cover.\n\nThe child writes every speech bubble, narration box and sound effect. You may ask questions (Who speaks? How do they feel? What sound would that make?) and point out a spelling they might check, but never write their dialogue for them. When they finish a page, write their words back exactly, titled with the page number, so they can pin it. For the cover, help them describe their hero in an exciting pose with empty space at the top for the title, and never put any letters in the picture.",
+    "chat": true,
+    "image": true,
+    "imageStyle": "illustrated",
+    "caps": {
+      "messages": 50,
+      "images": 6,
+      "imageRetriesPerPrompt": 2
+    }
+  }
+}

@@ -6,22 +6,26 @@ import { ConfirmForm } from "@/components/confirm-form";
 import { JoinCount } from "@/components/join-count";
 import { sessionIsOver } from "@/lib/caps";
 import { joinUrlForDisplay } from "@/lib/env";
-import { formatDateTime } from "@/lib/format";
-import { parseMission } from "@/lib/missions";
+import { formatDateTime, weekLabel } from "@/lib/format";
+import { MissionSchema, isTrack, kidSteps, snapshotInfo } from "@/lib/missions";
 import { requireTeacher } from "@/lib/teacher";
 import type { SessionRow } from "@/lib/types";
 
-type SessionWithClass = SessionRow & { class: { id: string; name: string; code: string } | null };
+type SessionWithClass = SessionRow & { class: { id: string; name: string; code: string; track: string | null } | null };
 
 export default async function LaunchPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const { supabase } = await requireTeacher();
-  const { data: session } = await supabase.from("sessions").select("*, class:classes(id, name, code)").eq("id", id).maybeSingle<SessionWithClass>();
+  const { data: session } = await supabase.from("sessions").select("*, class:classes(id, name, code, track)").eq("id", id).maybeSingle<SessionWithClass>();
   if (!session || !session.class) notFound();
-  const mission = parseMission(session.mission_snapshot, session.id);
+  // Sessions from before terms carry an old snapshot: show what we can.
+  const parsed = MissionSchema.safeParse(session.mission_snapshot);
+  const mission = parsed.success ? parsed.data : null;
+  const info = snapshotInfo(session.mission_snapshot);
   const over = sessionIsOver(session);
   const { count } = await supabase.from("participants").select("id", { count: "exact", head: true }).eq("session_id", id);
 
+  const track = isTrack(session.class.track) ? session.class.track : "8-9";
   const end = endSession.bind(null, session.id);
 
   return (
@@ -56,7 +60,7 @@ export default async function LaunchPage({ params }: { params: Promise<{ id: str
       <main className="page" style={{ gap: 32, paddingTop: 24 }}>
         <div className="stack" style={{ alignItems: "center", gap: 12 }}>
           <p className="section-label">
-            Mission {String(mission.number).padStart(2, "0")} · {mission.title}
+            {weekLabel(session.week ?? info.week, info.title)}
           </p>
           {over ? (
             <>
@@ -64,15 +68,15 @@ export default async function LaunchPage({ params }: { params: Promise<{ id: str
                 This session has ended
               </p>
               <Link className="btn btn-primary" href={`/teacher/session/${session.id}/gallery`}>
-                Open the class gallery
+                Open the club gallery
               </Link>
             </>
           ) : (
             <>
               <p className="launch-url">
-                Go to <b>{joinUrlForDisplay()}</b> and type the code
+                Go to <b>{joinUrlForDisplay()}</b>, type the code and tap your name
               </p>
-              <p className="launch-code" aria-label={`Class code ${session.class.code.split("").join(" ")}`}>
+              <p className="launch-code" aria-label={`Club code ${session.class.code.split("").join(" ")}`}>
                 {session.class.code}
               </p>
               <JoinCount sessionId={session.id} initial={count ?? 0} live={!over} />
@@ -80,30 +84,38 @@ export default async function LaunchPage({ params }: { params: Promise<{ id: str
           )}
         </div>
 
-        <div className="grid grid-two" style={{ alignItems: "start" }}>
-          <section className="card card-pad stack">
-            <h2 className="section-label">Hook · read this to the class</h2>
-            <p className="launch-hook">{mission.teacher.hook}</p>
-          </section>
-          <section className="card card-pad stack">
-            <h2 className="section-label">What the kids see</h2>
-            <p className="launch-hook" style={{ fontSize: 17 }}>
-              {mission.kid.intro}
-            </p>
-            <ol className="brief-steps">
-              {mission.kid.steps.map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ol>
-            {Object.entries(session.teacher_inputs).length > 0 && (
-              <p className="meta">
-                {Object.entries(session.teacher_inputs)
-                  .map(([key, value]) => `${key}: ${value}`)
-                  .join(" · ")}
+        {mission && (
+          <div className="grid grid-two" style={{ alignItems: "start" }}>
+            <section className="card card-pad stack">
+              <h2 className="section-label">Warm-up · 5 min</h2>
+              <p className="launch-hook">{mission.teacher.warmUp}</p>
+              <h2 className="section-label">Mini-lesson · 10 min</h2>
+              <p className="launch-hook" style={{ fontSize: 17 }}>
+                {mission.teacher.miniLesson}
               </p>
-            )}
-          </section>
-        </div>
+            </section>
+            <section className="card card-pad stack">
+              <h2 className="section-label">Studio time · what the kids see</h2>
+              <p className="launch-hook" style={{ fontSize: 17 }}>
+                {mission.kid.intro}
+              </p>
+              <ol className="brief-steps">
+                {kidSteps(mission, track).map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ol>
+              <h2 className="section-label">Share &amp; save · 10 min</h2>
+              <p>{mission.teacher.shareSave}</p>
+              {Object.entries(session.teacher_inputs).length > 0 && (
+                <p className="meta">
+                  {Object.entries(session.teacher_inputs)
+                    .map(([key, value]) => `${key}: ${value}`)
+                    .join(" · ")}
+                </p>
+              )}
+            </section>
+          </div>
+        )}
       </main>
 
       <footer className="meta" style={{ padding: "0 24px 24px" }}>

@@ -1,54 +1,56 @@
 import Link from "next/link";
-import { formatDate } from "@/lib/format";
+import { TRACK_LABEL, isTrack } from "@/lib/missions";
 import { requireTeacher } from "@/lib/teacher";
-import type { ClassRow } from "@/lib/types";
+import type { ClassRow, TermRow } from "@/lib/types";
 import { createClass } from "./actions";
 
-export const metadata = { title: "Classes" };
+export const metadata = { title: "Clubs" };
 
-type ClassWithSessions = ClassRow & { sessions: { id: string; started_at: string }[] };
+type ClubWithSessions = ClassRow & { sessions: { id: string; week: number | null }[]; term: { title: string; number: number } | null };
 
-export default async function ClassesPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+export default async function ClubsPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const { supabase, userId } = await requireTeacher();
   const params = await searchParams;
-  const { data } = await supabase
-    .from("classes")
-    .select("*, sessions(id, started_at)")
-    .eq("teacher_id", userId)
-    .order("created_at", { ascending: false });
-  const classes = (data ?? []) as ClassWithSessions[];
+  const [{ data }, { data: termRows }] = await Promise.all([
+    supabase.from("classes").select("*, sessions(id, week), term:terms(title, number)").eq("teacher_id", userId).order("created_at", { ascending: false }),
+    supabase.from("terms").select("id, number, title, json").eq("published", true).order("number"),
+  ]);
+  const clubs = (data ?? []) as ClubWithSessions[];
+  const terms = (termRows ?? []) as Pick<TermRow, "id" | "number" | "title" | "json">[];
 
   return (
     <main className="page">
       <div className="page-head">
         <div className="page-intro">
-          <h1>Your classes</h1>
-          <p className="page-sub">Each class has a permanent six-character code. Start a mission from a class and kids join with the code and their first name.</p>
+          <h1>Your clubs</h1>
+          <p className="page-sub">
+            Each club group follows a term, one mission a week. Children join with the club code and tap their name on the club list, so their work follows them all term.
+          </p>
         </div>
       </div>
 
       <div className="grid grid-two" style={{ alignItems: "start" }}>
         <section className="section">
-          <h2 className="section-title">Classes</h2>
-          {classes.length === 0 ? (
+          <h2 className="section-title">Club groups</h2>
+          {clubs.length === 0 ? (
             <div className="card card-pad">
-              <p className="meta">No classes yet. Create your first one on the right: it takes ten seconds.</p>
+              <p className="meta">No clubs yet. Create your first one on the right: it takes ten seconds.</p>
             </div>
           ) : (
             <div className="card list">
-              {classes.map((klass) => {
-                const last = klass.sessions.map((s) => s.started_at).sort().at(-1);
+              {clubs.map((club) => {
+                const weeksRun = new Set(club.sessions.map((s) => s.week).filter(Boolean)).size;
                 return (
-                  <Link key={klass.id} href={`/teacher/class/${klass.id}`} className="item-row" style={{ color: "inherit" }}>
+                  <Link key={club.id} href={`/teacher/class/${club.id}`} className="item-row" style={{ color: "inherit" }}>
                     <div className="grow">
-                      <b>{klass.name}</b>
+                      <b>{club.name}</b>
                       <span className="meta">
-                        Year {klass.year_group} · {klass.sessions.length} session{klass.sessions.length === 1 ? "" : "s"}
-                        {last ? ` · last ${formatDate(last)}` : ""}
+                        {club.term ? `Term ${club.term.number} · ${club.term.title}` : "Term"} · {isTrack(club.track) ? TRACK_LABEL[club.track] : ""} · {weeksRun} week
+                        {weeksRun === 1 ? "" : "s"} run
                       </span>
                     </div>
                     <span className="mono" style={{ fontSize: 18, letterSpacing: "0.12em", color: "var(--color-petrol)" }}>
-                      {klass.code}
+                      {club.code}
                     </span>
                   </Link>
                 );
@@ -58,36 +60,52 @@ export default async function ClassesPage({ searchParams }: { searchParams: Prom
         </section>
 
         <section className="section">
-          <h2 className="section-title">New class</h2>
+          <h2 className="section-title">New club group</h2>
           <form action={createClass} className="card stack card-pad">
             {params.error === "class" && (
               <div className="notice notice-error">
-                <span>Give the class a name and pick a year group.</span>
+                <span>Give the club a name, then pick an age track and a term.</span>
               </div>
             )}
             <div className="field">
               <label className="label" htmlFor="name">
-                Class name
+                Club name
               </label>
-              <input className="input" id="name" name="name" required maxLength={60} placeholder="e.g. 5B, Dolphins, Ms Khan's class" />
+              <input className="input" id="name" name="name" required maxLength={60} placeholder="e.g. Comic Club, Tuesday group" />
             </div>
-            <div className="field">
-              <label className="label" htmlFor="year_group">
-                Year group
-              </label>
-              <select className="input" id="year_group" name="year_group" defaultValue="4" required>
-                {[3, 4, 5, 6].map((year) => (
-                  <option key={year} value={year}>
-                    Year {year}
-                  </option>
-                ))}
-              </select>
+            <div className="field-row">
+              <div className="field">
+                <label className="label" htmlFor="track">
+                  Age track
+                </label>
+                <select className="input" id="track" name="track" defaultValue="8-9" required>
+                  <option value="8-9">{TRACK_LABEL["8-9"]}</option>
+                  <option value="10-11">{TRACK_LABEL["10-11"]}</option>
+                </select>
+              </div>
+              <div className="field">
+                <label className="label" htmlFor="term_id">
+                  Term
+                </label>
+                <select className="input" id="term_id" name="term_id" defaultValue={terms[0]?.id} required>
+                  {terms.map((term) => (
+                    <option key={term.id} value={term.id}>
+                      Term {term.number} · {term.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
+            {terms.length === 0 && (
+              <p className="meta">
+                No terms are loaded yet. Run <code className="mono">npm run seed</code> to load the curriculum.
+              </p>
+            )}
             <div className="actions">
-              <button className="btn btn-primary" type="submit">
-                Create class
+              <button className="btn btn-primary" type="submit" disabled={terms.length === 0}>
+                Create club
               </button>
-              <span className="meta">You&rsquo;ll get the class code straight away.</span>
+              <span className="meta">You&rsquo;ll get the club code straight away.</span>
             </div>
           </form>
         </section>

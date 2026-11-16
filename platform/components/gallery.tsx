@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { GalleryData, GalleryItem } from "@/lib/gallery";
-import { formatDate, formatTime } from "@/lib/format";
+import { formatDate, formatTime, weekLabel } from "@/lib/format";
 
 type Props = { data: GalleryData; publicUrl: string; mode: "teacher" | "public" };
 
@@ -32,13 +32,14 @@ export function Gallery({ data, publicUrl, mode }: Props) {
   return (
     <>
       <div className="print-header">
-        <b>{data.schoolName}</b> · {data.className} · Mission {String(data.mission.number).padStart(2, "0")}: {data.mission.title} · {formatDate(data.session.startedAt)}
+        <b>{data.schoolName}</b> · {data.className} · {weekLabel(data.mission.week, data.mission.title)} · {formatDate(data.session.startedAt)}
       </div>
 
       <div className="page-head no-print">
         <div className="page-intro">
           <p className="section-label">
-            {mode === "teacher" ? `${data.className} · ` : ""}Mission {String(data.mission.number).padStart(2, "0")} · {formatDate(data.session.startedAt)}
+            {mode === "teacher" ? `${data.className} · ` : ""}
+            {weekLabel(data.mission.week)} · {formatDate(data.session.startedAt)}
           </p>
           <h1 className="page-title">{data.mission.title}</h1>
           <p className="page-sub">

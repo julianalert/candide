@@ -36,7 +36,7 @@ export async function moderate(text: string, ctx: { mission: Mission; stage: Mod
   if (isMockAi()) return mockModerate(text, ctx.stage);
 
   const system = substitute(readPromptFile("moderation.md"), {
-    mission: `${ctx.mission.title} — ${ctx.mission.idea}. ${ctx.mission.kid.intro}`,
+    mission: `School comic club, week ${ctx.mission.week}: ${ctx.mission.title} — ${ctx.mission.skill}. ${ctx.mission.kid.intro}`,
     stage: ctx.stage,
     blockedTopics: ctx.mission.ai.blockedTopics.join(", ") || "none",
   });

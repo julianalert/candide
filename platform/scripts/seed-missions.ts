@@ -1,10 +1,11 @@
 import "./_env";
 import { createClient } from "@supabase/supabase-js";
-import { loadMissions } from "../lib/missions";
-import type { MissionRow } from "../lib/types";
+import { loadTerms } from "../lib/missions";
+import type { MissionRow, TermRow } from "../lib/types";
 
-// Validates /missions/*.json and upserts them into the missions table.
+// Validates /terms/<term>/*.json and upserts the terms and their weekly missions.
 // A changed mission gets a new version; sessions keep their own snapshot.
+// Missions that are no longer in the repo are unpublished, never deleted (old galleries use them).
 
 async function main() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.SUPABASE_URL;
@@ -12,39 +13,64 @@ async function main() {
   if (!url || !key) throw new Error("Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_KEY");
   const db = createClient(url, key, { auth: { persistSession: false } });
 
-  const missions = loadMissions();
-  console.log(`Validated ${missions.length} missions.`);
+  const bundles = loadTerms();
+  console.log(`Validated ${bundles.length} term(s), ${bundles.reduce((n, b) => n + b.missions.length, 0)} missions.`);
 
-  const { data: existingRows, error } = await db.from("missions").select("id, number, type, json, version, published, updated_at");
-  if (error) throw error;
-  const existing = new Map((existingRows as MissionRow[] | null)?.map((row) => [row.id, row]) ?? []);
+  const { data: termRows, error: termError } = await db.from("terms").select("*");
+  if (termError) throw termError;
+  const existingTerms = new Map(((termRows ?? []) as TermRow[]).map((row) => [row.id, row]));
 
-  for (const mission of missions) {
-    const current = existing.get(mission.id);
-    const changed = !current || JSON.stringify(current.json) !== JSON.stringify(mission);
-    if (!changed) {
-      console.log(`  = ${mission.number.toString().padStart(2, "0")} ${mission.title} (v${current!.version}, unchanged)`);
-      continue;
+  const { data: missionRows, error: missionError } = await db.from("missions").select("id, term_id, week, json, version, published, updated_at");
+  if (missionError) throw missionError;
+  const existingMissions = new Map(((missionRows ?? []) as MissionRow[]).map((row) => [row.id, row]));
+
+  for (const { term, missions } of bundles) {
+    const current = existingTerms.get(term.id);
+    if (!current || JSON.stringify(current.json) !== JSON.stringify(term) || current.title !== term.title || current.number !== term.number) {
+      const version = current && Object.keys(current.json ?? {}).length ? current.version + 1 : 1;
+      const { error } = await db
+        .from("terms")
+        .upsert({ id: term.id, number: term.number, title: term.title, json: term, version, published: current?.published ?? true, updated_at: new Date().toISOString() }, { onConflict: "id" });
+      if (error) throw error;
+      console.log(`${current ? "↑" : "+"} Term ${term.number} · ${term.title} (v${version})`);
+    } else {
+      console.log(`= Term ${term.number} · ${term.title} (v${current.version}, unchanged)`);
     }
-    const version = current ? current.version + 1 : 1;
-    const { error: upsertError } = await db.from("missions").upsert(
-      {
-        id: mission.id,
-        number: mission.number,
-        type: mission.type,
-        json: mission,
-        version,
-        published: current?.published ?? true,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "id" },
-    );
-    if (upsertError) throw upsertError;
-    console.log(`  ${current ? "↑" : "+"} ${mission.number.toString().padStart(2, "0")} ${mission.title} (v${version})`);
+
+    for (const mission of missions) {
+      const row = existingMissions.get(mission.id);
+      const label = `  week ${String(mission.week).padStart(2, "0")} ${mission.title}`;
+      if (row && JSON.stringify(row.json) === JSON.stringify(mission) && row.published) {
+        console.log(`${label} (v${row.version}, unchanged)`);
+        continue;
+      }
+      const version = row ? row.version + 1 : 1;
+      const { error } = await db.from("missions").upsert(
+        {
+          id: mission.id,
+          term_id: term.id,
+          week: mission.week,
+          number: null,
+          type: null,
+          json: mission,
+          version,
+          published: true,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "id" },
+      );
+      if (error) throw error;
+      console.log(`${label} (${row ? "↑" : "+"} v${version})`);
+    }
   }
 
-  const orphaned = [...existing.keys()].filter((id) => !missions.some((m) => m.id === id));
-  if (orphaned.length) console.log(`Not in the repo any more (left in place, consider unpublishing): ${orphaned.join(", ")}`);
+  const keep = new Set(bundles.flatMap((b) => b.missions.map((m) => m.id)));
+  const stale = [...existingMissions.values()].filter((row) => row.published && !keep.has(row.id)).map((row) => row.id);
+  if (stale.length) {
+    const { error } = await db.from("missions").update({ published: false }).in("id", stale);
+    if (error) throw error;
+    console.log(`Unpublished missions no longer in the repo: ${stale.join(", ")}`);
+  }
 }
 
 main().catch((error) => {

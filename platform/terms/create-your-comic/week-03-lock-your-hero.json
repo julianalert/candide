@@ -1,0 +1,56 @@
+{
+  "id": "comic-03-lock-your-hero",
+  "term": "create-your-comic",
+  "week": 3,
+  "title": "Lock your hero",
+  "phase": "Meet your hero",
+  "skill": "Consistency: reuse the same description so AI draws the same character every time.",
+  "output": "Hero character sheet",
+  "durationMin": 60,
+  "paperOnly": false,
+  "teacher": {
+    "warmUp": "Show two pictures of “the same” character made with different words. Is it the same hero? Why not?",
+    "miniLesson": "Explain the character sheet: front view, three expressions (happy, angry, scared), outfit, name. Demo: paste your hero’s exact description into every picture request and change only the expression. Then each child chooses one comic style for the whole term: manga, cartoon, superhero or local heritage.",
+    "studio": "Children write their master description with the helper (the paragraph they will reuse all term), choose their style, then make the front view and three expressions by changing only the feeling words.",
+    "shareSave": "Show a few character sheets: does the hero look the same in every picture? Which words kept it the same? Everyone pins their master description and their sheet pictures.",
+    "printables": [
+      "Character sheet template"
+    ]
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "A comic hero has to look the same on every page. Today you lock your hero.",
+    "steps": [
+      "Write your hero’s master description with the helper: the exact words you’ll reuse all term.",
+      "Choose your comic style: manga, cartoon, superhero or local heritage.",
+      "Make your hero from the front, then happy, angry and scared. Change only the feeling words.",
+      "Pin your master description and your character sheet pictures."
+    ],
+    "starterPrompt": "Welcome back! Let’s lock your hero. Tell me again how your hero looks, and I’ll help you write one master description you can reuse every time."
+  },
+  "tracks": {
+    "8-9": {
+      "aiNotes": "Keep the master description to three short sentences. Suggest the expression words: happy, angry, scared."
+    },
+    "10-11": {
+      "aiNotes": "Help the master description be precise: colours, outfit, body shape and one distinctive detail. Explain that changing one word can change the whole picture."
+    }
+  },
+  "ai": {
+    "blockedTopics": [
+      "gore",
+      "realistic weapons",
+      "horror meant to frighten"
+    ],
+    "features": [],
+    "systemPrompt": "You are the studio helper in a children’s comic club. This week the child locks their hero so the AI draws the same character every time.\n\nSteps: (1) write a master description; (2) choose a comic style; (3) make the front view and three expressions (happy, angry, scared) by changing only the feeling words; (4) pin the description and the pictures.\n\nStart from the child’s hero card from earlier weeks if it is below. Help them write a master description of two to four sentences in their words: name, body, colours, outfit, one distinctive detail, and the style. Write it back titled “Master description” so they can pin it. For each picture, tell them to reuse the master description and add only the expression or pose. If two pictures look different, help them find which detail was missing.",
+    "chat": true,
+    "image": true,
+    "imageStyle": "illustrated",
+    "caps": {
+      "messages": 40,
+      "images": 12,
+      "imageRetriesPerPrompt": 2
+    }
+  }
+}

@@ -5,7 +5,8 @@ import { config } from "dotenv";
 config({ path: ".env.local" });
 config();
 
-// Teacher starts a session, kid joins, sends a message, pins the reply, teacher sees it
+// Teacher creates a club, adds a child to the club list and starts week 1; the child
+// finds the club, taps their name, sends a message, pins the reply; the teacher sees it
 // in the gallery. Needs a Supabase project with the migrations and seed applied, and the
 // dev server running with AI_MOCK=1 IMAGE_PROVIDER=mock (playwright.config does this).
 
@@ -45,7 +46,7 @@ async function signInTeacher(browser: Browser, baseURL: string) {
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto(`${baseURL}/auth/callback?token_hash=${data.properties.hashed_token}&type=magiclink&next=/teacher`);
-  await expect(page.getByRole("heading", { name: "Your classes" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Your clubs" })).toBeVisible();
   return { context, page };
 }
 
@@ -53,32 +54,34 @@ test("teacher launches, kid builds and pins, gallery shows it", async ({ browser
   const base = baseURL ?? "http://localhost:3000";
   const teacher = await signInTeacher(browser, base);
 
-  // Create a class and read its code.
-  await teacher.page.getByLabel("Class name").fill("E2E Dolphins");
-  await teacher.page.getByRole("button", { name: "Create class" }).click();
-  await expect(teacher.page.getByRole("heading", { name: "E2E Dolphins" })).toBeVisible();
+  // Create a club, read its code, and put one child on the club list.
+  await teacher.page.getByLabel("Club name").fill("E2E Comic Club");
+  await teacher.page.getByRole("button", { name: "Create club" }).click();
+  await expect(teacher.page.getByRole("heading", { name: "E2E Comic Club" })).toBeVisible();
   const code = (await teacher.page.locator(".mono").first().innerText()).trim();
   expect(code).toMatch(/^[A-HJ-NP-Z2-9]{6}$/);
+  await teacher.page.getByLabel("Add children").fill("Sam\nLina");
+  await teacher.page.getByRole("button", { name: "Add to the list" }).click();
+  await expect(teacher.page.getByText("Added 2 names")).toBeVisible();
 
-  // Pick mission 2 and start the session.
-  await teacher.page.getByRole("link", { name: "Start a mission" }).click();
-  await teacher.page.getByRole("link", { name: /Invent a Creature/ }).click();
-  await teacher.page.getByRole("button", { name: "Start session" }).click();
+  // Start week 1 of Term 1.
+  await teacher.page.getByRole("link", { name: "Start week 1" }).click();
+  await teacher.page.getByRole("button", { name: "Start the session" }).click();
   await expect(teacher.page.locator(".launch-code")).toHaveText(code);
   await expect(teacher.page.getByText(/kids? ha(s|ve) joined/)).toBeVisible();
 
-  // Kid joins in a separate browser context.
+  // The child joins in a separate browser context: code, then their name.
   const kidContext = await browser.newContext({ viewport: { width: 1024, height: 768 } });
   const kid = await kidContext.newPage();
   await kid.goto(`${base}/join`);
-  await kid.getByLabel("Class code").fill(code);
-  await kid.getByLabel("Your first name").fill("Sam");
-  await kid.getByRole("button", { name: "Join my class" }).click();
-  await expect(kid.getByRole("heading", { name: "Invent a Creature" })).toBeVisible();
+  await kid.getByLabel("Club code").fill(code);
+  await kid.getByRole("button", { name: "Find my club" }).click();
+  await kid.getByRole("listitem").filter({ hasText: "Sam" }).click();
+  await expect(kid.getByRole("heading", { name: "Welcome to the Comic Studio" })).toBeVisible();
   await expect(kid.locator(".kicker")).toHaveText("Sam");
 
   // Send a message and get the (mock) streamed reply, then pin it.
-  await kid.getByLabel("Message your helper").fill("My creature is a frog with wings called Zib");
+  await kid.getByLabel("Message your helper").fill("My hero is a frog with wings called Zib");
   await kid.getByRole("button", { name: "Send" }).click();
   const reply = kid.locator(".msg-ai .bubble").filter({ hasText: "frog with wings" });
   await expect(reply).toBeVisible({ timeout: 20_000 });
@@ -93,7 +96,7 @@ test("teacher launches, kid builds and pins, gallery shows it", async ({ browser
 
   // Make a picture (mock provider) and pin it.
   await kid.getByRole("button", { name: "Make a picture" }).click();
-  await kid.getByLabel("Describe the picture you want").fill("a green frog with butterfly wings in a swamp");
+  await kid.getByLabel("Describe the picture you want").fill("a green frog hero with butterfly wings in a swamp, cartoon style");
   await kid.getByRole("button", { name: "Make it" }).click();
   await expect(kid.locator("img.picture")).toBeVisible({ timeout: 30_000 });
   await kid.getByRole("button", { name: "Pin", exact: true }).first().click();
@@ -110,7 +113,7 @@ test("teacher launches, kid builds and pins, gallery shows it", async ({ browser
   await teacher.page.getByRole("button", { name: "End session" }).click();
   await expect(teacher.page.getByText("This session has ended")).toBeVisible();
   await kid.reload();
-  await expect(kid.getByText("Your class gallery →")).toBeVisible();
+  await expect(kid.getByText("Your club gallery →")).toBeVisible();
 
   await kidContext.close();
   await teacher.context.close();

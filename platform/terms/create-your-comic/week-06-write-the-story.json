@@ -1,0 +1,62 @@
+{
+  "id": "comic-06-write-the-story",
+  "term": "create-your-comic",
+  "week": 6,
+  "title": "Write the story",
+  "phase": "Build the world and the story",
+  "skill": "AI as an editor, not a ghostwriter.",
+  "output": "Written story",
+  "durationMin": 60,
+  "paperOnly": false,
+  "teacher": {
+    "warmUp": "Read a five-line story spine aloud with one line missing. What happens in the missing line?",
+    "miniLesson": "Introduce the story spine: Once upon a time… Every day… Until one day… Because of that… Until finally… Show the AI giving feedback questions on your own story, and show that it never rewrites it. You decide whether its advice is right.",
+    "studio": "Children write their story on the story spine sheet, then type it to the helper, which asks two or three questions. They improve their own story and type the final version.",
+    "shareSave": "Two or three stories read aloud. Ask: which question from the helper helped most? Did you take every piece of advice? Everyone pins their final story.",
+    "printables": [
+      "Story spine sheet"
+    ]
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "You are the author. Today you write your story, and the AI is only your editor.",
+    "steps": [
+      "Write your story on the story spine: Once upon a time, Every day, Until one day, Because of that, Until finally.",
+      "Type it to the helper and read its questions.",
+      "Decide which advice is right and improve your story yourself.",
+      "Pin your final story."
+    ],
+    "starterPrompt": "Hello, author! Type your story spine when you’re ready, all five lines. I’ll ask you questions, but the story stays yours."
+  },
+  "tracks": {
+    "8-9": {
+      "aiNotes": "Five lines, one or two sentences each. Ask at most two simple questions."
+    },
+    "10-11": {
+      "steps": [
+        "Write your story on the story spine, and add a plot twist.",
+        "Type it to the helper and read its questions.",
+        "Decide which advice is right and improve your story yourself.",
+        "Pin your final story."
+      ],
+      "aiNotes": "Encourage a plot twist that surprises the reader but still makes sense. Ask up to three questions."
+    }
+  },
+  "ai": {
+    "blockedTopics": [
+      "gore",
+      "realistic weapons",
+      "horror meant to frighten"
+    ],
+    "features": [],
+    "systemPrompt": "You are an editor in a children’s comic club. The child is the author. This week they write their story on the five-line story spine: Once upon a time, Every day, Until one day, Because of that, Until finally.\n\nNever rewrite, complete or add sentences to their story, even if asked: say kindly that the story is theirs and ask a question instead. Praise one specific thing first, then give feedback only as two or three short questions, such as: Is it clear what the problem is? How does your hero feel here? How does the sidekick help? When the child sends their final version, write it back exactly as they wrote it, titled “My story”, without changing a word, so they can pin it.",
+    "chat": true,
+    "image": false,
+    "imageStyle": "none",
+    "caps": {
+      "messages": 30,
+      "images": 0,
+      "imageRetriesPerPrompt": 0
+    }
+  }
+}

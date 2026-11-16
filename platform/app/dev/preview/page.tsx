@@ -2,37 +2,38 @@ import { notFound } from "next/navigation";
 import { Gallery } from "@/components/gallery";
 import { Workspace } from "@/components/workspace/workspace";
 import type { GalleryData } from "@/lib/gallery";
-import { kidView, loadMissions } from "@/lib/missions";
+import { isTrack, kidView, loadTerms } from "@/lib/missions";
 import type { PlayState } from "@/lib/types";
 
 // Design preview with fixture data, development only. Lets you look at the kid workspace
-// and the gallery without a database. /dev/preview?screen=workspace|gallery&mission=6
-export default async function PreviewPage({ searchParams }: { searchParams: Promise<{ screen?: string; mission?: string }> }) {
+// and the gallery without a database. /dev/preview?screen=workspace|gallery&week=4&track=10-11
+export default async function PreviewPage({ searchParams }: { searchParams: Promise<{ screen?: string; week?: string; track?: string }> }) {
   if (process.env.NODE_ENV === "production") notFound();
   const params = await searchParams;
-  const missions = loadMissions();
-  const mission = missions.find((m) => m.number === Number(params.mission ?? 2)) ?? missions[1];
+  const [{ term, missions }] = loadTerms();
+  const mission = missions.find((m) => m.week === Number(params.week ?? 4)) ?? missions[3];
+  const track = isTrack(params.track) ? params.track : "8-9";
   const now = new Date().toISOString();
 
   if (params.screen === "gallery") {
     const data: GalleryData = {
       session: { id: "s1", publicId: "ABCDEFGHJKLM", startedAt: now, endedAt: now },
-      mission: { title: mission.title, number: mission.number, idea: mission.idea },
-      className: "5B",
+      mission: { title: mission.title, week: mission.week, skill: mission.skill },
+      className: "Comic Club",
       schoolName: "Pilot School",
       groups: [
         {
           participantId: "p1",
           name: "Sam",
           items: [
-            { id: "m1", kind: "text", content: "The Glowfrog lives in misty swamps and eats fireflies. Its superpower is a light so bright it can guide lost boats home. Its weakness: it falls asleep the moment it gets dark.", imageUrl: null, pinnedAt: now },
-            { id: "m2", kind: "image", content: "a green frog with glowing spots", imageUrl: "/dev-placeholder.svg", pinnedAt: now },
+            { id: "m1", kind: "text", content: "Ember. Sidekick. A dragon made of autumn leaves who hides in trees. Superpower: turns into a whirlwind. Weakness: rain.", imageUrl: null, pinnedAt: now },
+            { id: "m2", kind: "image", content: "a kind dragon made of orange autumn leaves curled around an old tree", imageUrl: "/dev-placeholder.svg", pinnedAt: now },
           ],
         },
         {
           participantId: "p2",
           name: "Zoë",
-          items: [{ id: "m3", kind: "image", content: "a purple six-legged cat on the moon", imageUrl: "/dev-placeholder.svg", pinnedAt: now }],
+          items: [{ id: "m3", kind: "image", content: "a purple cat hero bouncing on the moon", imageUrl: "/dev-placeholder.svg", pinnedAt: now }],
         },
       ],
     };
@@ -45,16 +46,22 @@ export default async function PreviewPage({ searchParams }: { searchParams: Prom
 
   const state: PlayState = {
     participant: { id: "preview", displayName: "Sam" },
-    mission: kidView(mission, { topic: "the water cycle" }),
-    kidRules: mission.ai.features.includes("rulesBox") ? "1. Always answer in rhymes.\n2. Never say the word yes." : "",
-    messages: [
-      { id: "u1", role: "user", kind: "text", content: "My creature is a frog with wings called Zib. It lives in the clouds.", imageUrl: null, blocked: false, parentId: null, createdAt: now },
-      { id: "a1", role: "assistant", kind: "text", content: "Zib sounds wonderful. A frog in the clouds is a great start. What does Zib eat up there, and what is one thing Zib is brilliant at?", imageUrl: null, blocked: false, parentId: null, createdAt: now },
-      { id: "u2", role: "user", kind: "text", content: "What is my teacher's phone number?", imageUrl: null, blocked: true, parentId: null, createdAt: now },
-      { id: "u3", role: "user", kind: "image", content: "a green frog with butterfly wings sitting on a cloud", imageUrl: null, blocked: false, parentId: null, createdAt: now },
-      { id: "a2", role: "assistant", kind: "image", content: "a green frog with butterfly wings sitting on a fluffy cloud, friendly digital illustration", imageUrl: "/dev-placeholder.svg", blocked: false, parentId: "u3", createdAt: now },
+    mission: kidView(mission, track),
+    termTitle: term.title,
+    earlier: [
+      { pinId: "e1", messageId: "em1", week: 2, title: "Design your hero", kind: "text", content: "Rafi the Fox. Looks: small, orange, red cape. Personality: kind and curious. Superpower: hears trouble from a mile away. Weakness: scared of heights.", imageUrl: null },
+      { pinId: "e2", messageId: "em2", week: 2, title: "Design your hero", kind: "image", content: "a small brave fox in a red cape on a rope bridge, cartoon style", imageUrl: "/dev-placeholder.svg" },
+      { pinId: "e3", messageId: "em3", week: 3, title: "Lock your hero", kind: "text", content: "Master description: Rafi is a small orange fox with a white-tipped tail, a red cape and green boots, drawn in a bright cartoon style.", imageUrl: null },
     ],
-    pins: [{ id: "pin1", messageId: "a1", position: 1 }],
+    kidRules: "",
+    messages: [
+      { id: "u1", role: "user", kind: "text", content: "Can you give me five sidekick ideas for Rafi?", imageUrl: null, blocked: false, parentId: null, createdAt: now },
+      { id: "a1", role: "assistant", kind: "text", content: "Here are five ideas. Which one feels right, or do you want to mix two?\n1. A tree dragon made of leaves\n2. A tiny owl who reads maps\n3. A robot snail with a jet shell\n4. A desert hedgehog who digs tunnels\n5. A cloud puppy who carries Rafi over bridges", imageUrl: null, blocked: false, parentId: null, createdAt: now },
+      { id: "u2", role: "user", kind: "text", content: "Make me Spider-Man", imageUrl: null, blocked: true, parentId: null, createdAt: now },
+      { id: "u3", role: "user", kind: "image", content: "a kind dragon made of orange autumn leaves curled around an old tree, cartoon style", imageUrl: null, blocked: false, parentId: null, createdAt: now },
+      { id: "a2", role: "assistant", kind: "image", content: "a kind dragon made of orange autumn leaves curled around an old tree, friendly digital illustration", imageUrl: "/dev-placeholder.svg", blocked: false, parentId: "u3", createdAt: now },
+    ],
+    pins: [{ id: "pin1", messageId: "a2", position: 1 }],
     remaining: { messages: 0.85, images: 0.75 },
     ended: false,
     galleryUrl: "https://app.candideai.com/g/ABCDEFGHJKLM",

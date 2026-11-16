@@ -1,5 +1,6 @@
 import { remainingFraction } from "./caps";
 import { appUrl } from "./env";
+import { loadEarlierPins } from "./kid-work";
 import { kidView } from "./missions";
 import { signImagePaths, type PlayContext } from "./play";
 import { createServiceSupabase } from "./supabase/service";
@@ -18,12 +19,13 @@ export function toPlayMessage(row: MessageRow, urls: Map<string, string>): PlayM
   };
 }
 
-/** Everything the kid's browser needs: mission (kid view), transcript, board, remaining caps. */
+/** Everything the kid's browser needs: this week's mission (kid view), transcript, board, earlier weeks, remaining caps. */
 export async function buildPlayState(ctx: PlayContext): Promise<PlayState> {
   const db = createServiceSupabase();
-  const [{ data: messageRows }, { data: pinRows }] = await Promise.all([
+  const [{ data: messageRows }, { data: pinRows }, earlier] = await Promise.all([
     db.from("messages").select("*").eq("participant_id", ctx.participant.id).in("role", ["user", "assistant"]).order("created_at"),
     db.from("pins").select("*").eq("participant_id", ctx.participant.id).order("position"),
+    loadEarlierPins(ctx.participant.kid_id, ctx.participant.id),
   ]);
   const messages = (messageRows ?? []) as MessageRow[];
   const pins = (pinRows ?? []) as Pin[];
@@ -31,7 +33,9 @@ export async function buildPlayState(ctx: PlayContext): Promise<PlayState> {
 
   return {
     participant: { id: ctx.participant.id, displayName: ctx.participant.display_name },
-    mission: kidView(ctx.mission, ctx.session.teacher_inputs),
+    mission: kidView(ctx.mission, ctx.track, ctx.session.teacher_inputs),
+    termTitle: ctx.termTitle,
+    earlier,
     kidRules: ctx.participant.kid_rules ?? "",
     messages: messages.map((row) => toPlayMessage(row, urls)),
     pins: pins.map((pin) => ({ id: pin.id, messageId: pin.message_id, position: pin.position })),

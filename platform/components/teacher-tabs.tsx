@@ -9,7 +9,7 @@ export function TeacherTabs({ isAdmin }: { isAdmin: boolean }) {
   return (
     <nav className="tabs" aria-label="Main">
       <Link className="tab" href="/teacher" aria-current={classesActive ? "page" : undefined}>
-        Classes
+        Clubs
       </Link>
       {isAdmin && (
         <Link className="tab" href="/teacher/school" aria-current={pathname.startsWith("/teacher/school") ? "page" : undefined}>

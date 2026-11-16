@@ -1,3 +1,4 @@
+import { snapshotInfo } from "./missions";
 import { signImagePaths } from "./play";
 import { createServiceSupabase } from "./supabase/service";
 import type { MessageRow, Participant, Pin, SessionRow } from "./types";
@@ -14,7 +15,7 @@ export type GalleryGroup = { participantId: string; name: string; items: Gallery
 
 export type GalleryData = {
   session: { id: string; publicId: string; startedAt: string; endedAt: string | null };
-  mission: { title: string; number: number; idea: string };
+  mission: { title: string; week: number | null; skill: string };
   className: string;
   schoolName: string;
   groups: GalleryGroup[];
@@ -76,10 +77,10 @@ async function loadGallery(column: "id" | "public_id", value: string): Promise<G
     }))
     .filter((group) => group.items.length > 0);
 
-  const mission = session.mission_snapshot;
+  const info = snapshotInfo(session.mission_snapshot);
   return {
     session: { id: session.id, publicId: session.public_id, startedAt: session.started_at, endedAt: session.ended_at },
-    mission: { title: mission.title, number: mission.number, idea: mission.idea },
+    mission: { title: info.title, week: session.week ?? info.week, skill: info.skill },
     className: session.class?.name ?? "",
     schoolName: session.class?.school?.name ?? "",
     groups,

@@ -1,4 +1,4 @@
-import type { Mission, TeacherInputs } from "./missions";
+import type { KidMission, Mission, TeacherInputs, Term, Track } from "./missions";
 
 export type ProfileRole = "admin" | "teacher";
 
@@ -20,29 +20,53 @@ export type Profile = {
   created_at: string;
 };
 
+/** A club group: it follows one term, in one age track. The table is still called classes. */
 export type ClassRow = {
   id: string;
   school_id: string;
   teacher_id: string;
   name: string;
-  year_group: number;
+  year_group: number | null;
+  term_id: string;
+  track: Track;
   code: string;
   created_at: string;
 };
 
-export type MissionRow = {
+export type TermRow = {
   id: string;
   number: number;
-  type: Mission["type"];
+  title: string;
+  json: Term;
+  version: number;
+  published: boolean;
+  updated_at: string;
+};
+
+export type MissionRow = {
+  id: string;
+  term_id: string | null;
+  week: number | null;
   json: Mission;
   version: number;
   published: boolean;
   updated_at: string;
 };
 
+/** A child on a club's list. */
+export type Kid = {
+  id: string;
+  class_id: string;
+  display_name: string;
+  archived_at: string | null;
+  created_at: string;
+};
+
 export type SessionRow = {
   id: string;
   class_id: string;
+  term_id: string | null;
+  week: number | null;
   mission_id: string;
   mission_version: number;
   mission_snapshot: Mission;
@@ -55,6 +79,7 @@ export type SessionRow = {
 export type Participant = {
   id: string;
   session_id: string;
+  kid_id: string | null;
   display_name: string;
   kid_rules: string | null;
   joined_at: string;
@@ -103,9 +128,22 @@ export type PlayMessage = {
   createdAt: string;
 };
 
+/** Something the child pinned in an earlier week of the same club. */
+export type EarlierPin = {
+  pinId: string;
+  messageId: string;
+  week: number | null;
+  title: string;
+  kind: MessageKind;
+  content: string;
+  imageUrl: string | null;
+};
+
 export type PlayState = {
   participant: { id: string; displayName: string };
-  mission: import("./missions").KidMission;
+  mission: KidMission;
+  termTitle: string;
+  earlier: EarlierPin[];
   kidRules: string;
   messages: PlayMessage[];
   pins: { id: string; messageId: string; position: number }[];

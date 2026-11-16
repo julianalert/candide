@@ -12,7 +12,7 @@ import { PENDING_IMAGE_ID, STREAMING_ID, Studio } from "./studio";
 type Panel = "mission" | "studio" | "board";
 type Pin = PlayState["pins"][number];
 
-// The kid workspace: mission panel, studio, creation board. Three columns on a
+// The kid workspace: this week's mission, the studio, and the comic board with earlier weeks. Three columns on a
 // Chromebook, tabs under 900px. State lives here; the panels are presentational.
 
 export function Workspace({ initial }: { initial: PlayState }) {
@@ -170,7 +170,7 @@ export function Workspace({ initial }: { initial: PlayState }) {
         <div className="actions" style={{ gap: 14 }}>
           <Image className="wordmark" src="/logo.svg" alt="Candide" width={107} height={22} priority />
           <span className="meta" style={{ fontSize: 15 }}>
-            Mission {String(mission.number).padStart(2, "0")} · {mission.title}
+            {initial.termTitle ? `${initial.termTitle} · ` : ""}Week {mission.week} · {mission.title}
           </span>
         </div>
         <span className="kicker" style={{ fontSize: 15, padding: "4px 12px" }} aria-label={`Your badge name is ${initial.participant.displayName}`}>
@@ -199,15 +199,15 @@ export function Workspace({ initial }: { initial: PlayState }) {
             onDismissNotice={() => setNotice(null)}
           />
         </section>
-        <section className={`card ws-panel${panel === "board" ? " is-active" : ""}`} aria-label="My creation board">
-          <Board pins={pins} messages={messages} ended={ended} onUnpin={unpin} />
+        <section className={`card ws-panel${panel === "board" ? " is-active" : ""}`} aria-label="My comic board">
+          <Board pins={pins} messages={messages} earlier={initial.earlier} ended={ended} onUnpin={unpin} />
         </section>
       </main>
 
       <nav className="ws-tabs" role="tablist" aria-label="Panels">
         {(
           [
-            ["mission", "Mission"],
+            ["mission", `Week ${mission.week}`],
             ["studio", "Studio"],
             ["board", `Board${pins.length ? ` (${pins.length})` : ""}`],
           ] as [Panel, string][]

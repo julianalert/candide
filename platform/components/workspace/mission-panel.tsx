@@ -55,9 +55,7 @@ export function MissionPanel({ mission, participantId, kidRules, ended, onSaveRu
   return (
     <>
       <div className="ws-panel-head">
-        <span className="section-label">
-          Mission {String(mission.number).padStart(2, "0")}
-        </span>
+        <span className="section-label">Week {mission.week}</span>
         <span className="chip">{done.filter(Boolean).length}/{mission.steps.length} done</span>
       </div>
       <div className="ws-panel-body stack" style={{ gap: 18 }}>
@@ -66,6 +64,9 @@ export function MissionPanel({ mission, participantId, kidRules, ended, onSaveRu
             {mission.title}
           </h1>
           <p style={{ fontSize: 16, color: "var(--color-grey-700)" }}>{mission.intro}</p>
+          <p className="meta" style={{ fontSize: 15 }}>
+            Today you make: <b>{mission.output}</b>
+          </p>
         </div>
 
         {mission.rulesBox && (

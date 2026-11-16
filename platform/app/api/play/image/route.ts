@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
   if (!ctx) return unauthorised();
   if (ctx.ended) return sessionOver();
   const { participant, session, mission, school } = ctx;
-  if (!imageEnabled(mission)) return badRequest("This mission is chat only.");
+  if (!imageEnabled(mission)) return badRequest("No pictures this week.");
 
   const body = (await request.json().catch(() => ({}))) as { text?: string; retryOf?: string };
   const db = createServiceSupabase();
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
   if (!text) return badRequest("Describe the picture you want first.");
 
   if (!canMakeImage(participant.image_count, mission.ai.caps)) {
-    return NextResponse.json({ error: "You've made all your pictures for this mission. Pin your favourite!", code: "cap" }, { status: 429 });
+    return NextResponse.json({ error: "You've made all your pictures for this week. Pin your favourite!", code: "cap" }, { status: 429 });
   }
   const { data: todayCount } = await db.rpc("school_images_today", { p_school: school.id });
   if ((todayCount ?? 0) >= school.daily_image_cap) {

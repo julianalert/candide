@@ -1,0 +1,54 @@
+{
+  "id": "comic-09-make-the-pages-2",
+  "term": "create-your-comic",
+  "week": 9,
+  "title": "Make the pages (2)",
+  "phase": "Make the pages",
+  "skill": "AI makes mistakes. Always check its work.",
+  "output": "All panels drafted",
+  "durationMin": 60,
+  "paperOnly": false,
+  "teacher": {
+    "warmUp": "AI mistake hunt: show a picture with an extra finger or a wrong outfit. Who spots it first?",
+    "miniLesson": "Show common AI mistakes: extra fingers or legs, a hero whose outfit changes, gibberish letters. Demo fixing one by changing the words, not by pressing the button again.",
+    "studio": "Children finish their panels, then check every panel for mistakes and fix them. With ages 10–11, talk about why AI makes mistakes: it guesses from examples it has seen.",
+    "shareSave": "Each child shows one mistake they found and how they fixed it. Everyone pins all their panels.",
+    "printables": []
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "Finish your panels, then become a mistake hunter. AI makes mistakes, and you fix them.",
+    "steps": [
+      "Finish the rest of your panels.",
+      "Check every panel: extra fingers? A different outfit? Strange letters?",
+      "Fix mistakes by changing your words.",
+      "Pin all your panels in order."
+    ],
+    "starterPrompt": "Welcome back! Which panel are you making next? Keep your eyes open: we’re hunting AI mistakes today."
+  },
+  "tracks": {
+    "8-9": {
+      "aiNotes": "Explain simply: the AI learned from lots of pictures and sometimes guesses wrong."
+    },
+    "10-11": {
+      "aiNotes": "When a mistake appears, explain briefly why AI makes mistakes: it predicts from examples it was trained on, it guesses, and its pictures can carry bias."
+    }
+  },
+  "ai": {
+    "blockedTopics": [
+      "gore",
+      "realistic weapons",
+      "horror meant to frighten"
+    ],
+    "features": [],
+    "systemPrompt": "You are the studio helper in a children’s comic club. This week the child finishes their comic panels and checks the AI’s work for mistakes.\n\nHelp build each remaining panel from the character (their master description), the action, the place and the camera, following their storyboard. Then ask them to check each picture for mistakes: extra fingers or legs, the character’s outfit or colours changing, strange letters. When they find one, help them change the words to fix it, and remind them of the three-tries rule. Be honest that AI makes mistakes and that checking its work is their job as the author. Never put letters in pictures.",
+    "chat": true,
+    "image": true,
+    "imageStyle": "illustrated",
+    "caps": {
+      "messages": 50,
+      "images": 20,
+      "imageRetriesPerPrompt": 2
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "comic-08-make-the-pages-1",
+  "term": "create-your-comic",
+  "week": 8,
+  "title": "Make the pages (1)",
+  "phase": "Make the pages",
+  "skill": "Building a full prompt from parts.",
+  "output": "First 2 pages",
+  "durationMin": 60,
+  "paperOnly": false,
+  "teacher": {
+    "warmUp": "Show a close-up and a wide shot of the same scene. Which one shows feelings? Which one shows the place?",
+    "miniLesson": "Show the four parts of a panel prompt: the character (reuse the master description), the action, the place (from the setting card) and the camera (close-up or wide shot). Demo building one panel from your storyboard, part by part.",
+    "studio": "Children make their first pages panel by panel, following their storyboard, and pin each panel in order. Remind them: three tries per panel, then change the words.",
+    "shareSave": "Two or three children show their first page in order. Everyone pins their panels. Preview: next week is the AI mistake hunt.",
+    "printables": [
+      "Prompt builder card"
+    ]
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "Time to make your comic pages, one panel at a time.",
+    "steps": [
+      "Open your storyboard at page 1, panel 1.",
+      "Build the picture: character + action + place + camera.",
+      "Make the panel, check it against your storyboard, and fix the words if needed.",
+      "Pin each panel in order. Aim for 2 pages today."
+    ],
+    "starterPrompt": "Let’s make your pages! Tell me what happens in page 1, panel 1 of your storyboard."
+  },
+  "tracks": {
+    "8-9": {
+      "aiNotes": "Use the prompt builder: give the sentence frame “[character from the master description] [doing what] in [place], [close-up or wide shot], [style] style” and help fill one part at a time."
+    },
+    "10-11": {
+      "aiNotes": "Let them write the full prompt freely; suggest a camera angle that fits the moment."
+    }
+  },
+  "ai": {
+    "blockedTopics": [
+      "gore",
+      "realistic weapons",
+      "horror meant to frighten"
+    ],
+    "features": [],
+    "systemPrompt": "You are the studio helper in a children’s comic club. This week the child makes their first comic pages, panel by panel, from their paper storyboard.\n\nFor each panel, help them build a picture request from four parts: the character (reuse their master description from earlier weeks), the action, the place (from their setting cards) and the camera (close-up or wide shot), plus their comic style. Ask for one missing part at a time. Never invent story events that are not in their storyboard. Never put words, speech bubbles or letters in a picture: children add their words later. After each picture, ask whether it matches their storyboard.",
+    "chat": true,
+    "image": true,
+    "imageStyle": "illustrated",
+    "caps": {
+      "messages": 50,
+      "images": 20,
+      "imageRetriesPerPrompt": 2
+    }
+  }
+}

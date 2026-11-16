@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { sessionIsOver } from "./caps";
 import { kidCookieSecret } from "./env";
 import { KID_COOKIE, verifyKidSession } from "./kid-session";
-import { parseMission, type Mission } from "./missions";
+import { isTrack, parseMission, type Mission, type Track } from "./missions";
 import { createServiceSupabase } from "./supabase/service";
 import type { Participant, SessionRow } from "./types";
 
@@ -14,7 +14,9 @@ export type PlayContext = {
   participant: Participant;
   session: SessionRow;
   mission: Mission;
+  termTitle: string;
   classId: string;
+  track: Track;
   school: { id: string; name: string; daily_image_cap: number };
   ended: boolean;
 };
@@ -22,7 +24,8 @@ export type PlayContext = {
 type Loaded = Participant & {
   session:
     | (SessionRow & {
-        class: { id: string; school_id: string; school: { id: string; name: string; daily_image_cap: number } | null } | null;
+        class: { id: string; school_id: string; track: string | null; school: { id: string; name: string; daily_image_cap: number } | null } | null;
+        term: { title: string } | null;
       })
     | null;
 };
@@ -35,19 +38,28 @@ export async function getParticipant(): Promise<PlayContext | null> {
   const db = createServiceSupabase();
   const { data, error } = await db
     .from("participants")
-    .select("*, session:sessions(*, class:classes(id, school_id, school:schools(id, name, daily_image_cap)))")
+    .select("*, session:sessions(*, term:terms(title), class:classes(id, school_id, track, school:schools(id, name, daily_image_cap)))")
     .eq("id", kid.pid)
     .maybeSingle<Loaded>();
   if (error) throw error;
   if (!data || !data.session || data.session.id !== kid.sid || !data.session.class?.school) return null;
 
   const { session, ...participant } = data;
-  const { class: klass, ...sessionRow } = session;
+  const { class: klass, term, ...sessionRow } = session;
+  let mission: Mission;
+  try {
+    mission = parseMission(sessionRow.mission_snapshot, `session ${sessionRow.id}`);
+  } catch {
+    // A session from before terms existed: its snapshot no longer fits the schema.
+    return null;
+  }
   return {
     participant,
     session: sessionRow,
-    mission: parseMission(sessionRow.mission_snapshot, `session ${sessionRow.id}`),
+    mission,
+    termTitle: term?.title ?? "",
     classId: klass!.id,
+    track: isTrack(klass!.track) ? klass!.track : "8-9",
     school: klass!.school!,
     ended: sessionIsOver(sessionRow),
   };

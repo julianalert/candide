@@ -1,7 +1,7 @@
-// Where the pilot-request form sends its data. Paste a form endpoint URL here
-// (Formspree, Basin, Getform or your own API: anything that accepts a JSON POST).
+// Where the demo-request form sends its data: the platform's API, which saves
+// the request and emails the team and the person who asked.
 // While this is empty the form runs in preview mode and sends nothing.
-const FORM_ENDPOINT = '';
+const FORM_ENDPOINT = 'https://app.candideai.com/api/demo-request';
 
 // ---------- Video ----------
 // The page shows a thumbnail that links to YouTube. Pressing play swaps in the
@@ -23,14 +23,14 @@ document.querySelectorAll('a.video[data-video-id]').forEach((link) => {
   });
 });
 
-// ---------- Pilot-request form ----------
+// ---------- Demo-request form ----------
 
-const form = document.querySelector('#pilot-form');
+const form = document.querySelector('#demo-form');
 
 if (form) {
   const status = form.querySelector('.form-status');
   const button = form.querySelector('button[type="submit"]');
-  const success = document.querySelector('#pilot-success');
+  const success = document.querySelector('#demo-success');
 
   const say = (message, kind) => {
     status.textContent = message;
@@ -43,9 +43,12 @@ if (form) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const data = Object.fromEntries(new FormData(form));
-    if (data._gotcha) return; // filled in by a bot
-    delete data._gotcha;
+    const fields = new FormData(form);
+    if (fields.get('_gotcha')) return; // filled in by a bot
+    fields.delete('_gotcha');
+
+    const data = Object.fromEntries(fields);
+    data.ages = fields.getAll('ages'); // several boxes can be ticked
 
     if (!FORM_ENDPOINT) {
       say('Preview mode: this form isn’t connected yet, so nothing was sent.', 'warn');
@@ -71,7 +74,7 @@ if (form) {
       success.focus();
     } catch (err) {
       console.error(err);
-      say('Something went wrong and your details weren’t sent. Please try again in a moment.', 'error');
+      say('Something went wrong and your request wasn’t sent. Please try again in a moment, or write to hello@candideai.com.', 'error');
       button.disabled = false;
       button.textContent = label;
     }

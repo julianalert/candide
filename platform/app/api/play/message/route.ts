@@ -1,6 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { assembleSystemPrompt, buildHistory, streamChat } from "@/lib/ai";
 import { canSendMessage } from "@/lib/caps";
+import { earlierWorkSummary, loadEarlierPins } from "@/lib/kid-work";
+import { chatEnabled } from "@/lib/missions";
 import { moderate, NEUTRAL_REPLACEMENT, SOFT_BLOCK_MESSAGE } from "@/lib/moderation";
 import { badRequest, getParticipant, sessionOver, unauthorised } from "@/lib/play";
 import { toPlayMessage } from "@/lib/play-state";
@@ -25,8 +27,9 @@ export async function POST(request: NextRequest) {
   if (!text) return badRequest("Type something first.");
 
   const { participant, session, mission } = ctx;
+  if (!chatEnabled(mission)) return badRequest("No AI this week: today you work on paper.", "paper_week");
   if (!canSendMessage(participant.message_count, mission.ai.caps)) {
-    return NextResponse.json({ error: "You've used all your messages for this mission. Time to pin your best work!", code: "cap" }, { status: 429 });
+    return NextResponse.json({ error: "You've used all your messages for this week. Time to pin your best work!", code: "cap" }, { status: 429 });
   }
 
   const db = createServiceSupabase();
@@ -67,7 +70,8 @@ export async function POST(request: NextRequest) {
           .reverse()
           .map((m) => ({ role: m.role as "user" | "assistant", kind: m.kind, content: m.content, blocked: m.moderation?.ok === false }));
         const history = buildHistory([...prior, { role: "user", kind: "text", content: text, blocked: false }]);
-        const system = assembleSystemPrompt(mission, session.teacher_inputs, participant.kid_rules ?? "");
+        const earlier = await loadEarlierPins(participant.kid_id, participant.id, { signUrls: false });
+        const system = assembleSystemPrompt(mission, session.teacher_inputs, participant.kid_rules ?? "", {}, { track: ctx.track, earlierWork: earlierWorkSummary(earlier) });
 
         const result = await streamChat({
           system,

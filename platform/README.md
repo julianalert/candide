@@ -1,42 +1,52 @@
 # Candide platform
 
-The classroom app behind **app.candideai.com**: a teacher launches a 45-minute AI mission, every kid works in a guarded AI workspace, and the session ends with a shareable class gallery. The marketing site lives one folder up and deploys separately to candideai.com.
+The app behind **app.candideai.com** and the **AI Creators Club**, an extra-curricular club schools run themselves for ages 8 to 11. A club group follows a term (Term 1 is *Create Your Comic*, 12 weeks); each week the teacher starts that week's mission, every child works in a guarded AI workspace, and their pinned work follows them from week to week until the end-of-term showcase. The marketing site lives one folder up and deploys separately to candideai.com.
 
 Stack: Next.js 15 (App Router), TypeScript, Tailwind v4 with the Sodobat design tokens, Supabase (Postgres, Auth, Storage), Anthropic SDK (Claude Sonnet for chat, Claude Haiku for moderation and prompt rewriting), Zod, Vitest, Playwright. Deployed on Vercel.
 
 ## Layout
 
 ```
-app/                  routes: /join, /play, /g/[publicId], /login, /teacher/**, /api/play/**, /api/teacher/**
+app/                  routes: /join, /play, /g/[publicId], /login, /teacher/**, /api/play/**, /api/teacher/**,
+                      /api/demo-request (the "Book a demo" form on candideai.com)
 components/           teacher tabs, gallery, join form, kid workspace (studio, mission panel, board)
-lib/                  missions (Zod + loader), ai (prompt assembly, Claude), moderation, image providers,
-                      kid-session (signed cookie), caps, play (getParticipant), gallery, supabase clients
-missions/*.json       the 10 missions. Edit JSON, run `npm run seed`. No code change needed.
+lib/                  missions (terms + weekly missions, Zod + loader), ai (prompt assembly, Claude), moderation,
+                      image providers, kid-session (signed cookie), kid-work (earlier weeks), caps, play, gallery,
+                      demo + loops (demo form emails), supabase clients
+terms/<term>/         one folder per term: term.json (topic, goal, phases) and week-NN-*.json, one mission per
+                      week. Edit JSON, run `npm run seed`. No code change needed.
 ai/                   safety.md (fixed, always first), age-tier-8-11.md, moderation.md, image-rewrite.md
-supabase/migrations/  0001 schema + RLS, 0002 functions, 0003 storage bucket, 0004 pg_cron jobs
+supabase/migrations/  0001 schema + RLS, 0002 functions, 0003 storage bucket, 0004 pg_cron jobs,
+                      0005 demo requests, 0006 terms, club groups and club lists
 scripts/              seed-missions, create-school, ops (end-stale, purge-transcripts, moderation-report)
 tests/                Vitest: loader, codes, cookie, caps, prompt assembly, adversarial (live, gated)
-e2e/                  Playwright: teacher starts → kid joins, chats, pins → gallery → end
+e2e/                  Playwright: club + club list → week 1 → kid taps their name, chats, pins → gallery → end
 ```
 
 ## Set up a Supabase project
 
 1. Create a project in the **EU (Frankfurt)** region. Note the project URL, anon key and service role key.
-2. Run the four files in `supabase/migrations/` in order (SQL editor, or `supabase db push` if you use the CLI). `0004` schedules the auto-end and the 90-day transcript purge with pg_cron; if pg_cron is not available it prints a notice and you run `npm run ops end-stale` / `npm run ops purge-transcripts` from a scheduler instead.
+2. Run the files in `supabase/migrations/` in order (SQL editor, or `supabase db push` if you use the CLI). `0004` schedules the auto-end and the 90-day transcript purge with pg_cron; if pg_cron is not available it prints a notice and you run `npm run ops end-stale` / `npm run ops purge-transcripts` from a scheduler instead.
 3. Authentication → URL configuration: Site URL `https://app.candideai.com`, redirect URLs `https://app.candideai.com/auth/callback` and `http://localhost:3000/auth/callback`.
-4. Authentication → Email templates: the invite and magic link templates should link to `{{ .SiteURL }}/auth/callback?token_hash={{ .TokenHash }}&type=invite` and `...&type=magiclink`. For pilots the built-in mailer is fine; add custom SMTP before more than a handful of schools.
+4. Auth emails go through **Loops** (candideai.com sending domain). In Loops → Settings → Supabase, connect the project to set its SMTP (smtp.loops.so:587, user `loops`, a Loops API key as password). Each email is a published Loops transactional email (group "Account Management": Auth · Invite, Auth · Magic link, Auth · Confirm signup) with one data variable, `signInUrl`. In Supabase → Authentication → Emails, the Invite user, Magic link and Confirm sign up template bodies are not HTML but a Loops payload, for example:
+
+   ```json
+   {"transactionalId": "<Loops ID>", "email": "{{ .Email }}", "dataVariables": {"signInUrl": "{{ .SiteURL }}/auth/callback?token_hash={{ .TokenHash }}&type=invite"}}
+   ```
+
+   with `type=magiclink` for Magic link and `type=email` for Confirm sign up (Supabase sends that one instead of a magic link to someone who hasn't accepted their invite). Any template left as HTML fails to send. Subject and sender come from Loops, not Supabase.
 
 ## Run locally
 
 ```bash
 cp .env.example .env.local   # fill in Supabase keys, ANTHROPIC_API_KEY, KID_COOKIE_SECRET
 npm install
-npm run seed                 # validates missions/*.json and loads them
+npm run seed                 # validates terms/*/ and loads the terms and their weekly missions
 npm run create-school -- --name "Pilot School" --country QA --admin-email you@example.com --admin-name "You"
 npm run dev
 ```
 
-The invite email signs you in at `/teacher`. Create a class, pick a mission, start it, then open `/join` in a private window with the class code.
+The invite email signs you in at `/teacher`. Create a club group (name, age track, term), add the children's first names to its club list, and start week 1. Then open `/join` in a private window, type the club code and tap a name. Each week the teacher starts the next week; a child who taps their name sees everything they pinned in earlier weeks, and the AI helper gets a short summary of it.
 
 Without an Anthropic key, set `AI_MOCK=1` (canned replies, keyword moderation) and `IMAGE_PROVIDER=mock` (a locally drawn placeholder PNG); the whole flow still works end to end.
 
@@ -49,6 +59,10 @@ Without an Anthropic key, set `AI_MOCK=1` (canned replies, keyword moderation) a
 - `mock` — no network, for development and tests.
 
 The provider is still an open decision in the spec; both real adapters are ~40 lines and share one interface, so switching is an environment change.
+
+## Book a demo (candideai.com)
+
+The marketing site's form posts to `POST /api/demo-request` (CORS allows candideai.com). The route saves the request in `demo_requests` and, through Loops, emails the team the "DEMO ASKED FOR CANDIDE" alert (Loops email "Demo · Team alert") and the requester a confirmation ("Demo · Confirmation"). It needs `LOOPS_API_KEY` and `DEMO_NOTIFY_EMAILS` (comma-separated team addresses, kept out of the repo); without them the request is still saved.
 
 ## Tests
 

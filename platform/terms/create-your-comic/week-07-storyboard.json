@@ -1,0 +1,68 @@
+{
+  "id": "comic-07-storyboard",
+  "term": "create-your-comic",
+  "week": 7,
+  "title": "Storyboard",
+  "phase": "Storyboard",
+  "skill": "Plan before you generate. No AI this week.",
+  "output": "Storyboard and script",
+  "durationMin": 60,
+  "paperOnly": true,
+  "teacher": {
+    "warmUp": "Show a comic page next to its storyboard. What did the artist decide before drawing?",
+    "miniLesson": "Show how to split a story into pages and panels: one moment per panel, and what the camera sees (close-up or wide shot). Sketch one panel on the board with stick figures and write its dialogue underneath.",
+    "studio": "On paper, children split their story into pages and panels, sketch each panel with stick figures and write the dialogue. Ages 8–9: 4 pages of 3 panels. Ages 10–11: 6 to 8 pages of 3 to 5 panels. Their board on the platform shows their hero, characters, places and story from earlier weeks.",
+    "shareSave": "Partners swap storyboards: can you follow the story without the words? Children keep their storyboard for next week.",
+    "printables": [
+      "Storyboard sheet"
+    ]
+  },
+  "teacherInputs": [],
+  "kid": {
+    "intro": "No AI this week! Real comic artists plan on paper first. Your board shows everything you’ve made so far.",
+    "steps": [
+      "Look at your board: your hero, friends, places and story.",
+      "On paper, split your story into pages and panels.",
+      "Sketch each panel with stick figures.",
+      "Write what each character says under each panel."
+    ],
+    "starterPrompt": "No AI this week: grab your pencil!"
+  },
+  "tracks": {
+    "8-9": {
+      "steps": [
+        "Look at your board: your hero, your sidekick, your places and your story.",
+        "On paper, split your story into 4 pages of 3 panels.",
+        "Sketch each panel with stick figures.",
+        "Write what each character says under each panel."
+      ],
+      "aiNotes": "Paper week: no AI."
+    },
+    "10-11": {
+      "steps": [
+        "Look at your board: your hero, your sidekick, your villain, your places and your story.",
+        "On paper, split your story into 6 to 8 pages of 3 to 5 panels.",
+        "Sketch each panel with stick figures and choose close-ups or wide shots.",
+        "Write the dialogue and narration under each panel."
+      ],
+      "aiNotes": "Paper week: no AI."
+    }
+  },
+  "ai": {
+    "blockedTopics": [
+      "gore",
+      "realistic weapons",
+      "horror meant to frighten"
+    ],
+    "features": [],
+    "systemPrompt": "This is a paper week: there is no AI helper.",
+    "chat": false,
+    "image": false,
+    "imageStyle": "none",
+    "caps": {
+      "messages": 0,
+      "images": 0,
+      "imageRetriesPerPrompt": 0
+    }
+  }
+}

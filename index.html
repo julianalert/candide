@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Candide — AI missions for the classroom</title>
-<meta name="description" content="Candide is an online classroom platform for schools. A teacher launches a 45-minute AI mission, every child aged 8 to 11 builds something in a guarded AI workspace, and the lesson ends with a class gallery.">
+<title>Candide — The AI Creators Club for schools</title>
+<meta name="description" content="The AI Creators Club is a ready-to-run extra-curricular club for ages 8 to 11. A teacher from your school leads one mission a week for a term, and every child creates their own comic with AI, safely, then presents it to parents.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Candide — AI missions for the classroom">
-<meta property="og:description" content="Ten scripted 45-minute missions. A teacher launches one, every child creates in a guarded AI workspace, and the class ends with a gallery to share.">
+<meta property="og:title" content="Candide — The AI Creators Club for schools">
+<meta property="og:description" content="A new club parents will sign up for, and any teacher can run. Twelve weekly AI missions for ages 8 to 11, ending with a showcase for parents.">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,302 +26,547 @@
   </div>
   <nav class="tabs" aria-label="Main">
     <a class="tab" href="/" aria-current="page">Overview</a>
-    <a class="tab" href="/missions">Missions</a>
+    <a class="tab" href="/programme">Term 1</a>
+    <a class="tab" href="/#how">How it works</a>
     <a class="tab" href="/#safety">Safety</a>
     <a class="tab" href="/#schools">For schools</a>
     <a class="tab" href="/#faq">Questions</a>
   </nav>
   <div class="topbar-actions">
-    <a class="btn btn-primary" href="/pilot"><span>Request <span class="long">a </span>pilot</span></a>
+    <a class="btn btn-primary" href="/demo"><span>Book <span class="long">a </span>demo</span></a>
   </div>
 </header>
 
 <main id="main" class="page">
 
-  <!-- Hero and the platform at a glance -->
+  <!-- Hero: the promise, then the product itself -->
   <div class="stack">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
         <span class="context">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
-          <span class="sr-only">Format: </span>Online · for primary schools
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>
+          <span class="sr-only">Format: </span>Extra-curricular club · ages 8–11
         </span>
-        <h1 id="hero-title">AI lessons your class can run <span class="accent">tomorrow morning</span></h1>
-        <p class="hero-sub">Candide is a classroom platform for ages 8 to 11. A teacher launches a scripted 45-minute mission, every child creates in a guarded AI workspace on their own device, and the lesson ends with a class gallery to share.</p>
-        <div class="actions">
-          <a class="btn" href="/missions">See the ten missions</a>
-          <a class="btn btn-primary" href="/pilot">Request a pilot</a>
-        </div>
-        <p class="meta">10 missions · Ages 8–11 · Up to 30 children per session · Nothing to install</p>
+        <h1 id="hero-title">The AI club any teacher can run, <span class="accent">from week one</span></h1>
       </div>
-
-      <figure class="card hero-video">
-        <a class="video" href="https://www.youtube.com/watch?v=GMK51pf6-xc" data-video-id="GMK51pf6-xc" data-video-title="Candide: where you learn AI the fun way">
-          <img src="https://i.ytimg.com/vi/GMK51pf6-xc/maxresdefault.jpg" alt="" width="1280" height="720">
-          <span class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-          <span class="sr-only">Play the video: Candide, where you learn AI the fun way</span>
-        </a>
-      </figure>
+      <div class="hero-side">
+        <p class="hero-sub">The AI Creators Club is a ready-to-run club for your school’s activities programme. One mission a week for a term, no prep, no AI expertise needed. Every child invents a hero, makes their own comic with AI, and presents it to parents at the end of term.</p>
+        <div class="actions">
+          <a class="btn" href="/programme">See Term 1</a>
+          <a class="btn btn-primary" href="/demo">Book a demo</a>
+        </div>
+      </div>
     </section>
 
-    <ul class="card kpis" aria-label="The platform at a glance">
-      <li class="kpi"><span class="kpi-label">Minutes per mission</span><span class="kpi-value">45</span><span class="kpi-sub">Hook, build, share, debrief</span></li>
-      <li class="kpi"><span class="kpi-label">Missions</span><span class="kpi-value">10</span><span class="kpi-sub">Creative, literacy, curriculum</span></li>
-      <li class="kpi"><span class="kpi-label">Age range</span><span class="kpi-value">8–11</span><span class="kpi-sub">Years 3 to 6</span></li>
-      <li class="kpi"><span class="kpi-label">Children per session</span><span class="kpi-value">30</span><span class="kpi-sub">One device each</span></li>
-      <li class="kpi"><span class="kpi-label">Child accounts</span><span class="kpi-value">0</span><span class="kpi-sub">Class code and first name</span></li>
-      <li class="kpi"><span class="kpi-label">To launch a mission</span><span class="kpi-value">60 <span class="kpi-unit">s</span></span><span class="kpi-sub">From sign-in to “kids can join”</span></li>
+    <figure class="stage" role="img" aria-label="The Candide workspace during week 2 of Term 1, Design your hero. On the left, the week's four steps. In the middle, a child named Sam describes a fox hero to the AI helper and gets a comic picture of a fox in a red cape crossing a rope bridge. On the right, Sam's board with the hero card and the pinned picture. Floating cards show the club code on the class screen and the club gallery.">
+      <div class="stage-grid" aria-hidden="true"></div>
+      <div class="stage-inner" aria-hidden="true">
+        <div class="ui">
+          <div class="ui-bar">
+            <img class="ui-logo" src="assets/logo.svg" alt="" width="107" height="22">
+            <span class="ui-crumb">Term 1 · Week 2 · Design your hero</span>
+            <span class="ui-name">Sam</span>
+          </div>
+          <div class="ui-cols">
+            <div class="ui-panel ui-mission">
+              <div class="ui-ph"><span class="ui-label">Week 2</span><span class="ui-chip">2/4 done</span></div>
+              <div class="ui-pb">
+                <span class="ui-title">Design your hero</span>
+                <span class="ui-muted">You are the author. AI is your illustrator.</span>
+                <ul class="ui-steps">
+                  <li class="done"><i></i>Draw your hero on paper.</li>
+                  <li class="done"><i></i>Describe them: look, personality, superpower, one weakness.</li>
+                  <li class="now"><i></i>Make 4 versions. Pick the one that feels like yours.</li>
+                  <li><i></i>Pin your hero to your board.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="ui-panel ui-studio">
+              <div class="ui-ph"><span class="ui-label">Studio</span><span class="ui-hint">Chat with your helper or ask for a picture</span></div>
+              <div class="ui-chat">
+                <div class="ui-msg"><div class="ui-bubble">A fox who is scared of heights but still crosses bridges to help others: that’s a real hero. Now describe Rafi for the picture: colours, outfit, and where Rafi is.</div></div>
+                <div class="ui-msg me"><span class="ui-cap">Picture request</span><div class="ui-bubble">a small brave fox in a red cape crossing a wobbly rope bridge, comic style</div></div>
+                <div class="ui-msg">
+                  <img class="ui-img" src="assets/creations/comic-fox.jpg" alt="" width="720" height="720">
+                  <div class="ui-btns"><span class="ui-btn on">Pinned</span><span class="ui-btn">Try again</span></div>
+                </div>
+              </div>
+              <div class="ui-compose">
+                <span class="ui-input">Type here…</span>
+                <span class="ui-mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+                <span class="ui-send">Send</span>
+              </div>
+              <div class="ui-foot">
+                <span class="ui-btn">Make a picture</span>
+                <span class="ui-budget"><span>Messages</span><i style="--v:72%"></i></span>
+                <span class="ui-budget"><span>Pictures</span><i style="--v:62%"></i></span>
+              </div>
+            </div>
+
+            <div class="ui-panel ui-board">
+              <div class="ui-ph"><span class="ui-label">My comic board</span><span class="ui-chip">2 pinned</span></div>
+              <div class="ui-pb">
+                <div class="ui-pin">
+                  <p><b>Rafi the Fox</b><br>Superpower: hears trouble from a mile away. Weakness: scared of heights. Always helps anyway.</p>
+                  <span class="ui-btn">Unpin</span>
+                </div>
+                <div class="ui-pin">
+                  <img src="assets/creations/comic-fox.jpg" alt="" width="720" height="720">
+                  <span class="ui-btn">Unpin</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="float float-launch">
+          <div class="float-top"><span class="ui-label">On the class screen</span><span class="ui-chip live">14 joined</span></div>
+          <span class="float-url">Go to <b>app.candideai.com/join</b>, type the code, tap your name</span>
+          <span class="float-code">K7QX4M</span>
+        </div>
+
+        <div class="float float-gallery">
+          <div class="float-top"><span class="float-title">Club gallery · Week 2</span><span class="ui-chip">14</span></div>
+          <div class="float-thumbs">
+            <figure><img src="assets/creations/glowfrog.jpg" alt="" width="720" height="720" loading="lazy"><figcaption>Omar</figcaption></figure>
+            <figure><img src="assets/creations/moon-cat.jpg" alt="" width="720" height="720" loading="lazy"><figcaption>Zoë</figcaption></figure>
+            <figure><img src="assets/creations/leaf-dragon.jpg" alt="" width="720" height="720" loading="lazy"><figcaption>Lina</figcaption></figure>
+            <figure><img src="assets/creations/creature-precise.jpg" alt="" width="720" height="720" loading="lazy"><figcaption>Yusuf</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </figure>
+
+    <ul class="card kpis" aria-label="The club at a glance">
+      <li class="kpi"><span class="kpi-label">Weekly missions</span><span class="kpi-value">12</span><span class="kpi-sub">One term, one club session each</span></li>
+      <li class="kpi"><span class="kpi-label">Per session</span><span class="kpi-value">60 <span class="kpi-unit">min</span></span><span class="kpi-sub">Warm-up, lesson, studio, share</span></li>
+      <li class="kpi"><span class="kpi-label">Age range</span><span class="kpi-value">8–11</span><span class="kpi-sub">Two tracks: 8–9 and 10–11</span></li>
+      <li class="kpi"><span class="kpi-label">Prep for the teacher</span><span class="kpi-value">0</span><span class="kpi-sub">The script runs on the class screen</span></li>
+      <li class="kpi"><span class="kpi-label">Child accounts</span><span class="kpi-value">0</span><span class="kpi-sub">Club code, then tap their name</span></li>
+      <li class="kpi"><span class="kpi-label">End of term</span><span class="kpi-value">1</span><span class="kpi-sub">Comic Con showcase for parents</span></li>
     </ul>
   </div>
 
-  <!-- How a mission runs -->
-  <section class="section" id="mission">
-    <div class="section-head">
-      <p class="section-label">How a mission runs</p>
-      <h2 class="section-title">One lesson. Four parts. Every child makes something.</h2>
-      <p class="section-intro">The teacher runs the room. Candide runs the AI. Each mission follows the same rhythm, so after the first one the class knows exactly what to do.</p>
+  <!-- Term 1, shown by what children make -->
+  <section class="section" id="term">
+    <div class="section-head-row">
+      <div class="section-head">
+        <p class="section-label">Term 1 · Create Your Comic</p>
+        <h2 class="section-title">Twelve weeks. Every child publishes their own comic.</h2>
+        <p class="section-intro">Each child invents an original hero and publishes a printed comic of 4 to 8 pages, learning eight AI skills along the way. The child is the author; AI is their illustrator and editor.</p>
+      </div>
+      <a class="link-arrow" href="/programme">See the twelve weeks →</a>
     </div>
 
-    <ol class="grid grid-cards">
-      <li class="card tile">
-        <span class="mono">01 · 5 min</span>
-        <h3 class="card-title">Hook</h3>
-        <p>The teacher projects the launch page: the class code, the join address and a short hook script to read aloud. Children join with the code and their first name.</p>
+    <ol class="missions">
+      <li class="card mission">
+        <div class="mission-art"><img src="assets/creations/comic-fox.jpg" alt="A comic panel of a fox in a red cape crossing a wobbly rope bridge to rescue a kitten" width="720" height="720" loading="lazy"></div>
+        <div class="mission-body"><span class="mission-num">Weeks 1–3</span><h3 class="mission-title">Meet your hero</h3><p class="mission-idea">Invent a hero, describe them precisely, and lock how they look.</p></div>
       </li>
-      <li class="card tile">
-        <span class="mono">02 · 25 min</span>
-        <h3 class="card-title">Build</h3>
-        <p>Each child works through four steps in their own workspace: a chat with an AI helper that plays a role, a picture button, and a board for the work they want to keep.</p>
+      <li class="card mission">
+        <div class="mission-art"><img src="assets/creations/leaf-dragon.jpg" alt="A dragon made of autumn leaves curled around a tree, smiling at a hedgehog" width="720" height="720" loading="lazy"></div>
+        <div class="mission-body"><span class="mission-num">Weeks 4–6</span><h3 class="mission-title">Build the world and the story</h3><p class="mission-idea">A sidekick, a villain, the places, and a story they write themselves.</p></div>
       </li>
-      <li class="card tile">
-        <span class="mono">03 · 10 min</span>
-        <h3 class="card-title">Share</h3>
-        <p>The teacher opens the class gallery on the projector. Every pinned creation, grouped by first name, with a full-screen view for the one being discussed.</p>
+      <li class="card mission">
+        <div class="mission-art frame" role="img" aria-label="Week 7 on the class screen: split your story into pages and panels, on paper">
+          <div class="mini screen" aria-hidden="true">
+            <span class="ui-label">Week 7 · Storyboard</span>
+            <span class="screen-q">Pages, panels, dialogue. On paper. No AI this week.</span>
+          </div>
+        </div>
+        <div class="mission-body"><span class="mission-num">Week 7</span><h3 class="mission-title">Storyboard</h3><p class="mission-idea">Plan before you generate.</p></div>
       </li>
-      <li class="card tile">
-        <span class="mono">04 · 5 min</span>
-        <h3 class="card-title">Debrief</h3>
-        <p>One question from the brief, for example: when the picture was wrong, was the AI wrong or was the prompt unclear? That question is the point of the lesson.</p>
+      <li class="card mission">
+        <div class="mission-art"><img src="assets/creations/moon-cat.jpg" alt="A purple cat bouncing on the moon with the Earth behind it. Count the legs: six, an AI mistake to fix" width="720" height="720" loading="lazy"></div>
+        <div class="mission-body"><span class="mission-num">Weeks 8–10</span><h3 class="mission-title">Make the pages</h3><p class="mission-idea">Panel by panel, then hunt the AI’s mistakes and fix them.</p></div>
+      </li>
+      <li class="card mission">
+        <div class="mission-art"><img src="assets/creations/photo-classroom.jpg" alt="A class watching their creations on the screen while the teacher points at one" width="1400" height="940" loading="lazy"></div>
+        <div class="mission-body"><span class="mission-num">Weeks 11–12</span><h3 class="mission-title">Publish: Comic Con</h3><p class="mission-idea">Polish, print, and present to parents.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- How a session runs -->
+  <section class="section" id="how">
+    <div class="section-head">
+      <p class="section-label">How a club session runs</p>
+      <h2 class="section-title">One hour a week, same rhythm every time. The teacher follows the script; Candide runs the AI.</h2>
+    </div>
+
+    <div class="timeline" aria-hidden="true">
+      <div style="flex:5"><i></i><span><b>Warm-up</b> <span class="short">· 5 min</span></span></div>
+      <div style="flex:10"><i></i><span><b>Mini-lesson</b> · 10 min</span></div>
+      <div style="flex:35" class="is-key"><i></i><span><b>Studio time</b> · 35 min hands-on</span></div>
+      <div style="flex:10"><i></i><span><b>Share &amp; save</b> · 10 min</span></div>
+    </div>
+
+    <ol class="phases">
+      <li class="card phase">
+        <div class="phase-art frame" role="img" aria-label="The warm-up on the class screen: Real or AI?">
+          <div class="mini screen" aria-hidden="true">
+            <span class="ui-label">Warm-up</span>
+            <span class="screen-q">Real or AI? Look closely at the hands.</span>
+          </div>
+        </div>
+        <div class="phase-body">
+          <span class="mono">01 · Warm-up · 5 min</span>
+          <h3 class="card-title">Kids join and focus</h3>
+          <p>A “Real or AI?” picture or one quick AI fact, while children type the club code and tap their name.</p>
+        </div>
+      </li>
+      <li class="card phase">
+        <div class="phase-art frame" role="img" aria-label="The class screen: week 2, the club code K7QX4M and 14 children joined">
+          <div class="mini screen" aria-hidden="true">
+            <span class="ui-label">Week 2 · Design your hero</span>
+            <span class="screen-url">Go to <b>app.candideai.com/join</b></span>
+            <span class="screen-code">K7QX4M</span>
+            <span class="ui-chip live">14 joined</span>
+          </div>
+        </div>
+        <div class="phase-body">
+          <span class="mono">02 · Mini-lesson · 10 min</span>
+          <h3 class="card-title">The teacher plays the week’s lesson</h3>
+          <p>A short video and demo on the class screen, then the mission explained. The script tells them what to say.</p>
+        </div>
+      </li>
+      <li class="card phase">
+        <div class="phase-art"><img src="assets/creations/photo-laptop.jpg" alt="A child's hands on a laptop showing a character they made" width="1400" height="940" loading="lazy"></div>
+        <div class="phase-body">
+          <span class="mono">03 · Studio time · 35 min</span>
+          <h3 class="card-title">Every child creates</h3>
+          <p>On paper or on the platform, with an AI helper that guides and never does the work for them. The teacher circulates.</p>
+        </div>
+      </li>
+      <li class="card phase">
+        <div class="phase-art"><img src="assets/creations/photo-classroom.jpg" alt="A club watching their gallery on the screen while the teacher points at one" width="1400" height="940" loading="lazy"></div>
+        <div class="phase-body">
+          <span class="mono">04 · Share &amp; save · 10 min</span>
+          <h3 class="card-title">Two or three kids show their work</h3>
+          <p>Everyone saves, the gallery goes up, and the teacher previews next week. Their work is waiting for them next time.</p>
+        </div>
       </li>
     </ol>
 
-    <div class="card card-pad hands-on">
-      <p>Twenty-five of the forty-five minutes are hands-on with AI. The rest is the teacher’s: the hook, the share and the debrief, all scripted in the mission brief.</p>
-      <div class="bar" aria-hidden="true"><i style="width:55.6%"></i></div>
-      <p class="meta">Works on Chromebooks, iPads and laptops · One live session per class · Ends automatically after three hours</p>
-    </div>
+    <ul class="card facts" aria-label="Two club rules, repeated every week">
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></span>
+        <div><b>Rule 1 · You are the author</b><span>Ideas come from you; AI helps you make them.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></span>
+        <div><b>Rule 2 · Three tries</b><span>Improve your prompt, don’t spam the button. After three tries, change your words or ask a friend.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg></span>
+        <div><b>Paper and screen</b><span>Sketches, story spines and storyboards happen on paper, to keep it hands-on.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></span>
+        <div><b>Saved every week</b><span>Each week ends with something concrete on their board, ready for the next one.</span></div>
+      </li>
+    </ul>
   </section>
 
-  <!-- The missions -->
-  <section class="section" id="missions">
+  <!-- What children learn: the vague prompt beside the precise one -->
+  <section class="section" id="learn">
     <div class="section-head">
-      <p class="section-label">The missions</p>
-      <h2 class="section-title">Ten missions, each built around one idea about AI.</h2>
-      <p class="section-intro">Every mission teaches one thing a child can say in a sentence afterwards. Pick any one; they stand alone and fit a single lesson.</p>
+      <p class="section-label">What children learn</p>
+      <h2 class="section-title">Eight AI skills, learned by making something they’re proud of.</h2>
+      <p class="section-intro">Week 1 starts with this: same AI, two prompts. Children see for themselves that the words they choose decide what they get, and that a wrong picture is something they can fix.</p>
     </div>
 
-    <ol class="grid grid-cards">
-      <li class="card tile"><span class="mono">01 · Literacy</span><h3 class="card-title">Say It Clearly</h3><p>Details make the difference.</p></li>
-      <li class="card tile"><span class="mono">02 · Creative</span><h3 class="card-title">Invent a Creature</h3><p>Precise prompts beat vague ones.</p></li>
-      <li class="card tile"><span class="mono">03 · Creative</span><h3 class="card-title">Comic Strip Hero</h3><p>A story needs a problem.</p></li>
-      <li class="card tile"><span class="mono">04 · Curriculum</span><h3 class="card-title">Postcard from the Past</h3><p>Check it before you trust it.</p></li>
-      <li class="card tile"><span class="mono">05 · Curriculum</span><h3 class="card-title">Fact or Fib?</h3><p>AI can sound sure and still be wrong.</p></li>
-      <li class="card tile"><span class="mono">06 · Literacy</span><h3 class="card-title">You Make the Rules</h3><p>Instructions shape behaviour.</p></li>
-      <li class="card tile"><span class="mono">07 · Curriculum</span><h3 class="card-title">Explain It to a Martian</h3><p>If you can explain it, you understand it.</p></li>
-      <li class="card tile"><span class="mono">08 · Literacy</span><h3 class="card-title">Poem Machine</h3><p>Edit, don’t accept.</p></li>
-      <li class="card tile"><span class="mono">09 · Creative</span><h3 class="card-title">Invention Workshop</h3><p>Start from the problem, not the gadget.</p></li>
-      <li class="card tile"><span class="mono">10 · Curriculum</span><h3 class="card-title">Design a Planet</h3><p>Imagination plus rules.</p></li>
-    </ol>
-
-    <a class="link-arrow" href="/missions">Explore the ten missions →</a>
-  </section>
-
-  <!-- Built for the classroom -->
-  <section class="section" id="product">
-    <div class="section-head">
-      <p class="section-label">Built for the classroom</p>
-      <h2 class="section-title">Three screens, nothing to install.</h2>
+    <div class="compare">
+      <figure class="card attempt attempt-vague">
+        <img src="assets/creations/creature-vague.jpg" alt="A cartoon dog in sunglasses: what the AI made from “a cool animal”" width="720" height="720" loading="lazy">
+        <figcaption class="attempt-body">
+          <span class="section-label">First try</span>
+          <p class="attempt-prompt">a cool animal</p>
+          <p class="meta">The AI had to guess, so it picked the most ordinary cool animal it knows.</p>
+          <p class="attempt-verdict">Not what Yusuf imagined.</p>
+        </figcaption>
+      </figure>
+      <span class="compare-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <figure class="card attempt attempt-good">
+        <img src="assets/creations/creature-precise.jpg" alt="A round purple creature with six legs, moth wings and one big eye in a swamp at sunset" width="720" height="720" loading="lazy">
+        <figcaption class="attempt-body">
+          <span class="section-label">After fixing the words</span>
+          <p class="attempt-prompt">a round purple animal with six legs, moth wings and one big eye, standing in a swamp at sunset</p>
+          <p class="meta">Shape, colour, body, place. Every detail the AI could not have guessed.</p>
+          <p class="attempt-verdict">That one is his.</p>
+        </figcaption>
+      </figure>
     </div>
 
-    <div class="grid grid-cards">
-      <div class="card tile">
-        <h3 class="card-title">The teacher console</h3>
-        <p>Create a class and get its permanent code. Read a mission brief, start the session, project the launch page. Everything a teacher does takes under a minute.</p>
-      </div>
-      <div class="card tile">
-        <h3 class="card-title">The child’s workspace</h3>
-        <p>Mission steps on the left, the AI helper in the middle, the creation board on the right. Large buttons, a microphone for children who’d rather talk than type, and a budget bar instead of a counter.</p>
-      </div>
-      <div class="card tile">
-        <h3 class="card-title">The class gallery</h3>
-        <p>Every pinned creation, grouped by first name. A full-screen view for the projector, a shareable link, and a print layout with one child per page for the classroom wall.</p>
-      </div>
-    </div>
+    <ul class="card skills">
+      <li class="skill"><b>Precise words, better results</b><span>AI follows instructions. Week 1.</span></li>
+      <li class="skill"><b>Writing a detailed prompt</b><span>Who, what they look like, style. Weeks 2 and 8.</span></li>
+      <li class="skill"><b>Keeping a character consistent</b><span>Reusing a reference so the hero looks the same. Week 3.</span></li>
+      <li class="skill"><b>Brainstorming with AI</b><span>AI suggests, you decide. Week 4.</span></li>
+      <li class="skill"><b>AI as an editor, not a ghostwriter</b><span>It asks questions; you write. Week 6.</span></li>
+      <li class="skill"><b>Spotting and fixing mistakes</b><span>Extra fingers, wrong outfits, gibberish text. Weeks 9 and 10.</span></li>
+      <li class="skill"><b>Creating original work</b><span>Your own hero, not someone else’s. Weeks 2 and 11.</span></li>
+      <li class="skill"><b>Being honest about AI</b><span>What I made, and what AI made. Weeks 11 and 12.</span></li>
+    </ul>
   </section>
 
   <!-- Safety by design -->
   <section class="section" id="safety">
     <div class="section-head">
       <p class="section-label">Safety by design</p>
-      <h2 class="section-title">Every message passes the same guardrails.</h2>
-      <p class="section-intro">Children never talk to a raw chatbot. Each mission runs inside a layer of rules the child cannot change, with checks on the way in and on the way out.</p>
+      <h2 class="section-title">Children never touch an open AI model.</h2>
+      <p class="section-intro">Every mission runs inside rules the child cannot change, with a check on the way in and another on the way out. Safety is built into the platform, not left to the teacher.</p>
     </div>
 
-    <div class="grid grid-two">
-      <ol class="card list">
-        <li class="item-row"><span class="mono">01</span><p class="grow">A fixed safety layer sits above every mission: no personal information, no real people as characters, no topics that don’t belong in a classroom. Nothing a child writes can move it.</p></li>
-        <li class="item-row"><span class="mono">02</span><p class="grow">Every child message is checked before it reaches the AI, and every reply is checked before a child sees it. A blocked message gets one gentle line: “Let’s keep it about the mission.”</p></li>
-        <li class="item-row"><span class="mono">03</span><p class="grow">Each child has a budget per mission, for messages and for pictures, and each school has a daily picture cap. The AI stays a tool in the lesson, not a game.</p></li>
-        <li class="item-row"><span class="mono">04</span><p class="grow">Pictures are generated from a rewritten, safe version of the child’s words, with a style preset and no real people.</p></li>
-      </ol>
+    <div class="safety">
+      <figure class="ui ui-live" role="img" aria-label="A conversation in the workspace. The child asks for Spider-Man; the helper explains that heroes from films belong to someone else and invites the child to invent their own, and the mission carries on.">
+        <div aria-hidden="true">
+          <div class="ui-ph"><span class="ui-label">Studio · Week 2</span><span class="ui-chip">Sam</span></div>
+          <div class="ui-chat">
+            <div class="ui-msg"><div class="ui-bubble">Hi! I’m your comic studio helper. Tell me about your hero: what are they called, and what makes them special?</div></div>
+            <div class="ui-msg me"><div class="ui-bubble">Make me Spider-Man</div><div class="ui-block">Spider-Man belongs to someone else. Let’s invent a hero that’s all yours!</div></div>
+            <div class="ui-msg me"><div class="ui-bubble">My hero is a fox called Rafi who can hear trouble from far away.</div></div>
+            <div class="ui-msg"><div class="ui-bubble">Rafi is a great start. Every hero needs one weakness. What is Rafi scared of?</div></div>
+          </div>
+          <div class="ui-compose">
+            <span class="ui-input">Type here…</span>
+            <span class="ui-mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+            <span class="ui-send">Send</span>
+          </div>
+          <div class="ui-foot">
+            <span class="ui-btn">Make a picture</span>
+            <span class="ui-budget"><span>Messages</span><i style="--v:90%"></i></span>
+            <span class="ui-budget"><span>Pictures</span><i style="--v:100%"></i></span>
+          </div>
+        </div>
+      </figure>
 
-      <ul class="card list">
-        <li class="item-row"><div><b>No child accounts</b><span class="meta">A class code and a first name, kept per session. No email, no date of birth, no photo, no password.</span></div></li>
-        <li class="item-row"><div><b>Private creations</b><span class="meta">Pictures live in a private store. Gallery links are unguessable and expire; the teacher can issue a new one.</span></div></li>
-        <li class="item-row"><div><b>Transcripts for safety review only</b><span class="meta">Kept 90 days, then deleted automatically. Pinned creations are kept until the school asks us to remove them.</span></div></li>
-        <li class="item-row"><div><b>Hosted in the EU</b><span class="meta">No analytics on children’s pages. Children’s data is never used to train AI models. A one-page data sheet comes with every pilot.</span></div></li>
-      </ul>
+      <div class="card">
+        <ol class="flow">
+          <li class="flow-step">
+            <span class="flow-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></span>
+            <div><b>The child writes</b><span class="meta">Or speaks, with the microphone button.</span></div>
+          </li>
+          <li class="flow-step is-check">
+            <span class="flow-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+            <div><b>Checked on the way in</b><span class="meta">Before anything reaches the AI. Off-mission messages get one gentle line.</span></div>
+          </li>
+          <li class="flow-step is-ai">
+            <span class="flow-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></span>
+            <div><b>The AI helper answers</b><span class="meta">In the week’s role, within a per-child budget.</span>
+              <p class="flow-layer">Fixed safety layer: no personal information, no real people, no copyrighted characters, nothing that doesn’t belong in a school club.</p>
+            </div>
+          </li>
+          <li class="flow-step is-check">
+            <span class="flow-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+            <div><b>Checked on the way out</b><span class="meta">Every reply, before the child sees it. Pictures come from a rewritten, safe prompt, modest by default.</span></div>
+          </li>
+          <li class="flow-step">
+            <span class="flow-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"/></svg></span>
+            <div><b>The child reads, and keeps going</b><span class="meta">The AI stays a tool in their hands, not a game.</span></div>
+          </li>
+        </ol>
+      </div>
     </div>
-  </section>
 
-  <!-- What they'll learn -->
-  <section class="section" id="learn">
-    <div class="section-head">
-      <p class="section-label">What children learn</p>
-      <h2 class="section-title">Creating something exciting takes real thinking.</h2>
-      <p class="section-intro">Every mission gives children a reason to practise skills they can use beyond the lesson.</p>
-    </div>
-
-    <div class="grid grid-cards">
-      <div class="card tile">
-        <h3 class="card-title">Express an idea clearly.</h3>
-        <p>Turn a picture in their head into words precise enough for someone else, or something else, to act on.</p>
-      </div>
-      <div class="card tile">
-        <h3 class="card-title">Think critically about AI.</h3>
-        <p>Discover that AI doesn’t always get things right. Compare results, spot mistakes, check a fact, and decide what to keep.</p>
-      </div>
-      <div class="card tile">
-        <h3 class="card-title">Keep going when it doesn’t work.</h3>
-        <p>Try another approach, fix the prompt, rewrite a line. Experience how an idea improves through practice.</p>
-      </div>
-      <div class="card tile">
-        <h3 class="card-title">Share their work with confidence.</h3>
-        <p>Pin what they are proud of, see it on the projector, and explain the choices behind it.</p>
-      </div>
-    </div>
-
-    <p class="section-note">Along the way, they learn the basics of using AI creatively—and how to recognise the difference between their own decisions and the tool’s contribution.</p>
+    <ul class="card facts">
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span>
+        <div><b>No child accounts</b><span>A club code and their first name on the club list. No email, no password, no selfies.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+        <div><b>Nothing leaves the club</b><span>No chat between children, no public sharing. Gallery links are private.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+        <div><b>Teacher in control</b><span>The teacher sees every child’s work and can end the session at any time.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span>
+        <div><b>Hosted in the EU</b><span>Never used to train AI models. Transcripts deleted after 90 days.</span></div>
+      </li>
+    </ul>
   </section>
 
   <!-- For schools -->
   <section class="section" id="schools">
     <div class="section-head">
       <p class="section-label">For schools</p>
-      <h2 class="section-title">We’re running pilots with a small number of schools.</h2>
-      <p class="section-intro">A pilot is a term of missions with your classes, with the Candide team alongside. It tells you whether this belongs in your curriculum before you commit to anything larger.</p>
+      <h2 class="section-title">Add the AI Creators Club to next term’s club list.</h2>
+      <p class="section-intro">A new club parents will sign up for, that any teacher at your school can lead. It sits beside your official programmes, it doesn’t replace them, and the end-of-term showcase gives parents something to see.</p>
     </div>
 
-    <div class="grid grid-two">
-      <ul class="card list">
-        <li class="item-row"><div><b>The platform and all ten missions</b><span class="meta">Run as many as you like; most schools pick three to five for the term.</span></div></li>
-        <li class="item-row"><div><b>Teacher onboarding</b><span class="meta">A short session with your teachers before the first mission. No AI experience needed.</span></div></li>
-        <li class="item-row"><div><b>The data sheet</b><span class="meta">One page for parents and governors: what is collected, where it lives, for how long.</span></div></li>
-        <li class="item-row"><div><b>A review after each mission</b><span class="meta">What worked, what to change, and the gallery to show at assembly.</span></div></li>
-      </ul>
+    <div class="split-media">
+      <figure class="console-frame" role="img" aria-label="The teacher console for the Comic Club, ages 8 to 9: the permanent club code, a Start week 3 button, and the club's weekly sessions, week 2 live and week 1 ended with its gallery.">
+        <div class="ui console" aria-hidden="true">
+          <div class="ui-bar">
+            <img class="ui-logo" src="assets/logo.svg" alt="" width="107" height="22">
+            <span class="ui-crumb">Your school</span>
+            <span class="ui-name">Teacher</span>
+          </div>
+          <div class="console-body">
+            <div class="console-head">
+              <div><span class="ui-label">Term 1 · Create Your Comic · Ages 8–9</span><span class="console-title">Comic Club</span></div>
+              <span class="console-btn">Start week 3</span>
+            </div>
+            <div class="console-cols">
+              <div class="ui-panel console-code">
+                <span class="ui-label">Club code</span>
+                <span class="console-codeval">K7QX4M</span>
+                <span class="ui-muted">Kids go to <b>app.candideai.com/join</b>, type this code and tap their name. It never changes.</span>
+              </div>
+              <div class="ui-panel">
+                <div class="ui-ph"><b class="console-h">Weeks</b><span class="ui-hint">2 of 12</span></div>
+                <div class="console-row"><div><b>Week 2 · Design your hero</b><span>Today, 14:05</span></div><span class="ui-chip chip-live">Live</span><span class="ui-btn">Class screen</span></div>
+                <div class="console-row"><div><b>Week 1 · Welcome to the Comic Studio</b><span>10 Nov, 14:00</span></div><span class="ui-chip">Done</span><span class="ui-btn">Gallery</span></div>
+                <div class="console-row"><div><b>Week 3 · Lock your hero</b><span>Next week</span></div><span class="ui-chip">Next</span><span class="ui-btn">Preview</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
 
-      <ul class="card list">
-        <li class="item-row"><div><b>One device per child</b><span class="meta">A Chromebook, iPad or laptop with a browser. The workspace is built for 1024px screens.</span></div></li>
-        <li class="item-row"><div><b>A projector</b><span class="meta">For the launch page at the start and the gallery at the end.</span></div></li>
-        <li class="item-row"><div><b>A teacher in the room</b><span class="meta">They read the hook, keep an eye on the build, and lead the debrief. Candide never replaces them.</span></div></li>
-        <li class="item-row"><div><b>Honest feedback</b><span class="meta">Pilots are priced per school and invoiced once. In return we ask you to tell us what to fix.</span></div></li>
-      </ul>
+      <div class="card">
+        <h3 class="card-head card-title">What your school gets</h3>
+        <ul class="list">
+          <li class="item-row"><div><b>Term 1 on the platform</b><span class="meta">Twelve scripted weekly missions, with the script on the class screen.</span></div></li>
+          <li class="item-row"><div><b>Onboarding for the teacher who leads the club</b><span class="meta">One short session. No AI experience needed.</span></div></li>
+          <li class="item-row"><div><b>A club description for your sign-up list</b><span class="meta">Ready to send to parents.</span></div></li>
+          <li class="item-row"><div><b>The Comic Con kit</b><span class="meta">Print-ready comics, certificates, award cards and a parent invitation in English and Arabic.</span></div></li>
+          <li class="item-row"><div><b>The data sheet</b><span class="meta">One page for parents and your data protection lead.</span></div></li>
+        </ul>
+      </div>
     </div>
+
+    <ul class="card facts" aria-label="What you need">
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span>
+        <div><b>A teacher to lead the club</b><span>Any teacher. They learn alongside the kids.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <div><b>One hour a week</b><span>An activity slot in the school day or after school.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 19h20"/></svg></span>
+        <div><b>One device per child</b><span>Chromebook, iPad or laptop with a browser, or a cart the club can book.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
+        <div><b>A class screen</b><span>For the warm-up, the lesson and the gallery.</span></div>
+      </li>
+    </ul>
   </section>
 
   <!-- About Candide -->
   <section class="section" id="about">
     <div class="section-head">
       <p class="section-label">About Candide</p>
-      <h2 class="section-title">Built around the joy of “I made that.”</h2>
-      <p class="section-intro">Candide began with online courses that helped children explore AI through creative projects—from inventing imaginary creatures to becoming the hero of their own story.</p>
-      <p class="section-intro">The platform brings that approach into the classroom: scripted missions any teacher can run with a whole class, with the guardrails built in.</p>
+      <h2 class="section-title">Kids learn AI the fun way, and leave saying “I made that.”</h2>
+      <p class="section-intro">Candide began with online courses where children explored AI through creative projects. The AI Creators Club brings that approach into schools, as a club any teacher can run, with the guardrails built in.</p>
     </div>
 
-    <ul class="card people">
-      <li class="person">
-        <img class="avatar" src="assets/carine.jpg" alt="" width="72" height="72" loading="lazy">
-        <div>
-          <h3 class="card-title">Carine</h3>
-          <span class="meta">Co-founder</span>
-          <p>Previously the director of a Montessori school. At Candide she designs how children learn: the missions, the briefs, and the habit of explaining your own work.</p>
-        </div>
-      </li>
-      <li class="person">
-        <img class="avatar" src="assets/julien.jpg" alt="" width="72" height="72" loading="lazy">
-        <div>
-          <h3 class="card-title">Julien</h3>
-          <span class="meta">Co-founder</span>
-          <p>More than 15 years working in tech. At Candide he builds the platform and the guardrails, so that AI stays a tool in the child’s hands.</p>
-        </div>
-      </li>
-    </ul>
+    <div class="split-media">
+      <ul class="card people">
+        <li class="person">
+          <img class="avatar" src="assets/carine.jpg" alt="" width="72" height="72" loading="lazy">
+          <div>
+            <h3 class="card-title">Carine</h3>
+            <span class="meta">Co-founder</span>
+            <p>Previously the director of a Montessori school. At Candide she designs how children learn: the terms, the weekly missions, and the scripts teachers follow.</p>
+          </div>
+        </li>
+        <li class="person">
+          <img class="avatar" src="assets/julien.jpg" alt="" width="72" height="72" loading="lazy">
+          <div>
+            <h3 class="card-title">Julien</h3>
+            <span class="meta">Co-founder</span>
+            <p>More than 15 years working in tech. At Candide he builds the platform and the guardrails, so that AI stays a tool in the child’s hands.</p>
+          </div>
+        </li>
+      </ul>
+
+      <figure class="card hero-video">
+        <a class="video" href="https://www.youtube.com/watch?v=GMK51pf6-xc" data-video-id="GMK51pf6-xc" data-video-title="Candide: where you learn AI the fun way">
+          <img src="https://i.ytimg.com/vi/GMK51pf6-xc/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy">
+          <span class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="sr-only">Play the video: Candide, where you learn AI the fun way</span>
+        </a>
+      </figure>
+    </div>
   </section>
 
   <!-- Your questions -->
   <section class="section" id="faq">
     <div class="section-head">
       <p class="section-label">Your questions</p>
-      <h2 class="section-title">Is Candide right for our school?</h2>
+      <h2 class="section-title">Is the AI Creators Club right for our school?</h2>
     </div>
 
     <div class="card list">
       <details class="faq-item">
-        <summary>Do teachers need any AI experience?</summary>
-        <p>No. Every mission comes with a brief: a hook to read aloud, the four build steps, how to run the share, the debrief question, and what to do if a class needs a stretch or a simpler version. The platform handles the AI.</p>
+        <summary>Does the teacher who leads the club need any AI experience?</summary>
+        <p>No. Every week’s mission comes with a script on the class screen: the warm-up, the short video and demo, how to explain the mission, what to look for during studio time, and how to run share and save. The platform handles the AI, and the teacher learns alongside the kids.</p>
       </details>
       <details class="faq-item">
-        <summary>What devices do the children need?</summary>
-        <p>One per child, with a browser: a Chromebook, iPad or laptop. There is nothing to install. The workspace is designed for a 1024-pixel-wide screen, with large buttons and no hover-only actions.</p>
+        <summary>How does it fit our activities programme?</summary>
+        <p>It’s a club like your others: one hour a week for a term, twelve sessions, during an activity slot or after school. For a ten-week term there is a shorter version that merges four of the weeks. It sits outside your official curriculum, so there’s nothing to change in the timetable.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Which ages is it for?</summary>
+        <p>Ages 8 to 11, in two tracks. Ages 8–9 make a 4-page comic with a hero and a sidekick, using a guided prompt builder and read-aloud. Ages 10–11 make 6 to 8 pages with a villain and a plot twist, and write their prompts freely.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What happens at the end of term?</summary>
+        <p>Comic Con. Each child presents their comic in one minute to the club and to parents, gets a printed A5 copy and a “Published Author &amp; AI Creator” certificate, and the club’s comics become an anthology for your library. It’s the moment parents remember, and the reason the club fills again next term.</p>
       </details>
       <details class="faq-item">
         <summary>Do children need accounts or email addresses?</summary>
-        <p>No. They join with the class code and a first name, which is kept only for that session. No email, no password, no date of birth, no photo.</p>
+        <p>No. The teacher types the children’s first names once. Each week, children type the club code and tap their name, and their work from last week is there. No email, no password, no date of birth. They only ever upload photos of their paper sketches, never of themselves.</p>
       </details>
       <details class="faq-item">
         <summary>What can the AI see and say?</summary>
-        <p>Only what the child types in that session, inside a fixed safety layer and the mission’s own instructions. Each message is checked before it reaches the AI and each reply is checked before the child sees it. The AI never asks for personal information, never writes about real people, and redirects anything off-mission.</p>
+        <p>Only what the child types in the club, inside a fixed safety layer and the week’s own instructions. Each message is checked before it reaches the AI and each reply is checked before the child sees it. The AI never asks for personal information, never draws real people or characters that belong to someone else, and redirects anything off-mission.</p>
       </details>
       <details class="faq-item">
         <summary>Which AI models do you use?</summary>
         <p>Claude, by Anthropic, for the conversation and the safety checks, and a separate image model with a safety tier for pictures. Children’s data is not used to train any model.</p>
       </details>
       <details class="faq-item">
-        <summary>Does a mission fit in one lesson?</summary>
-        <p>Yes. Forty-five minutes: about five for the hook, twenty-five to build, ten to share and five to debrief. A session stays open for three hours in case a class runs over, then closes itself.</p>
-      </details>
-      <details class="faq-item">
         <summary>Where is the data hosted, and for how long?</summary>
-        <p>In the EU. Transcripts are kept for 90 days for safety review, then deleted. Pinned creations and galleries stay until the school asks for them to be removed, which a school admin can do in one click.</p>
+        <p>In the EU. Transcripts are kept for 90 days for safety review, then deleted. Children’s creations stay until the school asks for them to be removed, which a school admin can do in one click.</p>
       </details>
       <details class="faq-item">
-        <summary>How much does a pilot cost?</summary>
-        <p>Pilots are priced per school and invoiced once. Tell us about your school and we’ll share the figure with the pilot plan.</p>
+        <summary>What comes after Term 1?</summary>
+        <p>Children keep the same hero all year. In Term 2 their hero comes to life as an animation or a game; in Term 3 they design the toy and pitch it. Term 1 is available now; the next terms follow.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How much does it cost?</summary>
+        <p>It depends on how many club groups you run each term. Book a demo and we’ll share the figure with a plan for your school.</p>
       </details>
     </div>
   </section>
 
   <!-- Closing call to action -->
   <div class="card cta">
-    <div>
-      <p class="section-label">Pilot term · a handful of schools</p>
-      <h2 class="cta-title">Run your first mission with us.</h2>
-      <p>Tell us about your school and we’ll set up a pilot: the platform, the ten missions, teacher onboarding and the data sheet for parents.</p>
-      <p>You decide after the first mission whether to carry on.</p>
+    <div class="cta-copy">
+      <p class="section-label">Term 1 · Create Your Comic</p>
+      <h2 class="cta-title">Start the club next term.</h2>
+      <p>A 20-minute call: we show you one mission end to end and how the club fits your activities programme.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/demo">Book a demo</a>
+        <a class="btn" href="/programme">See Term 1</a>
+      </div>
     </div>
-    <div class="cta-action">
-      <a class="btn btn-primary" href="/pilot">Request a pilot</a>
-      <span class="meta">For ages 8–11 · Online · No commitment to start</span>
+    <div class="cta-wall" aria-hidden="true">
+      <img src="assets/creations/comic-fox.jpg" alt="" width="720" height="720" loading="lazy">
+      <img src="assets/creations/leaf-dragon.jpg" alt="" width="720" height="720" loading="lazy">
+      <img src="assets/creations/glowfrog.jpg" alt="" width="720" height="720" loading="lazy">
+      <img src="assets/creations/robot.jpg" alt="" width="720" height="720" loading="lazy">
+      <img src="assets/creations/moon-cat.jpg" alt="" width="720" height="720" loading="lazy">
+      <img src="assets/creations/planet.jpg" alt="" width="720" height="720" loading="lazy">
     </div>
   </div>
 
@@ -330,11 +575,12 @@
 <footer class="footer">
   <span>© 2026 Candide AI · Doha, Qatar</span>
   <nav aria-label="Footer">
-    <a href="/missions">Missions</a>
+    <a href="/programme">Term 1</a>
+    <a href="/#how">How it works</a>
     <a href="/#safety">Safety</a>
     <a href="/#schools">For schools</a>
     <a href="/#faq">Questions</a>
-    <a href="/pilot">Request a pilot</a>
+    <a href="/demo">Book a demo</a>
     <a href="https://app.candideai.com/teacher">Teacher sign in</a>
   </nav>
 </footer>

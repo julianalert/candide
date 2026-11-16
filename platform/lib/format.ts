@@ -34,3 +34,30 @@ export function cleanFirstName(raw: string): string {
   const first = trimmed.split(" ")[0];
   return first.charAt(0).toUpperCase() + first.slice(1);
 }
+
+/** "Week 3 · Lock your hero", or just "Week 3". Old standalone missions have no week. */
+export function weekLabel(week: number | null | undefined, title?: string): string {
+  const head = week ? `Week ${week}` : "Mission";
+  return title ? `${head} · ${title}` : head;
+}
+
+/** A name on a club list: letters, spaces, hyphens, apostrophes and full stops ("Sam K."); max 24 chars. */
+export function cleanRosterName(raw: string): string {
+  const trimmed = raw.replace(/[^\p{L}\p{M}' .-]/gu, "").replace(/\s+/g, " ").trim().slice(0, 24).trim();
+  if (!trimmed) return "";
+  return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+}
+
+/** Names typed into the club list box: one per line or separated by commas, cleaned, without repeats. */
+export function parseRosterNames(raw: string): string[] {
+  const seen = new Set<string>();
+  const names: string[] = [];
+  for (const part of raw.split(/[\n,;]+/)) {
+    const name = cleanRosterName(part);
+    const key = name.toLowerCase();
+    if (!name || seen.has(key)) continue;
+    seen.add(key);
+    names.push(name);
+  }
+  return names.slice(0, 60);
+}
