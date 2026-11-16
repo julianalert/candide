@@ -3,19 +3,21 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+/** Admins: School (every club, teachers, setup) and My clubs (the ones they run). Teachers: My clubs. */
 export function TeacherTabs({ isAdmin }: { isAdmin: boolean }) {
   const pathname = usePathname();
-  const classesActive = pathname === "/teacher" || pathname.startsWith("/teacher/class") || pathname.startsWith("/teacher/session");
+  const schoolActive = pathname.startsWith("/teacher/school") || pathname.startsWith("/teacher/welcome");
+  const clubsActive = !schoolActive && (pathname.startsWith("/teacher/clubs") || pathname.startsWith("/teacher/class") || pathname.startsWith("/teacher/session"));
   return (
     <nav className="tabs" aria-label="Main">
-      <Link className="tab" href="/teacher" aria-current={classesActive ? "page" : undefined}>
-        Clubs
-      </Link>
       {isAdmin && (
-        <Link className="tab" href="/teacher/school" aria-current={pathname.startsWith("/teacher/school") ? "page" : undefined}>
+        <Link className="tab" href="/teacher/school" aria-current={schoolActive ? "page" : undefined}>
           School
         </Link>
       )}
+      <Link className="tab" href="/teacher/clubs" aria-current={clubsActive ? "page" : undefined}>
+        My clubs
+      </Link>
     </nav>
   );
 }

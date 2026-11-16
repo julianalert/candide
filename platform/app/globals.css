@@ -461,6 +461,9 @@
   .item-row .grow {
     flex: 1 1 auto;
   }
+  .item-row .grow > .meta {
+    display: block;
+  }
   a.item-row:hover {
     background: var(--color-surface-soft);
     text-decoration: none;

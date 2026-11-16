@@ -30,6 +30,10 @@ export async function requireTeacher(): Promise<TeacherContext & { profile: Prof
 
 export async function requireAdmin() {
   const ctx = await requireTeacher();
-  if (ctx.profile.role !== "admin" && !ctx.profile.is_superadmin) redirect("/teacher");
+  if (!isAdminProfile(ctx.profile)) redirect("/teacher");
   return ctx;
+}
+
+export function isAdminProfile(profile: Profile | null | undefined): boolean {
+  return profile?.role === "admin" || Boolean(profile?.is_superadmin);
 }

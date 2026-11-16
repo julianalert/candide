@@ -6,6 +6,9 @@ export type School = {
   id: string;
   name: string;
   country: string | null;
+  city: string | null;
+  /** First day of the term, "YYYY-MM-DD". */
+  term_start: string | null;
   daily_image_cap: number;
   created_at: string;
 };
@@ -16,6 +19,8 @@ export type Profile = {
   role: ProfileRole;
   display_name: string | null;
   email: string | null;
+  job_title: string | null;
+  onboarded_at: string | null;
   is_superadmin: boolean;
   created_at: string;
 };
@@ -24,7 +29,11 @@ export type Profile = {
 export type ClassRow = {
   id: string;
   school_id: string;
+  /** The club's manager: the person who runs the weekly sessions. */
   teacher_id: string;
+  meets_day: string | null;
+  /** "HH:MM", 24-hour. */
+  meets_time: string | null;
   name: string;
   year_group: number | null;
   term_id: string;

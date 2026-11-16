@@ -53,8 +53,8 @@ export async function POST(request: NextRequest) {
         send({ type: "start", userMessage: toPlayMessage(userRow, noUrls) });
 
         if (!verdict.ok) {
+          // The finally block closes the stream; closing it here too threw and broke the response.
           send({ type: "blocked", message: SOFT_BLOCK_MESSAGE });
-          controller.close();
           return;
         }
 

@@ -1,30 +1,44 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { addKids, removeKid } from "@/app/teacher/actions";
+import { notFound, redirect } from "next/navigation";
+import { addKids, removeKid, setClubManager } from "@/app/teacher/actions";
+import { ManagerPicker } from "@/components/manager-picker";
 import { sessionIsOver } from "@/lib/caps";
 import { joinUrlForDisplay } from "@/lib/env";
 import { formatDate } from "@/lib/format";
 import { TRACK_LABEL, isTrack, parseMission, parseTerm, type Mission, type Term } from "@/lib/missions";
-import { requireTeacher } from "@/lib/teacher";
-import type { ClassRow, Kid, MissionRow, TermRow } from "@/lib/types";
+import { pendingInvites } from "@/lib/invites";
+import { meetsLabel, shortDay, weekDate } from "@/lib/schedule";
+import { isAdminProfile, requireTeacher } from "@/lib/teacher";
+import type { ClassRow, Kid, MissionRow, Profile, School, TermRow } from "@/lib/types";
 
 type SessionSummary = { id: string; started_at: string; ended_at: string | null; week: number | null };
 
-type Search = { added?: string; skipped?: string; error?: string };
+type Search = { added?: string; skipped?: string; error?: string; manager?: string; manager_error?: string };
 
 export default async function ClubPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<Search> }) {
   const { id } = await params;
   const search = await searchParams;
-  const { supabase } = await requireTeacher();
+  const { supabase, userId, profile } = await requireTeacher();
   const { data: klass } = await supabase.from("classes").select("*").eq("id", id).maybeSingle<ClassRow>();
   if (!klass) notFound();
+  const admin = isAdminProfile(profile);
+  const isManager = klass.teacher_id === userId;
+  // Teachers see the clubs they run; admins see every club in the school.
+  if (!admin && !isManager) redirect("/teacher/clubs");
 
-  const [{ data: termRow }, { data: missionRows }, { data: sessionRows }, { data: kidRows }] = await Promise.all([
+  const [{ data: termRow }, { data: missionRows }, { data: sessionRows }, { data: kidRows }, { data: school }, { data: peopleRows }] = await Promise.all([
     supabase.from("terms").select("*").eq("id", klass.term_id).maybeSingle<TermRow>(),
     supabase.from("missions").select("*").eq("term_id", klass.term_id).eq("published", true).order("week"),
     supabase.from("sessions").select("id, started_at, ended_at, week").eq("class_id", id).order("started_at", { ascending: false }),
     supabase.from("kids").select("*").eq("class_id", id).is("archived_at", null).order("display_name"),
+    supabase.from("schools").select("*").eq("id", klass.school_id).maybeSingle<School>(),
+    supabase.from("profiles").select("*").eq("school_id", klass.school_id).order("display_name"),
   ]);
+  const people = (peopleRows ?? []) as Profile[];
+  const manager = people.find((p) => p.id === klass.teacher_id) ?? null;
+  const pending = admin ? await pendingInvites(people.map((p) => p.id)) : new Set<string>();
+  const managerName = isManager ? "you" : manager?.display_name || manager?.email || "a teacher";
+  const meets = meetsLabel(klass.meets_day, klass.meets_time);
 
   let term: Term | null = null;
   try {
@@ -38,16 +52,23 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
   const live = sessions.find((s) => !sessionIsOver(s));
   const nextWeek = missions.find((m) => !sessions.some((s) => s.week === m.week))?.week ?? null;
   const track = isTrack(klass.track) ? klass.track : "8-9";
+  const termStart = school?.term_start ?? null;
+  const fresh = kids.length === 0 && sessions.length === 0;
 
   return (
     <main className="page">
       <div className="page-head">
         <div className="page-intro">
           <p className="section-label">
-            <Link href="/teacher">Clubs</Link> · {term ? `Term ${term.number} · ${term.title}` : "Term"} · {TRACK_LABEL[track]}
+            {admin && !isManager ? <Link href="/teacher/school">School</Link> : <Link href="/teacher/clubs">My clubs</Link>} · {term ? `Term ${term.number} · ${term.title}` : "Term"} ·{" "}
+            {TRACK_LABEL[track]}
           </p>
           <h1>{klass.name}</h1>
-          {term && <p className="page-sub">{term.goal}</p>}
+          <p className="page-sub">
+            Run by {managerName}
+            {pending.has(klass.teacher_id) ? " (invite not accepted yet)" : ""}
+            {meets ? ` · ${meets}` : ""}. {term?.goal}
+          </p>
         </div>
         <div className="actions">
           {live ? (
@@ -61,6 +82,62 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
           ) : null}
         </div>
       </div>
+
+      {search.manager === "changed" && (
+        <div className="notice notice-good">
+          <span>Manager changed. The club now appears in their &ldquo;My clubs&rdquo;.</span>
+        </div>
+      )}
+      {search.manager_error && (
+        <div className="notice notice-error">
+          <span>{search.manager_error}</span>
+        </div>
+      )}
+
+      {fresh && (isManager || admin) && (
+        <section className="card" aria-labelledby="get-started">
+          <div className="card-head">
+            <h2 className="card-title" id="get-started">
+              Get your club started
+            </h2>
+            <span className="meta">About ten minutes, once</span>
+          </div>
+          <ol className="list">
+            <li className="item-row">
+              <span className="chip">1</span>
+              <div className="grow">
+                <b>Read how a session runs</b>
+                <span className="meta">Every week has the same hour: warm-up, mini-lesson, studio time, share and save. The script shows on the class screen.</span>
+              </div>
+              {missions[0] && (
+                <Link className="btn" href={`/teacher/class/${klass.id}/week/${missions[0].week}`}>
+                  Read week 1
+                </Link>
+              )}
+            </li>
+            <li className="item-row">
+              <span className="chip">2</span>
+              <div className="grow">
+                <b>Add the children to the club list</b>
+                <span className="meta">First names only. Each week they type the club code and tap their name.</span>
+              </div>
+              <a className="btn" href="#club-list">
+                Add names
+              </a>
+            </li>
+            <li className="item-row">
+              <span className="chip">3</span>
+              <div className="grow">
+                <b>Start week 1 on the day</b>
+                <span className="meta">
+                  {weekDate(termStart, klass.meets_day, 1) ? `Planned for ${shortDay(weekDate(termStart, klass.meets_day, 1))}. ` : ""}
+                  Press start at the beginning of the session and put the class screen up.
+                </span>
+              </div>
+            </li>
+          </ol>
+        </section>
+      )}
 
       <div className="grid grid-two" style={{ alignItems: "start" }}>
         <div className="stack">
@@ -126,6 +203,27 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
               </div>
             </form>
           </section>
+
+          {admin && (
+            <form action={setClubManager} className="card card-pad stack" aria-labelledby="manager-title">
+              <input type="hidden" name="class_id" value={klass.id} />
+              <h2 className="card-title" id="manager-title">
+                Manager
+              </h2>
+              <p className="meta">
+                The manager runs the weekly sessions and sees this club in &ldquo;My clubs&rdquo;. As school admin you can open any club and start a session to cover for them.
+              </p>
+              <ManagerPicker
+                colleagues={people.filter((p) => p.id !== userId).map((p) => ({ id: p.id, name: p.display_name || p.email || "Colleague", pending: pending.has(p.id) }))}
+                defaultValue={klass.teacher_id === userId ? "me" : klass.teacher_id}
+              />
+              <div className="actions">
+                <button className="btn" type="submit">
+                  Save manager
+                </button>
+              </div>
+            </form>
+          )}
         </div>
 
         <section className="card" aria-labelledby="weeks">
@@ -144,7 +242,14 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
           ) : (
             <ol className="list">
               {missions.map((mission) => (
-                <WeekRow key={mission.id} mission={mission} classId={klass.id} sessions={sessions.filter((s) => s.week === mission.week)} isNext={mission.week === nextWeek} />
+                <WeekRow
+                  key={mission.id}
+                  mission={mission}
+                  classId={klass.id}
+                  sessions={sessions.filter((s) => s.week === mission.week)}
+                  isNext={mission.week === nextWeek}
+                  planned={shortDay(weekDate(termStart, klass.meets_day, mission.week))}
+                />
               ))}
             </ol>
           )}
@@ -154,7 +259,7 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
   );
 }
 
-function WeekRow({ mission, classId, sessions, isNext }: { mission: Mission; classId: string; sessions: SessionSummary[]; isNext: boolean }) {
+function WeekRow({ mission, classId, sessions, isNext, planned }: { mission: Mission; classId: string; sessions: SessionSummary[]; isNext: boolean; planned: string }) {
   const live = sessions.find((s) => !sessionIsOver(s));
   const latest = sessions[0];
   return (
@@ -167,7 +272,7 @@ function WeekRow({ mission, classId, sessions, isNext }: { mission: Mission; cla
         <span className="meta">
           {mission.phase}
           {mission.paperOnly ? " · on paper" : ""}
-          {latest ? ` · run ${formatDate(latest.started_at)}` : ""}
+          {latest ? ` · run ${formatDate(latest.started_at)}` : planned ? ` · ${planned}` : ""}
         </span>
       </div>
       {live ? (

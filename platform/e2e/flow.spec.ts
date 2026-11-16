@@ -5,9 +5,9 @@ import { config } from "dotenv";
 config({ path: ".env.local" });
 config();
 
-// Teacher creates a club, adds a child to the club list and starts week 1; the child
-// finds the club, taps their name, sends a message, pins the reply; the teacher sees it
-// in the gallery. Needs a Supabase project with the migrations and seed applied, and the
+// The school admin confirms the school on first sign-in, creates a club they run
+// themselves, adds children to its club list and starts week 1; a child finds the club,
+// taps their name, sends a message, pins the reply; the admin sees it in the gallery. Needs a Supabase project with the migrations and seed applied, and the
 // dev server running with AI_MOCK=1 IMAGE_PROVIDER=mock (playwright.config does this).
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -46,7 +46,7 @@ async function signInTeacher(browser: Browser, baseURL: string) {
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto(`${baseURL}/auth/callback?token_hash=${data.properties.hashed_token}&type=magiclink&next=/teacher`);
-  await expect(page.getByRole("heading", { name: "Your clubs" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /ready$/ })).toBeVisible();
   return { context, page };
 }
 
@@ -54,10 +54,20 @@ test("teacher launches, kid builds and pins, gallery shows it", async ({ browser
   const base = baseURL ?? "http://localhost:3000";
   const teacher = await signInTeacher(browser, base);
 
-  // Create a club, read its code, and put one child on the club list.
+  // First sign-in: the welcome screen, then the School home with its checklist.
+  await teacher.page.getByLabel("Your name").fill("E2E Head");
+  await teacher.page.getByLabel("First day of term").fill("2027-01-11");
+  await teacher.page.getByRole("button", { name: "Continue" }).click();
+  await expect(teacher.page.getByText("Getting your school ready")).toBeVisible();
+
+  // Create a club the admin runs themselves, then open it.
   await teacher.page.getByLabel("Club name").fill("E2E Comic Club");
+  await teacher.page.getByLabel("Meets on").selectOption("Tuesday");
   await teacher.page.getByRole("button", { name: "Create club" }).click();
+  await expect(teacher.page.getByText("Club E2E Comic Club created.")).toBeVisible();
+  await teacher.page.getByRole("link", { name: "E2E Comic Club" }).first().click();
   await expect(teacher.page.getByRole("heading", { name: "E2E Comic Club" })).toBeVisible();
+  await expect(teacher.page.getByText("Get your club started")).toBeVisible();
   const code = (await teacher.page.locator(".mono").first().innerText()).trim();
   expect(code).toMatch(/^[A-HJ-NP-Z2-9]{6}$/);
   await teacher.page.getByLabel("Add children").fill("Sam\nLina");

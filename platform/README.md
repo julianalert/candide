@@ -17,7 +17,8 @@ terms/<term>/         one folder per term: term.json (topic, goal, phases) and w
                       week. Edit JSON, run `npm run seed`. No code change needed.
 ai/                   safety.md (fixed, always first), age-tier-8-11.md, moderation.md, image-rewrite.md
 supabase/migrations/  0001 schema + RLS, 0002 functions, 0003 storage bucket, 0004 pg_cron jobs,
-                      0005 demo requests, 0006 terms, club groups and club lists
+                      0005 demo requests, 0006 terms, club groups and club lists,
+                      0007 school setup (welcome screen, club managers, meeting times)
 scripts/              seed-missions, create-school, ops (end-stale, purge-transcripts, moderation-report)
 tests/                Vitest: loader, codes, cookie, caps, prompt assembly, adversarial (live, gated)
 e2e/                  Playwright: club + club list → week 1 → kid taps their name, chats, pins → gallery → end
@@ -46,7 +47,7 @@ npm run create-school -- --name "Pilot School" --country QA --admin-email you@ex
 npm run dev
 ```
 
-The invite email signs you in at `/teacher`. Create a club group (name, age track, term), add the children's first names to its club list, and start week 1. Then open `/join` in a private window, type the club code and tap a name. Each week the teacher starts the next week; a child who taps their name sees everything they pinned in earlier weeks, and the AI helper gets a short summary of it.
+The invite email signs you in at `/teacher`. As the school admin you first confirm the school (welcome screen: name, city, your role, the first day of term), then land on the School home, whose checklist walks through the rest. Create a club group (name, age track, term, meeting day and time) and choose who runs it: yourself, a colleague, or a teacher you invite by email right there; that manager sees it in "My clubs" and lands on it at sign-in. On the club page, add the children's first names to its club list and start week 1. Then open `/join` in a private window, type the club code and tap a name. Each week the manager starts the next week; a child who taps their name sees everything they pinned in earlier weeks, and the AI helper gets a short summary of it. Only admins create clubs; an admin can open any club and start a session to cover for its manager.
 
 Without an Anthropic key, set `AI_MOCK=1` (canned replies, keyword moderation) and `IMAGE_PROVIDER=mock` (a locally drawn placeholder PNG); the whole flow still works end to end.
 

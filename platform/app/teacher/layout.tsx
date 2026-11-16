@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { TeacherTabs } from "@/components/teacher-tabs";
-import { getTeacher } from "@/lib/teacher";
+import { getTeacher, isAdminProfile } from "@/lib/teacher";
 
 export default async function TeacherLayout({ children }: { children: React.ReactNode }) {
   const { profile, email } = await getTeacher();
-  const isAdmin = profile?.role === "admin" || Boolean(profile?.is_superadmin);
+  const isAdmin = isAdminProfile(profile);
 
   return (
     <>
