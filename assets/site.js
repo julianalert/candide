@@ -80,3 +80,31 @@ if (form) {
     }
   });
 }
+
+// ---------- Terms menu in the top bar ----------
+// A disclosure: the button opens and closes the list of term pages.
+
+document.querySelectorAll('.nav-menu').forEach((menu) => {
+  const trigger = menu.querySelector('.tab-trigger');
+  const panel = menu.querySelector('.menu');
+
+  const setOpen = (open) => {
+    trigger.setAttribute('aria-expanded', String(open));
+    panel.hidden = !open;
+  };
+
+  trigger.addEventListener('click', () => setOpen(panel.hidden));
+  document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target)) setOpen(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !panel.hidden) {
+      setOpen(false);
+      trigger.focus();
+    }
+  });
+  // Close when keyboard focus moves on past the menu.
+  menu.addEventListener('focusout', (e) => {
+    if (e.relatedTarget && !menu.contains(e.relatedTarget)) setOpen(false);
+  });
+});

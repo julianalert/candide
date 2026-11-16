@@ -4,7 +4,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/missions", "destination": "/programme", "permanent": true },
+    { "source": "/programme", "destination": "/create-your-comic", "permanent": true },
+    { "source": "/missions", "destination": "/create-your-comic", "permanent": true },
     { "source": "/pilot", "destination": "/demo", "permanent": true },
     { "source": "/enrol", "destination": "/demo", "permanent": true }
   ]

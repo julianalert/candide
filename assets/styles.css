@@ -112,7 +112,7 @@ a:hover { text-decoration: underline; }
 
 .tabs {
   display: flex; gap: 2px; flex: 1 1 auto; justify-content: center; align-self: stretch;
-  min-height: 64px; overflow-x: auto; scrollbar-width: none;
+  min-height: 64px; scrollbar-width: none;
 }
 .tabs::-webkit-scrollbar { display: none; }
 .tab {
@@ -121,23 +121,48 @@ a:hover { text-decoration: underline; }
   border-bottom: 2px solid transparent;
 }
 .tab:hover { color: var(--ink); text-decoration: none; }
-.tab[aria-current="page"] { font-weight: 600; color: var(--petrol); border-bottom-color: var(--petrol); }
+.tab[aria-current="page"], .tab.is-current { font-weight: 600; color: var(--petrol); border-bottom-color: var(--petrol); }
+
+/* Terms dropdown. On phones the tabs row scrolls sideways, so the panel is placed
+   against the whole top bar instead of its button and escapes that scroller. */
+.nav-menu { position: relative; display: flex; }
+.tab-trigger {
+  gap: 5px; margin: 0; border-top: 0; border-left: 0; border-right: 0;
+  background: none; font-family: inherit; line-height: inherit; cursor: pointer;
+}
+.tab-trigger svg { width: 12px; height: 12px; transition: transform .15s ease; }
+.tab-trigger[aria-expanded="true"] { color: var(--ink); }
+.tab-trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
+.menu {
+  position: absolute; top: calc(100% + 8px); left: 50%; z-index: 60; transform: translateX(-50%);
+  display: flex; flex-direction: column; gap: 2px; width: 380px; padding: 6px;
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 12px;
+  outline: 6px solid rgba(14, 90, 95, .08);
+}
+.menu-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 8px; color: var(--ink); }
+.menu-item:hover { background: var(--surface-soft); text-decoration: none; }
+.menu-item[aria-current="page"] { background: var(--petrol-tint); }
+.menu-num { flex: 0 0 auto; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--petrol); }
+.menu-text { display: flex; flex-direction: column; flex: 1 1 auto; min-width: 0; }
+.menu-text b { font-size: 15px; font-weight: 500; }
+.menu-text span { font-size: 13px; color: var(--grey-600); }
+.menu-item .chip { flex: 0 0 auto; }
 
 .topbar-actions { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
 .context {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 7px 12px; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface);
-  font-size: 13px; color: var(--grey-700); white-space: nowrap;
+  padding: 4px 12px 4px 10px; border-radius: 999px; background: var(--petrol-tint);
+  font-size: 13px; font-weight: 500; color: var(--petrol); white-space: nowrap;
 }
-.context svg { width: 14px; height: 14px; color: var(--grey-500); }
+.context svg { width: 14px; height: 14px; color: currentColor; }
 
 /* ---------- Buttons ---------- */
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 9px 14px; border: 1px solid var(--rule-control); border-radius: 8px;
+  padding: 9px 14px; border: 1px solid #C9C9C3; border-radius: 8px;
   background: var(--surface); color: var(--ink);
-  font-size: 15px; line-height: 1.5; white-space: nowrap; cursor: pointer;
+  font-size: 15px; line-height: 24px; white-space: nowrap; cursor: pointer;
 }
 .btn:hover { background: var(--surface-soft); text-decoration: none; }
 .btn-primary { padding: 9px 16px; border-color: var(--petrol); background: var(--petrol); color: #fff; font-weight: 500; }
@@ -228,21 +253,23 @@ a:hover { text-decoration: underline; }
 .kv-row dd { font-weight: 500; text-align: right; }
 
 /* =====================================================================
-   Home hero: the copy on one row, the product on a full-width stage below.
+   Home hero: the copy stacked and centred, the product on a full-width stage below.
    ===================================================================== */
 
 .hero {
-  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 24px 56px; align-items: end;
-  padding-top: 28px;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  padding: 28px 0 28px; text-align: center;
 }
-.hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; min-width: 0; }
 .hero h1 {
+  max-width: 15em;
   font-size: clamp(34px, 4.4vw, 68px); font-weight: 600; letter-spacing: -.035em; line-height: 1.03;
   text-wrap: balance;
 }
 .hero h1 .accent { color: var(--petrol); }
-.hero-side { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; min-width: 0; padding-bottom: 6px; }
-.hero-sub { max-width: 34em; font-size: 18px; line-height: 1.55; color: var(--grey-600); text-wrap: pretty; }
+.hero-sub { max-width: 36em; font-size: 18px; line-height: 1.55; color: var(--grey-600); text-wrap: balance; }
+.hero .actions { justify-content: center; margin-top: 4px; }
+.hero .label-row { justify-content: center; }
+.hero .label-row .chip { padding: 4px 10px; border-radius: 999px; }
 
 /* =====================================================================
    Product shots. Real screens rebuilt in HTML, sized in em and scaled
@@ -439,6 +466,157 @@ a:hover { text-decoration: underline; }
 .mission-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 
 /* =====================================================================
+   The three terms: one card each on the home page, one page each.
+   ===================================================================== */
+
+.terms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.term { display: flex; flex-direction: column; height: 100%; overflow: hidden; color: var(--ink); }
+.term:hover { border-color: var(--petrol-light); text-decoration: none; }
+.term:hover .link-arrow { text-decoration: underline; }
+/* Every card's art is the same 16:10 frame, whatever is inside it. */
+.term-art { aspect-ratio: 16 / 10; min-height: 0; overflow: hidden; border-bottom: 1px solid var(--rule); background: var(--surface-sunken); }
+.term-art > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.term-body { display: flex; flex-direction: column; gap: 8px; flex: 1 1 auto; padding: 18px 20px 20px; }
+.term-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.term-title { font-size: 20px; font-weight: 600; letter-spacing: -.01em; line-height: 1.25; }
+.term-idea { font-size: 15px; color: var(--grey-700); text-wrap: pretty; }
+.term-end { font-size: 14px; color: var(--grey-600); }
+.term .link-arrow { margin-top: auto; padding-top: 6px; color: var(--petrol); }
+
+.label-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+/* Art for the terms still in preparation: the hero, in miniature screens.
+   A notch larger than .mini so the small labels stay legible in a fifth of the page. */
+.art-panel.mini, .toybox-stage.mini { font-size: calc(100cqw / 320 * 15); }
+.term-art .toybox-stage.mini { font-size: calc(100cqw / 420 * 15); }
+.art-panel {
+  display: flex; flex-direction: column; justify-content: center; gap: .9em;
+  height: 100%; padding: 1.3em; background: var(--page);
+}
+.art-panel .ui-label { text-align: center; }
+.chips-row { display: flex; justify-content: center; gap: .4em; flex-wrap: wrap; }
+.chips-row .ui-chip { background: var(--surface); border: 1px solid var(--rule); }
+.chips-row .ui-chip.on { border-color: var(--petrol-light); background: var(--petrol-tint); color: var(--petrol); }
+
+/* A comic panel turned into a clip. */
+.film-ui {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
+  padding: .9em;
+}
+.film-tag { padding: .3em .6em; border-radius: .45em; background: rgba(22, 24, 26, .72); color: #fff; font-size: .8em; font-weight: 500; }
+.film-play {
+  position: absolute; left: 50%; top: 50%; width: 3.4em; height: 3.4em; margin: -1.7em 0 0 -1.7em;
+  display: grid; place-items: center; border-radius: 50%; background: rgba(255, 255, 255, .94); color: var(--petrol);
+}
+.film-play svg { width: 1.3em; height: 1.3em; margin-left: .15em; }
+.film-bar {
+  align-self: stretch; display: flex; align-items: center; gap: .7em;
+  padding: .45em .7em; border-radius: .55em; background: rgba(22, 24, 26, .72); color: #fff;
+  font-family: var(--mono); font-size: .78em;
+}
+.film-bar i { position: relative; flex: 1 1 auto; height: .35em; border-radius: 1em; background: rgba(255, 255, 255, .3); }
+.film-bar i::before { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--v); border-radius: inherit; background: #fff; }
+
+/* Three takes of one shot; the child picks one. */
+.takes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6em; }
+.takes figure { display: flex; flex-direction: column; gap: .35em; min-width: 0; }
+.mission-art .takes img, .term-art .takes img {
+  width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover;
+  border: 1px solid var(--rule); border-radius: .5em;
+}
+.takes .on img { outline: .18em solid var(--petrol); outline-offset: .12em; }
+.takes figcaption { font-size: .78em; color: var(--grey-600); text-align: center; }
+.takes .on figcaption { color: var(--petrol); font-weight: 600; }
+
+/* Voice recording and sound effects. */
+.rec {
+  display: flex; align-items: center; gap: .6em; padding: .6em .8em;
+  border: 1px solid var(--rule); border-radius: .7em; background: var(--surface); font-size: .9em;
+}
+.rec::before { content: ""; flex: 0 0 auto; width: .6em; height: .6em; border-radius: 50%; background: var(--bad); }
+.rec span { flex: 1 1 auto; min-width: 0; font-weight: 500; }
+.rec .mono { flex: 0 0 auto; font-size: .85em; }
+.wave {
+  display: flex; align-items: center; gap: .2em; height: 4.2em; padding: 0 .8em;
+  border: 1px solid var(--rule); border-radius: .7em; background: var(--surface);
+}
+.wave i { flex: 1 1 0; height: var(--h); border-radius: 1em; background: var(--petrol); }
+.wave i:nth-child(n+14) { background: var(--petrol-light); }
+
+/* The edit: video, voice and sound tracks. */
+.tracks { position: relative; display: flex; flex-direction: column; gap: .45em; padding: .8em; border: 1px solid var(--rule); border-radius: .7em; background: var(--surface); }
+.track { display: flex; align-items: center; gap: .6em; }
+.track > span { flex: 0 0 3.4em; font-size: .72em; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--grey-500); }
+.track > div { display: flex; gap: .25em; flex: 1 1 auto; height: 1.6em; }
+.track i { border-radius: .35em; background: var(--petrol); }
+.track s { text-decoration: none; }
+.track.voice i { background: var(--petrol-light); }
+.track.sfx i { background: var(--surface-sunken); border: 1px solid var(--rule-control); }
+.track.clips i { background: url("creations/comic-fox.jpg") center / cover; }
+.playhead { position: absolute; top: .5em; bottom: .5em; left: 58%; width: 2px; border-radius: 2px; background: var(--bad); }
+
+/* The premiere poster. */
+.poster-ui {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: .25em;
+  padding: 1.2em; text-align: center; color: #fff;
+  background: linear-gradient(to top, rgba(8, 36, 38, .9) 0%, rgba(8, 36, 38, .55) 38%, transparent 70%);
+}
+.poster-kicker { font-size: .72em; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; opacity: .85; }
+.poster-title { font-size: 1.9em; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance; }
+.poster-by { font-size: .85em; opacity: .85; }
+
+/* A collection: the same hero in new colours, and a secret edition. */
+.collect { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5em; }
+.mission-art .collect img, .term-art .collect img {
+  width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: 30% 40%;
+  border: 1px solid var(--rule); border-radius: .5em;
+}
+.collect .secret {
+  display: grid; place-items: center; aspect-ratio: 1; border-radius: .5em;
+  background: var(--petrol); color: #fff; font-size: 1.6em; font-weight: 700;
+}
+
+/* The toy in its box. */
+.toybox-stage { display: grid; place-items: center; height: 100%; padding: 1em; background: var(--page); }
+.toybox {
+  display: flex; flex-direction: column; gap: .45em; width: 10.5em; padding: .55em .55em .6em;
+  border-radius: .7em; background: var(--petrol); color: #fff;
+}
+.toybox-top { display: flex; flex-direction: column; align-items: center; line-height: 1.1; }
+.toybox-top b { font-size: 1.35em; font-weight: 800; letter-spacing: .08em; }
+.toybox-top span { font-size: .62em; letter-spacing: .08em; text-transform: uppercase; opacity: .8; }
+.toybox-window { overflow: hidden; border: .2em solid rgba(255, 255, 255, .85); border-radius: .5em; background: #fff; }
+.mission-art .toybox-window img, .term-art .toybox-window img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: 28% 40%; }
+.toybox-foot { display: flex; justify-content: space-between; font-size: .6em; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; opacity: .85; }
+
+/* The render queue: children keep working while clips render. */
+.queue { display: flex; flex-direction: column; gap: .4em; }
+.queue li {
+  display: flex; align-items: center; justify-content: space-between; gap: .6em; padding: .55em .75em;
+  border: 1px solid var(--rule); border-radius: .6em; background: var(--surface); font-size: .92em; font-weight: 500;
+}
+.queue i { position: relative; flex: 0 0 4.5em; height: .4em; border-radius: 1em; background: var(--track); }
+.queue i::before { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--v); border-radius: inherit; background: var(--petrol); }
+
+/* The five-step pitch, and the Toy Fair tokens. */
+.pitch { display: flex; flex-direction: column; gap: .35em; }
+.pitch li {
+  display: flex; align-items: center; gap: .6em; padding: .45em .7em;
+  border: 1px solid var(--rule); border-radius: .6em; background: var(--surface); font-size: .92em; font-weight: 500;
+}
+.pitch b {
+  flex: 0 0 auto; width: 1.6em; height: 1.6em; display: grid; place-items: center; border-radius: 50%;
+  background: var(--petrol); color: #fff; font-family: var(--mono); font-size: .8em; font-weight: 500;
+}
+.tokens { display: flex; gap: .35em; }
+.tokens i {
+  width: 1.9em; height: 1.9em; border-radius: 50%;
+  background: var(--petrol-tint); border: .18em solid var(--petrol);
+}
+
+/* =====================================================================
    How a mission runs: a proportional timeline above four phase cards.
    ===================================================================== */
 
@@ -450,8 +628,9 @@ a:hover { text-decoration: underline; }
 .timeline b { font-weight: 600; color: var(--ink); }
 
 .phases { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.phases.phases-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .phase { display: flex; flex-direction: column; overflow: hidden; }
-.phase-art { aspect-ratio: 4 / 3; border-bottom: 1px solid var(--rule); background: var(--page); }
+.phase-art { aspect-ratio: 4 / 3; min-height: 0; overflow: hidden; border-bottom: 1px solid var(--rule); background: var(--page); }
 .phase-art > img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .phase-body { display: flex; flex-direction: column; gap: 8px; padding: 18px 20px 22px; }
 .phase-body .mono { color: var(--petrol); font-weight: 500; }
@@ -486,6 +665,22 @@ a:hover { text-decoration: underline; }
 .attempt-vague .attempt-prompt { background: var(--surface-sunken); color: var(--ink); }
 .attempt-verdict { margin-top: auto; font-size: 15px; font-weight: 500; }
 .attempt-good { border-color: var(--petrol-light); }
+
+/* Terms 2 and 3 compare a clip or a conversation instead of a picture. */
+.attempt-art { position: relative; aspect-ratio: 1; min-height: 0; overflow: hidden; background: var(--page); }
+.glitch {
+  position: absolute; left: 4%; top: 40%; width: 36%; height: 30%;
+  border: 3px dashed #fff; border-radius: 50%; background: rgba(180, 53, 42, .22);
+}
+.film-tag.is-bad { background: var(--bad); }
+.says { display: flex; flex-direction: column; gap: .55em; }
+.say {
+  display: flex; flex-direction: column; gap: .2em; padding: .75em .9em;
+  border: 1px solid var(--rule); border-radius: .8em; background: var(--surface);
+  font-size: 1.05em; line-height: 1.4;
+}
+.say b { font-size: .78em; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--petrol); }
+.say.ai b { color: var(--grey-500); }
 
 .skills { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); overflow: hidden; }
 .skill { display: flex; flex-direction: column; gap: 6px; padding: 20px 24px; box-shadow: -1px 0 0 var(--rule), 0 -1px 0 var(--rule); }
@@ -723,8 +918,9 @@ select.input {
 }
 
 @media (max-width: 980px) {
-  .hero { grid-template-columns: minmax(0, 1fr); align-items: start; padding-top: 12px; }
+  .hero { padding-top: 12px; }
   .hero h1 { font-size: clamp(34px, 7vw, 52px); }
+  .terms, .phases.phases-3 { grid-template-columns: minmax(0, 1fr); max-width: 560px; }
   .missions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .safety, .split-media { grid-template-columns: minmax(0, 1fr); }
   .photo img { min-height: 0; aspect-ratio: 3 / 2; }
@@ -734,14 +930,16 @@ select.input {
 @media (max-width: 860px) {
   [id] { scroll-margin-top: 16px; }
 
-  .topbar { position: static; padding: 0 16px; column-gap: 12px; }
+  .topbar { position: relative; padding: 0 16px; column-gap: 12px; }
   .page { padding-left: 16px; padding-right: 16px; gap: 72px; }
   .footer { padding-left: 16px; padding-right: 16px; }
   .brand { flex: 1 1 auto; min-height: 60px; }
   .tabs {
     order: 3; flex: 1 0 100%; justify-content: flex-start; min-height: 44px;
-    margin: 0 -16px; padding: 0 4px; border-top: 1px solid var(--rule);
+    margin: 0 -16px; padding: 0 4px; border-top: 1px solid var(--rule); overflow-x: auto;
   }
+  .nav-menu { position: static; }
+  .menu { top: calc(100% + 6px); left: 16px; right: 16px; width: auto; transform: none; }
 
   .enrol-grid { grid-template-columns: minmax(0, 1fr); }
 }
