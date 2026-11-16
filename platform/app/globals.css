@@ -1132,3 +1132,131 @@
   align-items: flex-start;
   padding: 24px;
 }
+
+/* The admin's welcome screen: one centred column. */
+.welcome-page {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.welcome-page .page-head {
+  justify-content: center;
+  text-align: center;
+}
+.welcome-page .page-intro {
+  align-items: center;
+}
+.welcome-page .page-sub {
+  max-width: 34em;
+}
+
+/* Account menu in the teacher top bar: an avatar that opens a small panel. */
+.user-menu {
+  position: relative;
+}
+.user-menu-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px 3px 3px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-grey-600);
+  cursor: pointer;
+}
+.user-menu-button:hover,
+.user-menu-button[aria-expanded="true"] {
+  border-color: var(--color-rule);
+  background: var(--color-surface-soft);
+}
+.user-menu-button:focus-visible {
+  outline: 2px solid var(--color-petrol);
+  outline-offset: 2px;
+}
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-petrol);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  flex: 0 0 auto;
+}
+.avatar-lg {
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+}
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 60;
+  width: 280px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule);
+  border-radius: 12px;
+  /* No drop shadow in this design system: a soft outline ring lifts the panel. */
+  box-shadow: 0 0 0 4px rgba(22, 24, 26, 0.04);
+  overflow: hidden;
+}
+.user-dropdown-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--color-rule);
+}
+.user-dropdown-who {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.user-dropdown-who b {
+  font-size: 15px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.user-dropdown-who span {
+  font-size: 13px;
+  color: var(--color-grey-600);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.user-dropdown-list {
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+}
+.user-dropdown-list + .user-dropdown-list {
+  border-top: 1px solid var(--color-rule);
+}
+.user-dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+.user-dropdown-item:hover,
+.user-dropdown-item:focus-visible {
+  background: var(--color-surface-soft);
+  text-decoration: none;
+  color: var(--color-ink);
+  outline: none;
+}

@@ -1,12 +1,17 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Gallery } from "@/components/gallery";
+import { TeacherTabs } from "@/components/teacher-tabs";
+import { UserMenu } from "@/components/user-menu";
+import { WelcomeForm } from "@/components/welcome-form";
 import { Workspace } from "@/components/workspace/workspace";
 import type { GalleryData } from "@/lib/gallery";
 import { isTrack, kidView, loadTerms } from "@/lib/missions";
 import type { PlayState } from "@/lib/types";
 
 // Design preview with fixture data, development only. Lets you look at the kid workspace
-// and the gallery without a database. /dev/preview?screen=workspace|gallery&week=4&track=10-11
+// the gallery and the admin welcome screen without a database.
+// /dev/preview?screen=workspace|gallery|welcome&week=4&track=10-11
 export default async function PreviewPage({ searchParams }: { searchParams: Promise<{ screen?: string; week?: string; track?: string }> }) {
   if (process.env.NODE_ENV === "production") notFound();
   const params = await searchParams;
@@ -14,6 +19,23 @@ export default async function PreviewPage({ searchParams }: { searchParams: Prom
   const mission = missions.find((m) => m.week === Number(params.week ?? 4)) ?? missions[3];
   const track = isTrack(params.track) ? params.track : "8-9";
   const now = new Date().toISOString();
+
+  if (params.screen === "welcome") {
+    return (
+      <>
+        <header className="topbar">
+          <div className="brand">
+            <Image className="wordmark" src="/logo.svg" alt="Candide" width={107} height={22} priority />
+          </div>
+          <TeacherTabs isAdmin />
+          <div className="topbar-actions">
+            <UserMenu name="Julien" email="julien@example.com" roleLabel="Principal or Head of School" schoolName="Hiboulala" isAdmin />
+          </div>
+        </header>
+        <WelcomeForm school={{ name: "Hiboulala", city: "Paris", country: "FR", term_start: null }} displayName="Julien" jobTitle={null} email="julien@example.com" editing={false} />
+      </>
+    );
+  }
 
   if (params.screen === "gallery") {
     const data: GalleryData = {
