@@ -77,7 +77,16 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
   // ---------- Setup checklist ----------
   const pendingManagers = [...new Set(clubs.map((c) => c.teacher_id).filter((id) => pending.has(id)))];
   const steps = [
-    { done: Boolean(profile.onboarded_at && school?.term_start), title: "Confirm your school and the term start", detail: school?.term_start ? `Term starts ${longDay(new Date(`${school.term_start}T00:00:00Z`))}.` : "Add the first day of term so each week gets a date.", href: "/teacher/welcome?edit=1", cta: "Edit details" },
+    // Done as soon as the welcome screen is saved; the term start is optional and can come later.
+    {
+      done: Boolean(profile.onboarded_at),
+      title: "Confirm your school",
+      detail: school?.term_start
+        ? `Term starts ${longDay(new Date(`${school.term_start}T00:00:00Z`))}.`
+        : "No term start yet: add it from School details when you know it, and each week gets a date.",
+      href: "/teacher/welcome?edit=1",
+      cta: "Edit details",
+    },
     { done: clubs.length > 0, title: "Create your club groups", detail: "One per group of children, each with an age track and a manager who runs it.", href: "#new-club", cta: "Create a club" },
     { done: clubs.length > 0 && pendingManagers.length === 0, title: "Managers accept their invites", detail: pendingManagers.length ? `Waiting for ${pendingManagers.map(nameOf).join(", ")}.` : "Everyone who runs a club has joined.", href: "#people", cta: "See teachers" },
     { done: clubs.length > 0 && clubs.every((c) => (kidsPerClub.get(c.id) ?? 0) > 0), title: "Fill each club list", detail: "The manager types the children’s first names once, from the club page.", href: "#clubs", cta: "See clubs" },
