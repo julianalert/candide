@@ -7,8 +7,6 @@ export type School = {
   name: string;
   country: string | null;
   city: string | null;
-  /** First day of the term, "YYYY-MM-DD". */
-  term_start: string | null;
   daily_image_cap: number;
   created_at: string;
 };
@@ -34,6 +32,8 @@ export type ClassRow = {
   meets_day: string | null;
   /** "HH:MM", 24-hour. */
   meets_time: string | null;
+  /** The club's first week, "YYYY-MM-DD": week 1 is its first meeting day on or after this date. */
+  starts_on: string | null;
   name: string;
   year_group: number | null;
   term_id: string;

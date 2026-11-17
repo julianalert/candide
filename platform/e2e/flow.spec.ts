@@ -56,18 +56,19 @@ test("teacher launches, kid builds and pins, gallery shows it", async ({ browser
 
   // First sign-in: the welcome screen, then the School home with its checklist.
   await teacher.page.getByLabel("Your name").fill("E2E Head");
-  await teacher.page.getByLabel("First day of term").fill("2027-01-11");
   await teacher.page.getByRole("button", { name: "Continue" }).click();
   await expect(teacher.page.getByText("Getting your school ready")).toBeVisible();
 
   // Create a club the admin runs themselves, then open it.
   await teacher.page.getByLabel("Club name").fill("E2E Comic Club");
   await teacher.page.getByLabel("Meets on").selectOption("Tuesday");
+  await teacher.page.getByLabel("First week starts").fill("2027-01-11");
   await teacher.page.getByRole("button", { name: "Create club" }).click();
   await expect(teacher.page.getByText("Club E2E Comic Club created.")).toBeVisible();
   await teacher.page.getByRole("link", { name: "E2E Comic Club" }).first().click();
   await expect(teacher.page.getByRole("heading", { name: "E2E Comic Club" })).toBeVisible();
   await expect(teacher.page.getByText("Get your club started")).toBeVisible();
+  await expect(teacher.page.getByText("Planned for Tue 12 Jan.")).toBeVisible();
   const code = (await teacher.page.locator(".mono").first().innerText()).trim();
   expect(code).toMatch(/^[A-HJ-NP-Z2-9]{6}$/);
   await teacher.page.getByLabel("Add children").fill("Sam\nLina");

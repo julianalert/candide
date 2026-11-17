@@ -25,7 +25,7 @@ const JOB_TITLES = [
 ];
 
 type Props = {
-  school: Pick<School, "name" | "city" | "country" | "term_start"> | null;
+  school: Pick<School, "name" | "city" | "country"> | null;
   displayName: string | null;
   jobTitle: string | null;
   email: string | null;
@@ -33,7 +33,7 @@ type Props = {
   error?: string;
 };
 
-/** The admin's welcome screen: confirm the school, who they are, and when the term starts. */
+/** The admin's welcome screen: confirm the school and who they are. */
 export function WelcomeForm({ school, displayName, jobTitle, email, editing, error }: Props) {
   const countryKnown = COUNTRIES.some(([code]) => code === school?.country);
   return (
@@ -50,8 +50,8 @@ export function WelcomeForm({ school, displayName, jobTitle, email, editing, err
           <h1>{editing ? "School details" : `Let’s get ${school?.name ?? "your school"} ready`}</h1>
           <p className="page-sub">
             {editing
-              ? "These details appear on your club descriptions for parents and set the dates of each week."
-              : "Three things before you start: confirm your school, tell us who you are, and when the term starts. Next, you’ll create your club groups and choose who runs each one."}
+              ? "Your school’s name and city appear on the club descriptions for parents."
+              : "Two things before you start: confirm your school and tell us who you are. Next, you’ll create your club groups, choose who runs each one and when each one starts."}
           </p>
         </div>
       </div>
@@ -122,19 +122,6 @@ export function WelcomeForm({ school, displayName, jobTitle, email, editing, err
             </div>
           </div>
           <p className="caption">You sign in as {email}. You&rsquo;re the school admin: you create the clubs and choose who runs them.</p>
-        </fieldset>
-
-        <fieldset className="stack" style={{ gap: 14, border: 0, padding: 0, margin: 0 }}>
-          <legend className="section-label" style={{ marginBottom: 10 }}>
-            3 · The term
-          </legend>
-          <div className="field" style={{ maxWidth: 320 }}>
-            <label className="label" htmlFor="term_start">
-              First day of term
-            </label>
-            <input className="input" id="term_start" name="term_start" type="date" defaultValue={school?.term_start ?? ""} />
-          </div>
-          <p className="caption">We use it to date each club&rsquo;s twelve weeks and its Comic Con. You can leave it empty and add it later.</p>
         </fieldset>
 
         <div className="actions">

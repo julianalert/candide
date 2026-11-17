@@ -13,11 +13,11 @@ export function parentClubDescription(params: {
   managerName: string | null;
   meetsDay: string | null;
   meetsTime: string | null;
-  termStart: string | null;
+  startsOn: string | null;
 }): string {
   const meets = meetsLabel(params.meetsDay, params.meetsTime);
-  const first = weekDate(params.termStart, params.meetsDay, 1);
-  const showcase = weekDate(params.termStart, params.meetsDay, params.termWeeks);
+  const first = weekDate(params.startsOn, params.meetsDay, 1);
+  const showcase = weekDate(params.startsOn, params.meetsDay, params.termWeeks);
   const lines = [
     `${params.clubName}: the AI Creators Club at ${params.schoolName} (${TRACK_LABEL[params.track].toLowerCase()})`,
     "",

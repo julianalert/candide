@@ -1260,3 +1260,18 @@
   color: var(--color-ink);
   outline: none;
 }
+
+/* A finished step of the school setup checklist. */
+.step-ready {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 8px;
+  background: var(--color-good-bg);
+  color: var(--color-good);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}

@@ -19,7 +19,7 @@ describe("club schedule", () => {
     expect(meetsLabel(null, null)).toBe("");
   });
 
-  it("puts week 1 on the club's first meeting day on or after the term start", () => {
+  it("puts week 1 on the club's first meeting day on or after its start date", () => {
     // 11 January 2027 is a Monday.
     expect(shortDay(weekDate("2027-01-11", "Tuesday", 1))).toBe("Tue 12 Jan");
     expect(shortDay(weekDate("2027-01-11", "Monday", 1))).toBe("Mon 11 Jan");
@@ -27,7 +27,7 @@ describe("club schedule", () => {
     expect(shortDay(weekDate("2027-01-11", "Tuesday", 12))).toBe("Tue 30 Mar");
   });
 
-  it("falls back to the term start without a meeting day, and to nothing without a start", () => {
+  it("falls back to the start date without a meeting day, and to nothing without a start", () => {
     expect(shortDay(weekDate("2027-01-11", null, 2))).toBe("Mon 18 Jan");
     expect(weekDate(null, "Tuesday", 1)).toBeNull();
     expect(weekDate("2027-01-11", "Tuesday", 0)).toBeNull();
@@ -52,7 +52,7 @@ describe("club description for parents", () => {
     managerName: "Ms Khan",
     meetsDay: "Tuesday",
     meetsTime: "14:00",
-    termStart: "2027-01-11",
+    startsOn: "2027-01-11",
   };
 
   it("says who runs it, when, and the Comic Con date", () => {
@@ -64,7 +64,7 @@ describe("club description for parents", () => {
   });
 
   it("leaves out what isn't decided yet", () => {
-    const text = parentClubDescription({ ...base, managerName: null, meetsDay: null, meetsTime: null, termStart: null });
+    const text = parentClubDescription({ ...base, managerName: null, meetsDay: null, meetsTime: null, startsOn: null });
     expect(text).toContain("One hour a week for 12 weeks. Children work");
     expect(text).not.toContain("First session");
     expect(text).not.toContain("led by");

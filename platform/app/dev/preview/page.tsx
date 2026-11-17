@@ -32,7 +32,7 @@ export default async function PreviewPage({ searchParams }: { searchParams: Prom
             <UserMenu name="Julien" email="julien@example.com" roleLabel="Principal or Head of School" schoolName="Hiboulala" isAdmin />
           </div>
         </header>
-        <WelcomeForm school={{ name: "Hiboulala", city: "Paris", country: "FR", term_start: null }} displayName="Julien" jobTitle={null} email="julien@example.com" editing={false} />
+        <WelcomeForm school={{ name: "Hiboulala", city: "Paris", country: "FR" }} displayName="Julien" jobTitle={null} email="julien@example.com" editing={false} />
       </>
     );
   }

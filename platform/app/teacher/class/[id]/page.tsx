@@ -1,19 +1,19 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { addKids, removeKid, setClubManager } from "@/app/teacher/actions";
+import { addKids, removeKid, setClubManager, updateClubSchedule } from "@/app/teacher/actions";
 import { ManagerPicker } from "@/components/manager-picker";
 import { sessionIsOver } from "@/lib/caps";
 import { joinUrlForDisplay } from "@/lib/env";
 import { formatDate } from "@/lib/format";
 import { TRACK_LABEL, isTrack, parseMission, parseTerm, type Mission, type Term } from "@/lib/missions";
 import { pendingInvites } from "@/lib/invites";
-import { meetsLabel, shortDay, weekDate } from "@/lib/schedule";
+import { DAYS, meetsLabel, shortDay, weekDate } from "@/lib/schedule";
 import { isAdminProfile, requireTeacher } from "@/lib/teacher";
-import type { ClassRow, Kid, MissionRow, Profile, School, TermRow } from "@/lib/types";
+import type { ClassRow, Kid, MissionRow, Profile, TermRow } from "@/lib/types";
 
 type SessionSummary = { id: string; started_at: string; ended_at: string | null; week: number | null };
 
-type Search = { added?: string; skipped?: string; error?: string; manager?: string; manager_error?: string };
+type Search = { added?: string; skipped?: string; error?: string; manager?: string; manager_error?: string; schedule?: string };
 
 export default async function ClubPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<Search> }) {
   const { id } = await params;
@@ -26,12 +26,11 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
   // Teachers see the clubs they run; admins see every club in the school.
   if (!admin && !isManager) redirect("/teacher/clubs");
 
-  const [{ data: termRow }, { data: missionRows }, { data: sessionRows }, { data: kidRows }, { data: school }, { data: peopleRows }] = await Promise.all([
+  const [{ data: termRow }, { data: missionRows }, { data: sessionRows }, { data: kidRows }, { data: peopleRows }] = await Promise.all([
     supabase.from("terms").select("*").eq("id", klass.term_id).maybeSingle<TermRow>(),
     supabase.from("missions").select("*").eq("term_id", klass.term_id).eq("published", true).order("week"),
     supabase.from("sessions").select("id, started_at, ended_at, week").eq("class_id", id).order("started_at", { ascending: false }),
     supabase.from("kids").select("*").eq("class_id", id).is("archived_at", null).order("display_name"),
-    supabase.from("schools").select("*").eq("id", klass.school_id).maybeSingle<School>(),
     supabase.from("profiles").select("*").eq("school_id", klass.school_id).order("display_name"),
   ]);
   const people = (peopleRows ?? []) as Profile[];
@@ -52,7 +51,8 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
   const live = sessions.find((s) => !sessionIsOver(s));
   const nextWeek = missions.find((m) => !sessions.some((s) => s.week === m.week))?.week ?? null;
   const track = isTrack(klass.track) ? klass.track : "8-9";
-  const termStart = school?.term_start ?? null;
+  const startsOn = klass.starts_on;
+  const firstWeek = weekDate(startsOn, klass.meets_day, 1);
   const fresh = kids.length === 0 && sessions.length === 0;
 
   return (
@@ -86,6 +86,16 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
       {search.manager === "changed" && (
         <div className="notice notice-good">
           <span>Manager changed. The club now appears in their &ldquo;My clubs&rdquo;.</span>
+        </div>
+      )}
+      {search.schedule === "saved" && (
+        <div className="notice notice-good">
+          <span>Schedule saved. Each week now shows its date.</span>
+        </div>
+      )}
+      {search.schedule === "denied" && (
+        <div className="notice notice-error">
+          <span>Only the club&rsquo;s manager or a school admin can change its schedule.</span>
         </div>
       )}
       {search.manager_error && (
@@ -130,7 +140,7 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
               <div className="grow">
                 <b>Start week 1 on the day</b>
                 <span className="meta">
-                  {weekDate(termStart, klass.meets_day, 1) ? `Planned for ${shortDay(weekDate(termStart, klass.meets_day, 1))}. ` : ""}
+                  {firstWeek ? `Planned for ${shortDay(firstWeek)}. ` : "Set the day and the first week in Schedule to see the date. "}
                   Press start at the beginning of the session and put the class screen up.
                 </span>
               </div>
@@ -204,6 +214,52 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
             </form>
           </section>
 
+          {(isManager || admin) && (
+            <form action={updateClubSchedule} className="card card-pad stack" aria-labelledby="schedule-title">
+              <input type="hidden" name="class_id" value={klass.id} />
+              <h2 className="card-title" id="schedule-title">
+                Schedule
+              </h2>
+              <div className="field-row">
+                <div className="field">
+                  <label className="label" htmlFor="meets_day">
+                    Meets on
+                  </label>
+                  <select className="input" id="meets_day" name="meets_day" defaultValue={klass.meets_day ?? ""}>
+                    <option value="">Not decided yet</option>
+                    {DAYS.map((day) => (
+                      <option key={day} value={day}>
+                        {day}s
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="field">
+                  <label className="label" htmlFor="meets_time">
+                    At
+                  </label>
+                  <input className="input" id="meets_time" name="meets_time" type="time" step={300} defaultValue={klass.meets_time ?? ""} />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label" htmlFor="starts_on">
+                  First week starts
+                </label>
+                <input className="input" id="starts_on" name="starts_on" type="date" defaultValue={klass.starts_on ?? ""} />
+                <span className="caption">
+                  {firstWeek && missions.length
+                    ? `Week 1: ${shortDay(firstWeek)} · Comic Con (week ${missions.length}): ${shortDay(weekDate(startsOn, klass.meets_day, missions.length))}.`
+                    : "Week 1 is the first meeting day from this date."}
+                </span>
+              </div>
+              <div className="actions">
+                <button className="btn" type="submit">
+                  Save schedule
+                </button>
+              </div>
+            </form>
+          )}
+
           {admin && (
             <form action={setClubManager} className="card card-pad stack" aria-labelledby="manager-title">
               <input type="hidden" name="class_id" value={klass.id} />
@@ -248,7 +304,7 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
                   classId={klass.id}
                   sessions={sessions.filter((s) => s.week === mission.week)}
                   isNext={mission.week === nextWeek}
-                  planned={shortDay(weekDate(termStart, klass.meets_day, mission.week))}
+                  planned={shortDay(weekDate(startsOn, klass.meets_day, mission.week))}
                 />
               ))}
             </ol>

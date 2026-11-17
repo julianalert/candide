@@ -26,6 +26,7 @@ export async function createClub(formData: FormData) {
   const termId = String(formData.get("term_id") ?? "");
   const meetsDay = String(formData.get("meets_day") ?? "");
   const meetsTime = String(formData.get("meets_time") ?? "");
+  const startsOn = String(formData.get("starts_on") ?? "");
   const back = (error: string) => redirect(`/teacher/school?club_error=${encodeURIComponent(error)}#new-club`);
   if (!name) back("Give the club a name.");
   if (!isTrack(track)) back("Pick an age track.");
@@ -45,6 +46,7 @@ export async function createClub(formData: FormData) {
       term_id: termId,
       meets_day: isDay(meetsDay) ? meetsDay : null,
       meets_time: isTime(meetsTime) ? meetsTime : null,
+      starts_on: isIsoDate(startsOn) ? startsOn : null,
       code: newClassCode(),
     });
     if (!error) {
@@ -55,6 +57,26 @@ export async function createClub(formData: FormData) {
     if (error.code !== "23505") throw error;
   }
   throw new Error("Could not generate a unique club code");
+}
+
+/** The manager or an admin sets when the club meets and the date its first week starts. */
+export async function updateClubSchedule(formData: FormData) {
+  const { supabase } = await requireTeacher();
+  const classId = String(formData.get("class_id") ?? "");
+  const meetsDay = String(formData.get("meets_day") ?? "");
+  const meetsTime = String(formData.get("meets_time") ?? "");
+  const startsOn = String(formData.get("starts_on") ?? "");
+  // RLS lets only the club's manager or a school admin change it.
+  const { data, error } = await supabase
+    .from("classes")
+    .update({ meets_day: isDay(meetsDay) ? meetsDay : null, meets_time: isTime(meetsTime) ? meetsTime : null, starts_on: isIsoDate(startsOn) ? startsOn : null })
+    .eq("id", classId)
+    .select("id");
+  if (error) throw error;
+  if (!data?.length) redirect(`/teacher/class/${classId}?schedule=denied`);
+  revalidatePath(`/teacher/class/${classId}`);
+  revalidatePath("/teacher/school");
+  redirect(`/teacher/class/${classId}?schedule=saved`);
 }
 
 /** Admins: hand a club to another manager (or take it over). */
@@ -93,7 +115,6 @@ export async function saveSchoolSetup(formData: FormData) {
   const schoolName = String(formData.get("school_name") ?? "").trim().slice(0, 120);
   const city = String(formData.get("city") ?? "").trim().slice(0, 80);
   const country = String(formData.get("country") ?? "").trim().toUpperCase().slice(0, 2);
-  const termStart = String(formData.get("term_start") ?? "");
   const displayName = String(formData.get("display_name") ?? "").trim().slice(0, 60);
   const jobTitle = String(formData.get("job_title") ?? "").trim().slice(0, 80);
   const editing = formData.get("editing") === "1";
@@ -102,7 +123,7 @@ export async function saveSchoolSetup(formData: FormData) {
   // Only these fields: the school's image cap and the rest stay Candide's to set.
   const { error: schoolError } = await createServiceSupabase()
     .from("schools")
-    .update({ name: schoolName, city: city || null, country: /^[A-Z]{2}$/.test(country) ? country : null, term_start: isIsoDate(termStart) ? termStart : null })
+    .update({ name: schoolName, city: city || null, country: /^[A-Z]{2}$/.test(country) ? country : null })
     .eq("id", profile.school_id);
   if (schoolError) throw schoolError;
 

@@ -8,7 +8,7 @@ import { parentClubDescription } from "@/lib/club-copy";
 import { formatDateTime, weekLabel } from "@/lib/format";
 import { pendingInvites } from "@/lib/invites";
 import { TRACK_LABEL, isTrack, type Term } from "@/lib/missions";
-import { DAYS, longDay, meetsLabel, shortDay, weekDate } from "@/lib/schedule";
+import { DAYS, meetsLabel, shortDay, weekDate } from "@/lib/schedule";
 import { requireAdmin } from "@/lib/teacher";
 import type { ClassRow, Profile, School, TermRow } from "@/lib/types";
 
@@ -77,18 +77,16 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
   // ---------- Setup checklist ----------
   const pendingManagers = [...new Set(clubs.map((c) => c.teacher_id).filter((id) => pending.has(id)))];
   const steps = [
-    // Done as soon as the welcome screen is saved; the term start is optional and can come later.
+    // Done as soon as the welcome screen is saved.
     {
       done: Boolean(profile.onboarded_at),
       title: "Confirm your school",
-      detail: school?.term_start
-        ? `Term starts ${longDay(new Date(`${school.term_start}T00:00:00Z`))}.`
-        : "No term start yet: add it from School details when you know it, and each week gets a date.",
+      detail: "Your school’s name and city, and your role.",
       href: "/teacher/welcome?edit=1",
       cta: "Edit details",
     },
     { done: clubs.length > 0, title: "Create your club groups", detail: "One per group of children, each with an age track and a manager who runs it.", href: "#new-club", cta: "Create a club" },
-    { done: clubs.length > 0 && pendingManagers.length === 0, title: "Managers accept their invites", detail: pendingManagers.length ? `Waiting for ${pendingManagers.map(nameOf).join(", ")}.` : "Everyone who runs a club has joined.", href: "#people", cta: "See teachers" },
+    { done: clubs.length > 0 && pendingManagers.length === 0, title: "Managers accept their invites", detail: pendingManagers.length ? `Waiting for ${pendingManagers.map(nameOf).join(", ")}.` : clubs.length ? "Everyone who runs a club has joined." : "Teachers you invite to run a club show here until they accept.", href: "#people", cta: "See teachers" },
     { done: clubs.length > 0 && clubs.every((c) => (kidsPerClub.get(c.id) ?? 0) > 0), title: "Fill each club list", detail: "The manager types the children’s first names once, from the club page.", href: "#clubs", cta: "See clubs" },
     { done: clubs.length > 0 && clubs.every((c) => c.sessions.length > 0), title: "Start week 1", detail: "Share the club description with parents first, then each manager starts week 1 on the day.", href: "#parents", cta: "For parents" },
   ];
@@ -103,7 +101,6 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
           <p className="section-label">School{where ? ` · ${where}` : ""}</p>
           <h1>{school?.name ?? "Your school"}</h1>
           <p className="page-sub">
-            {school?.term_start ? `Term starts ${longDay(new Date(`${school.term_start}T00:00:00Z`))}. ` : ""}
             Create the club groups, choose who runs each one, and follow every club from here.
           </p>
         </div>
@@ -172,14 +169,21 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
           <ol className="list">
             {steps.map((step, index) => (
               <li key={step.title} className="item-row">
-                <span className={`chip${step.done ? " chip-live" : ""}`} aria-label={step.done ? "Done" : "To do"} style={{ minWidth: 28, textAlign: "center" }}>
-                  {step.done ? "✓" : index + 1}
+                <span className="chip" style={{ minWidth: 28, textAlign: "center" }}>
+                  {index + 1}
                 </span>
                 <div className="grow">
                   <b>{step.title}</b>
                   <span className="meta">{step.detail}</span>
                 </div>
-                {!step.done && (
+                {step.done ? (
+                  <span className="step-ready">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M5 12.5l4.5 4.5L19 7.5" />
+                    </svg>
+                    Ready
+                  </span>
+                ) : (
                   <a className="btn" href={step.href}>
                     {step.cta}
                   </a>
@@ -209,7 +213,7 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
                 const live = club.sessions.some((s) => !sessionIsOver(s));
                 let next: number | null = null;
                 for (let w = 1; w <= weeks; w++) if (!run.has(w)) { next = w; break; }
-                const nextDate = next ? weekDate(school?.term_start, club.meets_day, next) : null;
+                const nextDate = next ? weekDate(club.starts_on, club.meets_day, next) : null;
                 const meets = meetsLabel(club.meets_day, club.meets_time);
                 const kids = kidsPerClub.get(club.id) ?? 0;
                 const manager = club.teacher_id === userId ? "You" : nameOf(club.teacher_id);
@@ -300,6 +304,13 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
               <input className="input" id="meets_time" name="meets_time" type="time" step={300} />
             </div>
           </div>
+          <div className="field" style={{ maxWidth: 320 }}>
+            <label className="label" htmlFor="starts_on">
+              First week starts
+            </label>
+            <input className="input" id="starts_on" name="starts_on" type="date" />
+            <span className="caption">Optional. Week 1 is the first meeting day from this date; each week and Comic Con get a date.</span>
+          </div>
           <ManagerPicker colleagues={colleagues} />
           <div className="actions">
             <button className="btn btn-primary" type="submit" disabled={terms.length === 0}>
@@ -335,7 +346,7 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
                         managerName: club.teacher_id ? peopleById.get(club.teacher_id)?.display_name ?? null : null,
                         meetsDay: club.meets_day,
                         meetsTime: club.meets_time,
-                        termStart: school?.term_start ?? null,
+                        startsOn: club.starts_on,
                       })}
                       label="Copy description"
                     />

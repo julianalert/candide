@@ -31,12 +31,12 @@ export function meetsLabel(day: string | null | undefined, time: string | null |
 }
 
 /**
- * The date of a week of the term: the club's first meeting day on or after the term
- * start, then a week later each week. Without a meeting day, week 1 is the term start.
+ * The date of a week of the term: the club's first meeting day on or after its start
+ * date, then a week later each week. Without a meeting day, week 1 is the start date.
  */
-export function weekDate(termStart: string | null | undefined, day: string | null | undefined, week: number): Date | null {
-  if (!termStart || !isIsoDate(termStart) || week < 1) return null;
-  const start = parseIsoDate(termStart)!;
+export function weekDate(startsOn: string | null | undefined, day: string | null | undefined, week: number): Date | null {
+  if (!startsOn || !isIsoDate(startsOn) || week < 1) return null;
+  const start = parseIsoDate(startsOn)!;
   let offset = 0;
   if (isDay(day)) {
     const target = (DAYS.indexOf(day) + 1) % 7; // JS: Sunday = 0
