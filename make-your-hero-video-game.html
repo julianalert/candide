@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Adventure 3: Make Your Hero’s Video Game — Candide</title>
+<meta name="description" content="Adventure 3 of Candide, coming soon: twelve weekly one-hour missions in which every child aged 8 to 11 builds a video game starring their hero, by chatting with an AI, and shares it at a Game Arcade Day.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Adventure 3: Make Your Hero’s Video Game — Candide">
+<meta property="og:description" content="Twelve weekly AI missions for ages 8 to 11. Every child builds a game starring their hero by chatting with an AI, and parents play it at a Game Arcade Day.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="brand">
+    <a class="identity" href="/">
+      <img class="wordmark" src="assets/logo.svg" alt="Candide" width="107" height="22">
+    </a>
+  </div>
+  <nav class="tabs" aria-label="Main">
+    <a class="tab" href="/">Overview</a>
+    <div class="nav-menu">
+      <button class="tab tab-trigger is-current" type="button" aria-expanded="false" aria-controls="terms-menu">Adventures <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="menu" id="terms-menu" hidden>
+        <a class="menu-item" href="/create-your-comic"><span class="menu-num">01</span><span class="menu-text"><b>Create Your Comic</b><span>Invent a hero, publish a comic</span></span><span class="chip chip-petrol">Available</span></a>
+        <a class="menu-item" href="/bring-your-hero-to-life"><span class="menu-num">02</span><span class="menu-text"><b>Bring Your Hero to Life</b><span>Direct an animated film</span></span><span class="chip">Coming soon</span></a>
+        <a class="menu-item" href="/make-your-hero-video-game" aria-current="page"><span class="menu-num">03</span><span class="menu-text"><b>Make Your Hero’s Video Game</b><span>Build a game by chatting with AI</span></span><span class="chip">Coming soon</span></a>
+      </div>
+    </div>
+    <a class="tab" href="/schools">Designed for Schools</a>
+  </nav>
+  <div class="topbar-actions">
+    <a class="btn btn-primary" href="/demo"><span>Book <span class="long">a </span>demo</span></a>
+  </div>
+</header>
+
+<main id="main" class="page">
+
+  <!-- The adventure, shown by what children make -->
+  <section class="section" aria-labelledby="page-title">
+    <div class="hero">
+      <div class="label-row">
+        <span class="context">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>
+          Adventure 3 · Make Your Hero’s Video Game
+        </span>
+        <span class="chip">Coming soon</span>
+      </div>
+      <h1 id="page-title">Twelve weeks. Every child builds their own video game.</h1>
+      <p class="hero-sub">Every child builds a simple game starring their hero, just by chatting with an AI. The child is the game designer; AI writes the code; the game runs right next to the chat, so they test every change instantly.</p>
+      <div class="actions">
+        <a class="btn" href="#weeks">See the twelve weeks</a>
+        <a class="btn btn-primary" href="/demo">Book a demo</a>
+      </div>
+    </div>
+
+    <ol class="missions">
+      <li class="card mission">
+        <div class="mission-art frame" role="img" aria-label="Week 1 on the class screen: player, goal, obstacles, rules, score">
+          <div class="mini screen" aria-hidden="true">
+            <span class="ui-label">Week 1 · What is a game?</span>
+            <span class="screen-q">Player, goal, obstacles, rules, score.</span>
+            <span class="ui-chip">Game design card</span>
+          </div>
+        </div>
+        <div class="mission-body"><span class="mission-num">Weeks 1–3</span><h3 class="mission-title">Design the game</h3><p class="mission-idea">Find what makes a game, then build version 0 in one message.</p></div>
+      </li>
+      <li class="card mission">
+        <div class="mission-art frame" role="img" aria-label="The game starring the hero, with the child's message: when I press space, Rafi jumps">
+          <img src="assets/creations/game-play.jpg" alt="" width="1536" height="1024" loading="lazy" style="object-position:30% 50%">
+          <div class="mini game-ui" aria-hidden="true">
+            <span class="film-tag">Week 4 · Controls and rules</span>
+            <span class="game-msg">When I press space, Rafi jumps.</span>
+          </div>
+        </div>
+        <div class="mission-body"><span class="mission-num">Weeks 4–6</span><h3 class="mission-title">Make it work</h3><p class="mission-idea">Controls, score and lives, then the villain as the boss.</p></div>
+      </li>
+      <li class="card mission">
+        <div class="mission-art frame" role="img" aria-label="A bug report card: what I did, what happened, what should happen">
+          <div class="mini art-panel" aria-hidden="true">
+            <span class="ui-label">Week 7 · Bug hunt</span>
+            <div class="says">
+              <div class="say"><b>What I did</b>Pressed space twice in the air</div>
+              <div class="say"><b>What happened</b>Rafi flew off the screen</div>
+              <div class="say"><b>What should happen</b>Jump again only after landing</div>
+            </div>
+          </div>
+        </div>
+        <div class="mission-body"><span class="mission-num">Weeks 7–9</span><h3 class="mission-title">Make it good</h3><p class="mission-idea">Hunt the bugs, add levels, then sound and sparkle.</p></div>
+      </li>
+      <li class="card mission">
+        <div class="mission-art frame" role="img" aria-label="A playtest feedback card: fun four stars out of five, level 2 a bit too hard, one bug found">
+          <div class="mini art-panel" aria-hidden="true">
+            <span class="ui-label">Week 10 · Playtest day</span>
+            <ul class="queue">
+              <li><span>Fun</span><span class="stars">★★★★☆</span></li>
+              <li><span>Too hard?</span><span class="ui-chip">Level 2, a bit</span></li>
+              <li><span>Bugs found</span><span class="ui-chip">1</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mission-body"><span class="mission-num">Weeks 10–11</span><h3 class="mission-title">Make it ready</h3><p class="mission-idea">Real players test it, then the cover, the credits and a peek at the code.</p></div>
+      </li>
+      <li class="card mission">
+        <div class="mission-art"><img src="assets/creations/adv3-arcade.jpg" alt="Game Arcade Day: parents and children playing the games on laptops around the classroom" width="1536" height="1024" loading="lazy"></div>
+        <div class="mission-body"><span class="mission-num">Week 12</span><h3 class="mission-title">Game Arcade Day</h3><p class="mission-idea">Parents play every game, and kids defend their high score.</p></div>
+      </li>
+    </ol>
+
+    <div class="grid grid-two" style="align-items:start">
+      <div class="card">
+        <div class="card-head"><h2 class="card-title">The adventure at a glance</h2></div>
+        <dl class="list">
+          <div class="kv-row"><dt>Topic</dt><dd>Game design and building with AI</dd></div>
+          <div class="kv-row"><dt>Goal</dt><dd>A playable game per child, played by parents at Arcade Day</dd></div>
+          <div class="kv-row"><dt>Length</dt><dd>12 weeks · 1 hour a week</dd></div>
+          <div class="kv-row"><dt>Ages</dt><dd>8–9 and 10–11 tracks</dd></div>
+          <div class="kv-row"><dt>Starts from</dt><dd>The hero, villain and sounds from Adventures 1 and 2</dd></div>
+          <div class="kv-row"><dt>How it’s built</dt><dd>Children chat with AI; the game runs next to the chat</dd></div>
+          <div class="kv-row"><dt>Coding needed?</dt><dd>None. They learn how games work along the way</dd></div>
+        </dl>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2 class="card-title">What every child leaves with</h2></div>
+        <ul class="list">
+          <li class="item-row"><div><b>A playable game</b><span class="meta">A title screen, two or three levels and a boss, starring their hero.</span></div></li>
+          <li class="item-row"><div><b>A private game link</b><span class="meta">With a QR code, shared with family once the teacher approves it.</span></div></li>
+          <li class="item-row"><div><b>A year portfolio</b><span class="meta">The printed comic, a QR code to the film and a QR code to the game.</span></div></li>
+          <li class="item-row"><div><b>A certificate</b><span class="meta">“Game Creator”, with their game’s title.</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Week by week -->
+  <section class="section" id="weeks">
+    <div class="section-head">
+      <p class="section-label">Week by week</p>
+      <h2 class="section-title">Five phases, one mission a week.</h2>
+      <p class="section-intro">Design it, make it work, make it good, make it ready, Arcade Day. Every week ends with a playable version saved as a checkpoint.</p>
+    </div>
+
+    <ol class="card list">
+      <li class="item-row"><span class="mono">01</span><div class="grow"><b>What is a game?</b><span class="meta">Play three short games and find their parts: player, goal, obstacles, rules, score, win and lose. Unplugged: “program” a classmate robot with exact instructions. Fill in the game design card.</span><span class="meta">Skill · computers follow exact rules, word for word</span></div><span class="chip">Game design card</span></li>
+      <li class="item-row"><span class="mono">02</span><div class="grow"><b>Your first game in one message</b><span class="meta">Describe the game in one message and watch it appear in the play box. Then change one thing at a time: speed, colours, size.</span><span class="meta">Skill · building through conversation, one change per message</span></div><span class="chip">Game, version 0</span></li>
+      <li class="item-row"><span class="mono">03</span><div class="grow"><b>Bring your hero in</b><span class="meta">Turn the character sheet into a game sprite and the comic’s places into backgrounds, then put them in the game.</span><span class="meta">Skill · pictures are separate from the rules that move them</span></div><span class="chip">Game starring the hero</span></li>
+      <li class="item-row"><span class="mono">04</span><div class="grow"><b>Controls and rules</b><span class="meta">On paper first, write the rules as “when… then…”: when I press space, the hero jumps. Then ask the AI for each rule and test it.</span><span class="meta">Skill · events and conditions</span></div><span class="chip">Hero moves, rules work</span></li>
+      <li class="item-row"><span class="mono">05</span><div class="grow"><b>Score, lives and timer</b><span class="meta">Add a score, lives or a timer, a start screen, and win and game-over screens.</span><span class="meta">Skill · variables: things the game remembers and changes</span></div><span class="chip">Start, play, end</span></li>
+      <li class="item-row"><span class="mono">06</span><div class="grow"><b>Enter the villain</b><span class="meta">Bring in the villain from Adventure 1 as the boss, plus obstacles. Describe exactly how it moves: “left and right, faster every 10 seconds”.</span><span class="meta">Skill · describing behaviour precisely</span></div><span class="chip">A real challenge</span></li>
+      <li class="item-row"><span class="mono">07</span><div class="grow"><b>Bug hunt</b><span class="meta">Play to break the game, then report each bug like a detective: what I did, what happened, what should happen. Go back to a checkpoint when a fix breaks something else.</span><span class="meta">Skill · debugging: AI’s code has mistakes too</span></div><span class="chip">Bug-free version</span></li>
+      <li class="item-row"><span class="mono">08</span><div class="grow"><b>Levels and difficulty</b><span class="meta">Add level 2, and level 3 for ages 10–11. A partner plays: how many tries to win? Too easy or too hard? Adjust.</span><span class="meta">Skill · game balance, and testing with numbers</span></div><span class="chip">2–3 levels</span></li>
+      <li class="item-row"><span class="mono">09</span><div class="grow"><b>Sound and sparkle</b><span class="meta">Add sound effects from Adventure 2, sparkles when collecting, a shake when hit, and a title screen with the game’s name.</span><span class="meta">Skill · small effects make a game feel good</span></div><span class="chip">Polished game</span></li>
+      <li class="item-row"><span class="mono">10</span><div class="grow"><b>Playtest day</b><span class="meta">Classmates play each game and fill in a feedback card: how fun, too hard, bugs found. Then fix the top two problems.</span><span class="meta">Skill · real players’ feedback beats your own opinion</span></div><span class="chip">Version 1.0</span></li>
+      <li class="item-row"><span class="mono">11</span><div class="grow"><b>Peek at the code</b><span class="meta">Open the code view, find the score or speed number and change it by hand. Make the cover, the instructions and the credits: “I designed…, AI wrote the code”.</span><span class="meta">Skill · reading real code, and crediting AI honestly</span></div><span class="chip">Final game</span></li>
+      <li class="item-row"><span class="mono">12</span><div class="grow"><b>Game Arcade Day</b><span class="meta">Every game on a screen, parents play, high-score boards, awards, and the year portfolio.</span><span class="meta">Skill · presenting your game and how AI helped</span></div><span class="chip chip-petrol">Published game</span></li>
+    </ol>
+  </section>
+
+  <!-- How a session runs -->
+  <section class="section" id="how">
+    <div class="section-head">
+      <p class="section-label">How a session runs</p>
+      <h2 class="section-title">One hour a week, same rhythm every time. The teacher follows the script; Candide runs the AI.</h2>
+      <p class="section-intro">Children describe a change, the AI updates the game, they press Play and test. The last ten minutes become a playtest.</p>
+    </div>
+
+    <div class="timeline" aria-hidden="true">
+      <div style="flex:5"><i></i><span><b>Warm-up</b> <span class="short">· 5 min</span></span></div>
+      <div style="flex:10"><i></i><span><b>Mini-lesson</b> · 10 min</span></div>
+      <div style="flex:35" class="is-key"><i></i><span><b>Studio time</b> · 35 min hands-on</span></div>
+      <div style="flex:10"><i></i><span><b>Playtest</b> · 10 min</span></div>
+    </div>
+
+    <ol class="phases">
+      <li class="card phase">
+        <div class="phase-art frame" role="img" aria-label="The warm-up on the class screen: spot the rule. What makes you lose?">
+          <div class="mini screen" aria-hidden="true">
+            <span class="ui-label">Warm-up</span>
+            <span class="screen-q">Spot the rule: what makes you lose?</span>
+          </div>
+        </div>
+        <div class="phase-body">
+          <span class="mono">01 · Warm-up · 5 min</span>
+          <h3 class="card-title">Kids join and focus</h3>
+          <p>A one-minute mini-game on the class screen. Children spot one game idea: a rule, a variable or a bug.</p>
+        </div>
+      </li>
+      <li class="card phase">
+        <div class="phase-art frame" role="img" aria-label="The class screen: week 4, the group code K7QX4M and 14 children joined">
+          <div class="mini screen" aria-hidden="true">
+            <span class="ui-label">Week 4 · Controls and rules</span>
+            <span class="screen-url">Go to <b>app.candideai.com/join</b></span>
+            <span class="screen-code">K7QX4M</span>
+            <span class="ui-chip live">14 joined</span>
+          </div>
+        </div>
+        <div class="phase-body">
+          <span class="mono">02 · Mini-lesson · 10 min</span>
+          <h3 class="card-title">The teacher builds one change live</h3>
+          <p>The week’s short video, then the teacher makes one change in the chat on the class screen to show the mission.</p>
+        </div>
+      </li>
+      <li class="card phase">
+        <div class="phase-art"><img src="assets/creations/adv3-card.jpg" alt="A child at a laptop: the chat on the left, their game starring the hero on the right" width="1536" height="1024" loading="lazy"></div>
+        <div class="phase-body">
+          <span class="mono">03 · Studio time · 35 min</span>
+          <h3 class="card-title">Every child builds</h3>
+          <p>They describe one change, the AI updates the game, they press Play and test. Then the next change.</p>
+        </div>
+      </li>
+      <li class="card phase">
+        <div class="phase-art frame" role="img" aria-label="The playtest prompt on the class screen: swap seats, play, give one tip">
+          <div class="mini screen" aria-hidden="true">
+            <span class="ui-label">Playtest</span>
+            <span class="screen-q">Swap seats. Play. Give one tip.</span>
+            <span class="ui-chip">Save a checkpoint</span>
+          </div>
+        </div>
+        <div class="phase-body">
+          <span class="mono">04 · Playtest · 10 min</span>
+          <h3 class="card-title">Swap seats and play</h3>
+          <p>Each child plays a neighbour’s game and gives one tip. Everyone saves a checkpoint before leaving.</p>
+        </div>
+      </li>
+    </ol>
+
+    <ul class="card facts" aria-label="The four builder rules for this adventure">
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg></span>
+        <div><b>Rule 1 · One change per message</b><span>Small steps are easier for AI to get right, and for you to test.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z"/></svg></span>
+        <div><b>Rule 2 · Play after every change</b><span>Never stack changes without testing them.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></span>
+        <div><b>Rule 3 · Save when it works</b><span>Make a checkpoint before trying something big.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></span>
+        <div><b>Rule 4 · Report bugs like a detective</b><span>What you did, what happened, what should have happened.</span></div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- What children learn: the first try beside the better one -->
+  <section class="section" id="learn">
+    <div class="section-head">
+      <p class="section-label">What children learn</p>
+      <h2 class="section-title">Eight skills, learned by building a game of their own.</h2>
+      <p class="section-intro">Week 7 starts with this: the same bug, reported two ways. Children see for themselves that the AI can only fix what they describe clearly.</p>
+    </div>
+
+    <div class="compare">
+      <figure class="card attempt attempt-vague">
+        <div class="attempt-art frame" role="img" aria-label="The game with a bug: the hero has flown off the top of the screen">
+          <img src="assets/creations/game-bug.jpg" alt="" width="1536" height="1024" loading="lazy" style="object-position:30% 50%">
+          <div class="mini film-ui" aria-hidden="true"><span class="film-tag is-bad">Bug · Rafi flies away</span></div>
+        </div>
+        <figcaption class="attempt-body">
+          <span class="section-label">First try</span>
+          <p class="attempt-prompt">the game is broken, fix it</p>
+          <p class="meta">The AI had to guess what was wrong, so it changed the wrong thing. Now the stars don’t count either.</p>
+          <p class="attempt-verdict">Two bugs instead of one.</p>
+        </figcaption>
+      </figure>
+      <span class="compare-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <figure class="card attempt attempt-good">
+        <div class="attempt-art frame" role="img" aria-label="The same game, fixed: the hero jumps between the platforms again">
+          <img src="assets/creations/game-play.jpg" alt="" width="1536" height="1024" loading="lazy" style="object-position:30% 50%">
+          <div class="mini film-ui" aria-hidden="true"><span class="film-tag">Fixed · Checkpoint 7</span></div>
+        </div>
+        <figcaption class="attempt-body">
+          <span class="section-label">Like a detective</span>
+          <p class="attempt-prompt">When I press space twice in the air, Rafi keeps going up and flies off the screen. He should only jump again after he lands.</p>
+          <p class="meta">What I did, what happened, what should happen. Every detail the AI needed.</p>
+          <p class="attempt-verdict">Fixed in one message.</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <ul class="card skills">
+      <li class="skill"><b>Giving exact instructions</b><span>Computers follow them word for word. Week 1.</span></li>
+      <li class="skill"><b>Building through conversation</b><span>One change per message. Weeks 2 and 3.</span></li>
+      <li class="skill"><b>Events and conditions</b><span>“When I press space, the hero jumps.” Week 4.</span></li>
+      <li class="skill"><b>Variables</b><span>Score, lives and a timer the game remembers. Week 5.</span></li>
+      <li class="skill"><b>Describing behaviour precisely</b><span>Exactly how the villain moves. Week 6.</span></li>
+      <li class="skill"><b>Debugging</b><span>Clear bug reports, and going back to a checkpoint. Week 7.</span></li>
+      <li class="skill"><b>Testing with real players</b><span>Too easy or too hard? Count the tries. Weeks 8 and 10.</span></li>
+      <li class="skill"><b>Reading code, crediting AI</b><span>Change a number by hand; say what AI wrote. Week 11.</span></li>
+    </ul>
+  </section>
+
+  <!-- Age tracks -->
+  <section class="section" id="tracks">
+    <div class="section-head">
+      <p class="section-label">Two age tracks</p>
+      <h2 class="section-title">Same twelve missions. The older track gets more freedom.</h2>
+    </div>
+
+    <div class="grid grid-two" style="align-items:start">
+      <div class="card">
+        <div class="card-head"><h3 class="card-title">Ages 8–9</h3></div>
+        <dl class="list">
+          <div class="kv-row"><dt>Game</dt><dd>One of 3 templates: catch, maze or runner</dd></div>
+          <div class="kv-row"><dt>Starting point</dt><dd>A template game, playable in week 2</dd></div>
+          <div class="kv-row"><dt>Chatting</dt><dd>Suggested prompt buttons and voice input</dd></div>
+          <div class="kv-row"><dt>Levels</dt><dd>2 levels</dd></div>
+          <div class="kv-row"><dt>Extras</dt><dd>Score and lives</dd></div>
+          <div class="kv-row"><dt>Code</dt><dd>Code view hidden</dd></div>
+          <div class="kv-row"><dt>Bug reports</dt><dd>A picture card: what I did, what happened</dd></div>
+        </dl>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3 class="card-title">Ages 10–11</h3></div>
+        <dl class="list">
+          <div class="kv-row"><dt>Game</dt><dd>Free choice, including a simple platformer</dd></div>
+          <div class="kv-row"><dt>Starting point</dt><dd>Built from their own first message</dd></div>
+          <div class="kv-row"><dt>Chatting</dt><dd>Typed messages, buttons optional</dd></div>
+          <div class="kv-row"><dt>Levels</dt><dd>3 levels and a boss fight</dd></div>
+          <div class="kv-row"><dt>Extras</dt><dd>Score, lives, timer and power-ups</dd></div>
+          <div class="kv-row"><dt>Code</dt><dd>Find and change 3 numbers by hand in week 11</dd></div>
+          <div class="kv-row"><dt>Bug reports</dt><dd>Written reports, then they test the fix</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safety -->
+  <section class="section" id="safety">
+    <div class="section-head">
+      <p class="section-label">Safety</p>
+      <h2 class="section-title">A game builder with the guardrails built in.</h2>
+      <p class="section-intro">Every rule from Adventures 1 and 2 still applies. Games and AI-written code add these.</p>
+    </div>
+
+    <ul class="card facts">
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span>
+        <div><b>Single-player only</b><span>No multiplayer, no chat between players, no accounts inside games.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+        <div><b>A sealed play box</b><span>Games run with no internet access: no links, no outside content, no data collection.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></span>
+        <div><b>Cartoon conflict only</b><span>Enemies get bonked and vanish in a sparkle. No blood, no weapons, no “kill”.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9.5 10.5h4a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3h4"/></svg></span>
+        <div><b>No gambling, no shops</b><span>No loot boxes, spinning wheels, betting or fake shops.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg></span>
+        <div><b>No copies of famous games</b><span>Names of well-known games and characters are blocked in the chat.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg></span>
+        <div><b>A builder that stays on topic</b><span>It only talks about building the game, and the teacher sees every chat.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></span>
+        <div><b>Private sharing</b><span>Game links are shared only after the teacher approves, never on public game sites.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <div><b>Games with an ending</b><span>Short games, with no endless loops built to keep children playing.</span></div>
+      </li>
+    </ul>
+
+    <a class="link-arrow" href="/schools#safety">How safety works in every adventure →</a>
+  </section>
+
+  <!-- The showcase and the year -->
+  <section class="section" id="showcase">
+    <div class="section-head">
+      <p class="section-label">Week 12 · Game Arcade Day</p>
+      <h2 class="section-title">Parents don’t just watch. They play.</h2>
+      <p class="section-intro">The classroom becomes an arcade and every child’s game runs on its own station. Candide supplies the class arcade page, cover cards, stamp cards, awards, certificates, the portfolio cover and the invitation in English and Arabic.</p>
+    </div>
+
+    <ul class="card facts">
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
+        <div><b>Arcade stations</b><span>Each game on a laptop or tablet, with its printed cover card.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20v-1a5 5 0 0 1 5-5h3a5 5 0 0 1 5 5v1"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14a5 5 0 0 1 3 4.6V20"/></svg></span>
+        <div><b>Parents play</b><span>An arcade card, at least five games to play, and a stamp at each one.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg></span>
+        <div><b>High-score boards</b><span>Each game shows the day’s top scores, and kids defend their record.</span></div>
+      </li>
+      <li class="fact">
+        <span class="fact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M9 14.5 8 22l4-2 4 2-1-7.5"/></svg></span>
+        <div><b>Awards for every child</b><span>Most Fun Game, Hardest Boss, Best Hero Design, Bug Squasher, and more.</span></div>
+      </li>
+    </ul>
+
+    <div class="card">
+      <div class="card-head"><h3 class="card-title">The hero comes back all year</h3><span class="meta">Adventure 1 available now</span></div>
+      <ol class="list">
+        <li class="item-row"><span class="mono">01</span><div class="grow"><b><a href="/create-your-comic">Create Your Comic</a></b><span class="meta">Invent the hero and publish their story.</span></div><span class="chip chip-petrol">Available now</span></li>
+        <li class="item-row"><span class="mono">02</span><div class="grow"><b><a href="/bring-your-hero-to-life">Bring Your Hero to Life</a></b><span class="meta">Turn the comic into an animated short film.</span></div><span class="chip">Coming soon</span></li>
+        <li class="item-row"><span class="mono">03</span><div class="grow"><b>Make Your Hero’s Video Game</b><span class="meta">Build a game starring the hero, by chatting with AI.</span></div><span class="chip">Coming soon</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Closing call to action -->
+  <div class="card cta">
+    <div class="cta-copy">
+      <p class="section-label">Adventure 3 · In preparation</p>
+      <h2 class="cta-title">Start with Adventure 1 next term.</h2>
+      <p>Adventure 3 closes the year with the hero children invented in Adventure 1. Book a 20-minute demo and we’ll show you one mission end to end and how the year fits together.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/demo">Book a demo</a>
+        <a class="btn" href="/create-your-comic">See Adventure 1</a>
+      </div>
+    </div>
+    <div class="cta-wall" aria-hidden="true">
+      <img src="assets/creations/hero-bridge.jpg" alt="" width="720" height="720" loading="lazy">
+      <img src="assets/creations/leaf-dragon.jpg" alt="" width="720" height="720" loading="lazy">
+      <img src="assets/creations/moon-cat.jpg" alt="" width="720" height="720" loading="lazy">
+      <img src="assets/creations/zib.jpg" alt="" width="720" height="720" loading="lazy">
+      <img src="assets/creations/glowfrog.jpg" alt="" width="720" height="720" loading="lazy">
+      <img src="assets/creations/planet.jpg" alt="" width="720" height="720" loading="lazy">
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <span>© 2026 Candide AI · Where kids learn AI the fun way</span>
+  <nav aria-label="Footer">
+    <a href="/create-your-comic">Adventure 1</a>
+    <a href="/bring-your-hero-to-life">Adventure 2</a>
+    <a href="/make-your-hero-video-game">Adventure 3</a>
+    <a href="/schools">Designed for Schools</a>
+    <a href="/demo">Book a demo</a>
+    <a href="https://app.candideai.com/teacher">Teacher sign in</a>
+  </nav>
+</footer>
+
+<script src="assets/site.js" defer></script>
+</body>
+</html>

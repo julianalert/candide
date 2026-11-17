@@ -6,6 +6,7 @@
   "redirects": [
     { "source": "/programme", "destination": "/create-your-comic", "permanent": true },
     { "source": "/missions", "destination": "/create-your-comic", "permanent": true },
+    { "source": "/turn-your-hero-into-a-toy", "destination": "/make-your-hero-video-game", "permanent": true },
     { "source": "/pilot", "destination": "/demo", "permanent": true },
     { "source": "/enrol", "destination": "/demo", "permanent": true }
   ]
