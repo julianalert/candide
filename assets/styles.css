@@ -271,6 +271,33 @@ a:hover { text-decoration: underline; }
 .hero .label-row { justify-content: center; }
 .hero .label-row .chip { padding: 4px 10px; border-radius: 999px; }
 
+/* Home hero built on the superhero picture: a dark panel in the picture's own
+   colours, the picture on the right, fading into the panel so the words sit on
+   a calm dark ground. */
+.hero.hero-image {
+  --hero-bg: #141824;
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  min-height: clamp(480px, 66vh, 600px); padding: 56px clamp(28px, 5vw, 72px);
+  border-radius: 24px; background: var(--hero-bg); color: #fff; text-align: left;
+}
+.hero-art {
+  position: absolute; z-index: -1; top: 0; right: 0;
+  width: auto; height: 100%; max-width: none; aspect-ratio: 3 / 2; object-fit: cover;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .15) 12%, rgba(0, 0, 0, .55) 26%, rgba(0, 0, 0, .9) 40%, #000 52%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .15) 12%, rgba(0, 0, 0, .55) 26%, rgba(0, 0, 0, .9) 40%, #000 52%);
+}
+.hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; max-width: 560px; }
+.hero-image h1 { max-width: 10em; color: #fff; }
+.hero-image h1 .accent { color: var(--petrol-light); }
+.hero-image .hero-sub { max-width: 30em; color: rgba(255, 255, 255, .78); text-wrap: pretty; }
+.hero-image .context { background: rgba(255, 255, 255, .12); color: #fff; }
+.hero-image .actions { justify-content: flex-start; }
+.hero-image .btn { border-color: rgba(255, 255, 255, .4); background: transparent; color: #fff; }
+.hero-image .btn:hover { background: rgba(255, 255, 255, .1); }
+.hero-image .btn-primary { border-color: #fff; background: #fff; color: var(--ink); }
+.hero-image .btn-primary:hover { border-color: var(--petrol-tint); background: var(--petrol-tint); }
+
 /* =====================================================================
    Product shots. Real screens rebuilt in HTML, sized in em and scaled
    with container units, so they stay sharp at any width.
@@ -553,7 +580,7 @@ a:hover { text-decoration: underline; }
 .track s { text-decoration: none; }
 .track.voice i { background: var(--petrol-light); }
 .track.sfx i { background: var(--surface-sunken); border: 1px solid var(--rule-control); }
-.track.clips i { background: url("creations/comic-fox.jpg") center / cover; }
+.track.clips i { background: url("creations/hero-bridge.jpg") 22% 40% / cover; }
 .playhead { position: absolute; top: .5em; bottom: .5em; left: 58%; width: 2px; border-radius: 2px; background: var(--bad); }
 
 /* The premiere poster. */
@@ -570,7 +597,7 @@ a:hover { text-decoration: underline; }
 /* A collection: the same hero in new colours, and a secret edition. */
 .collect { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5em; }
 .mission-art .collect img, .term-art .collect img {
-  width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: 30% 40%;
+  width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: 50% 30%;
   border: 1px solid var(--rule); border-radius: .5em;
 }
 .collect .secret {
@@ -588,7 +615,7 @@ a:hover { text-decoration: underline; }
 .toybox-top b { font-size: 1.35em; font-weight: 800; letter-spacing: .08em; }
 .toybox-top span { font-size: .62em; letter-spacing: .08em; text-transform: uppercase; opacity: .8; }
 .toybox-window { overflow: hidden; border: .2em solid rgba(255, 255, 255, .85); border-radius: .5em; background: #fff; }
-.mission-art .toybox-window img, .term-art .toybox-window img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: 28% 40%; }
+.mission-art .toybox-window img, .term-art .toybox-window img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: 50% 42%; }
 .toybox-foot { display: flex; justify-content: space-between; font-size: .6em; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; opacity: .85; }
 
 /* The render queue: children keep working while clips render. */
@@ -808,6 +835,24 @@ a:hover { text-decoration: underline; }
 .faq-item[open]:last-child summary { border-radius: 0; }
 .faq-item p { max-width: 760px; padding: 0 24px 20px; line-height: 1.6; color: var(--grey-700); text-wrap: pretty; }
 
+/* ---------- What people said on X ---------- */
+
+.tweets { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.tweet {
+  display: flex; flex-direction: column; gap: 14px; height: 100%; padding: 20px;
+  color: var(--ink); transition: border-color .15s ease, transform .15s ease;
+}
+.tweet:hover { border-color: var(--petrol-light); text-decoration: none; transform: translateY(-2px); }
+.tweet-head { display: flex; align-items: center; gap: 10px; }
+.tweet-avatar { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: var(--surface-sunken); }
+.tweet-who { display: flex; flex-direction: column; flex: 1 1 auto; min-width: 0; line-height: 1.3; }
+.tweet-who b { font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tweet-who span { font-size: 13px; color: var(--grey-500); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tweet-x { flex: 0 0 auto; width: 16px; height: 16px; fill: var(--grey-400); transition: fill .15s ease; }
+.tweet:hover .tweet-x { fill: var(--ink); }
+.tweet-text { flex: 1 1 auto; font-size: 17px; line-height: 1.45; text-wrap: pretty; }
+.tweet-date { font-size: 13px; color: var(--grey-500); }
+
 /* ---------- Closing call to action ---------- */
 
 .cta {
@@ -909,6 +954,13 @@ select.input {
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1180px) {
+  .tweets {
+    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(260px, 1fr);
+    overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin: 0 -24px; padding: 2px 24px 4px; scroll-padding: 0 24px;
+  }
+  .tweets::-webkit-scrollbar { display: none; }
+  .tweets > li { scroll-snap-align: start; }
   .missions { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .phases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .skills, .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -920,6 +972,15 @@ select.input {
 @media (max-width: 980px) {
   .hero { padding-top: 12px; }
   .hero h1 { font-size: clamp(34px, 7vw, 52px); }
+  /* The picture moves above the words and fades into the panel below it. */
+  .hero.hero-image { min-height: 0; justify-content: flex-start; padding: 0 0 36px; }
+  .hero-art {
+    position: relative; z-index: 0; width: 100%; height: auto; max-height: 440px; object-position: 50% 30%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent);
+  }
+  .hero-copy { position: relative; margin-top: -40px; padding: 0 clamp(20px, 5vw, 48px); }
+  .hero-image h1 { max-width: 12em; }
   .terms, .phases.phases-3 { grid-template-columns: minmax(0, 1fr); max-width: 560px; }
   .missions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .safety, .split-media { grid-template-columns: minmax(0, 1fr); }
@@ -928,6 +989,7 @@ select.input {
 }
 
 @media (max-width: 860px) {
+  .tweets { margin: 0 -16px; padding: 2px 16px 4px; scroll-padding: 0 16px; grid-auto-columns: minmax(250px, 78%); }
   [id] { scroll-margin-top: 16px; }
 
   .topbar { position: relative; padding: 0 16px; column-gap: 12px; }
