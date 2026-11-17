@@ -35,7 +35,7 @@ export function Board({ pins, messages, earlier, ended, onUnpin }: Props) {
         </span>
         {items.length === 0 ? (
           <p className="meta" style={{ fontSize: 15 }}>
-            Press <b>Pin</b> on a message or picture you like. Everything you pin stays with you all term, and goes into the club gallery.
+            Press <b>Pin</b> on a message or picture you like. Everything you pin stays with you all term, and goes into the group gallery.
           </p>
         ) : (
           <div className="board-list">

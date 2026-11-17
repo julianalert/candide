@@ -41,7 +41,7 @@ export default async function PreviewPage({ searchParams }: { searchParams: Prom
     const data: GalleryData = {
       session: { id: "s1", publicId: "ABCDEFGHJKLM", startedAt: now, endedAt: now },
       mission: { title: mission.title, week: mission.week, skill: mission.skill },
-      className: "Comic Club",
+      className: "Tuesday group",
       schoolName: "Pilot School",
       groups: [
         {

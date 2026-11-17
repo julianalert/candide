@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 export function TeacherTabs({ isAdmin }: { isAdmin: boolean }) {
   const pathname = usePathname();
   const schoolActive = pathname.startsWith("/teacher/school") || pathname.startsWith("/teacher/welcome");
-  const clubsActive = !schoolActive && (pathname.startsWith("/teacher/clubs") || pathname.startsWith("/teacher/class") || pathname.startsWith("/teacher/session"));
+  const clubsActive = !schoolActive && (pathname.startsWith("/teacher/groups") || pathname.startsWith("/teacher/class") || pathname.startsWith("/teacher/session"));
   return (
     <nav className="tabs" aria-label="Main">
       {isAdmin && (
@@ -15,8 +15,8 @@ export function TeacherTabs({ isAdmin }: { isAdmin: boolean }) {
           School
         </Link>
       )}
-      <Link className="tab" href="/teacher/clubs" aria-current={clubsActive ? "page" : undefined}>
-        My clubs
+      <Link className="tab" href="/teacher/groups" aria-current={clubsActive ? "page" : undefined}>
+        My groups
       </Link>
     </nav>
   );

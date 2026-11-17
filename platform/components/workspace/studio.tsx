@@ -155,7 +155,7 @@ export function Studio({ mission, displayName, messages, pinnedMessageIds, remai
             <span>
               This session has ended. Well done, {displayName}.{" "}
               <a href={galleryUrl} target="_blank" rel="noreferrer">
-                Your club gallery →
+                Your group gallery →
               </a>
             </span>
           </div>

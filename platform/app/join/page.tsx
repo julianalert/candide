@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { JoinForm } from "@/components/join-form";
 import { KID_COOKIE, verifyKidSession } from "@/lib/kid-session";
 
-export const metadata = { title: "Join your club" };
+export const metadata = { title: "Join your group" };
 export const dynamic = "force-dynamic";
 
 export default async function JoinPage() {
@@ -24,7 +24,7 @@ export default async function JoinPage() {
         <div className="card join-card">
           <div className="card-head">
             <h1 className="card-title" style={{ fontSize: 22 }}>
-              Join your club
+              Join your group
             </h1>
             <span className="meta">Your teacher has the code</span>
           </div>

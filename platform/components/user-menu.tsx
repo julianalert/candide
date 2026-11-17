@@ -84,8 +84,8 @@ export function UserMenu({ name, email, roleLabel, schoolName, isAdmin }: Props)
                 School
               </Link>
             )}
-            <Link role="menuitem" className="user-dropdown-item" href="/teacher/clubs" onClick={close}>
-              My clubs
+            <Link role="menuitem" className="user-dropdown-item" href="/teacher/groups" onClick={close}>
+              My groups
             </Link>
             {isAdmin && (
               <Link role="menuitem" className="user-dropdown-item" href="/teacher/welcome?edit=1" onClick={close}>

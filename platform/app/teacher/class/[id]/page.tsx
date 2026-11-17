@@ -24,7 +24,7 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
   const admin = isAdminProfile(profile);
   const isManager = klass.teacher_id === userId;
   // Teachers see the clubs they run; admins see every club in the school.
-  if (!admin && !isManager) redirect("/teacher/clubs");
+  if (!admin && !isManager) redirect("/teacher/groups");
 
   const [{ data: termRow }, { data: missionRows }, { data: sessionRows }, { data: kidRows }, { data: peopleRows }] = await Promise.all([
     supabase.from("terms").select("*").eq("id", klass.term_id).maybeSingle<TermRow>(),
@@ -60,7 +60,7 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
       <div className="page-head">
         <div className="page-intro">
           <p className="section-label">
-            {admin && !isManager ? <Link href="/teacher/school">School</Link> : <Link href="/teacher/clubs">My clubs</Link>} · {term ? `Term ${term.number} · ${term.title}` : "Term"} ·{" "}
+            {admin && !isManager ? <Link href="/teacher/school">School</Link> : <Link href="/teacher/groups">My groups</Link>} · {term ? `Term ${term.number} · ${term.title}` : "Term"} ·{" "}
             {TRACK_LABEL[track]}
           </p>
           <h1>{klass.name}</h1>
@@ -85,7 +85,7 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
 
       {search.manager === "changed" && (
         <div className="notice notice-good">
-          <span>Manager changed. The club now appears in their &ldquo;My clubs&rdquo;.</span>
+          <span>Teacher changed. The group now appears in their &ldquo;My groups&rdquo;.</span>
         </div>
       )}
       {search.schedule === "saved" && (
@@ -95,7 +95,7 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
       )}
       {search.schedule === "denied" && (
         <div className="notice notice-error">
-          <span>Only the club&rsquo;s manager or a school admin can change its schedule.</span>
+          <span>Only the group&rsquo;s teacher or a school admin can change its schedule.</span>
         </div>
       )}
       {search.manager_error && (
@@ -108,7 +108,7 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
         <section className="card" aria-labelledby="get-started">
           <div className="card-head">
             <h2 className="card-title" id="get-started">
-              Get your club started
+              Get your group started
             </h2>
             <span className="meta">About ten minutes, once</span>
           </div>
@@ -128,8 +128,8 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
             <li className="item-row">
               <span className="chip">2</span>
               <div className="grow">
-                <b>Add the children to the club list</b>
-                <span className="meta">First names only. Each week they type the club code and tap their name.</span>
+                <b>Add the children to the list</b>
+                <span className="meta">First names only. Each week they type the group code and tap their name.</span>
               </div>
               <a className="btn" href="#club-list">
                 Add names
@@ -152,7 +152,7 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
       <div className="grid grid-two" style={{ alignItems: "start" }}>
         <div className="stack">
           <div className="card card-pad stack" style={{ alignItems: "center", textAlign: "center", gap: 10 }}>
-            <span className="section-label">Club code</span>
+            <span className="section-label">Group code</span>
             <span className="mono" style={{ fontSize: "clamp(48px, 7vw, 84px)", letterSpacing: "0.16em", color: "var(--color-petrol)", lineHeight: 1 }}>
               {klass.code}
             </span>
@@ -164,7 +164,7 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
           <section className="card" aria-labelledby="club-list">
             <div className="card-head">
               <h2 className="card-title" id="club-list">
-                Club list
+                Children
               </h2>
               <span className="meta">
                 {kids.length} {kids.length === 1 ? "child" : "children"}
@@ -264,10 +264,10 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
             <form action={setClubManager} className="card card-pad stack" aria-labelledby="manager-title">
               <input type="hidden" name="class_id" value={klass.id} />
               <h2 className="card-title" id="manager-title">
-                Manager
+                Teacher
               </h2>
               <p className="meta">
-                The manager runs the weekly sessions and sees this club in &ldquo;My clubs&rdquo;. As school admin you can open any club and start a session to cover for them.
+                This teacher runs the weekly sessions and sees this group in &ldquo;My groups&rdquo;. As school admin you can open any group and start a session to cover for them.
               </p>
               <ManagerPicker
                 colleagues={people.filter((p) => p.id !== userId).map((p) => ({ id: p.id, name: p.display_name || p.email || "Colleague", pending: pending.has(p.id) }))}
@@ -275,7 +275,7 @@ export default async function ClubPage({ params, searchParams }: { params: Promi
               />
               <div className="actions">
                 <button className="btn" type="submit">
-                  Save manager
+                  Save teacher
                 </button>
               </div>
             </form>

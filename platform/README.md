@@ -1,6 +1,6 @@
 # Candide platform
 
-The app behind **app.candideai.com** and the **AI Creators Club**, an extra-curricular club schools run themselves for ages 8 to 11. A club group follows a term (Term 1 is *Create Your Comic*, 12 weeks); each week the teacher starts that week's mission, every child works in a guarded AI workspace, and their pinned work follows them from week to week until the end-of-term showcase. The marketing site lives one folder up and deploys separately to candideai.com.
+The app behind **app.candideai.com**: Candide, an extra-curricular AI activity schools run themselves for ages 8 to 11. A group of children (a "club group" in the code, the `classes` table in the database) follows a term (Term 1 is *Create Your Comic*, 12 weeks); each week the teacher starts that week's mission, every child works in a guarded AI workspace, and their pinned work follows them from week to week until the end-of-term showcase. The marketing site lives one folder up and deploys separately to candideai.com.
 
 Stack: Next.js 15 (App Router), TypeScript, Tailwind v4 with the Sodobat design tokens, Supabase (Postgres, Auth, Storage), Anthropic SDK (Claude Sonnet for chat, Claude Haiku for moderation and prompt rewriting), Zod, Vitest, Playwright. Deployed on Vercel.
 

@@ -4,7 +4,7 @@ import { meetsLabel } from "@/lib/schedule";
 import { isAdminProfile, requireTeacher } from "@/lib/teacher";
 import type { ClassRow } from "@/lib/types";
 
-export const metadata = { title: "My clubs" };
+export const metadata = { title: "My groups" };
 
 type ClubWithSessions = ClassRow & { sessions: { id: string; week: number | null }[]; term: { title: string; number: number } | null };
 
@@ -23,21 +23,21 @@ export default async function MyClubsPage() {
     <main className="page">
       <div className="page-head">
         <div className="page-intro">
-          <h1>My clubs</h1>
-          <p className="page-sub">The club groups you run. Each one follows a term, one mission a week; children join with the club code and tap their name.</p>
+          <h1>My groups</h1>
+          <p className="page-sub">The groups of children you run. Each one follows a term, one mission a week; children join with the group code and tap their name.</p>
         </div>
       </div>
 
       {clubs.length === 0 ? (
         <div className="card card-pad stack" style={{ maxWidth: 640 }}>
-          <p>{admin ? "You don’t run a club yourself." : "You don’t run a club yet."}</p>
+          <p>{admin ? "You don’t run a group yourself." : "You don’t run a group yet."}</p>
           <p className="meta">
             {admin ? (
               <>
                 To run one, create it on the <Link href="/teacher/school">School page</Link> and choose &ldquo;I&rsquo;ll run it myself&rdquo;.
               </>
             ) : (
-              "Your school admin creates the clubs and chooses who runs each one. Once they assign you a club, it appears here."
+              "Your school admin creates the groups and chooses who runs each one. Once they assign you a group, it appears here."
             )}
           </p>
         </div>

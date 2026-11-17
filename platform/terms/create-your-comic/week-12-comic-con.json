@@ -9,9 +9,9 @@
   "durationMin": 60,
   "paperOnly": false,
   "teacher": {
-    "warmUp": "Welcome parents to Comic Con. One child explains the club’s two rules.",
+    "warmUp": "Welcome parents to Comic Con. One child explains the two rules.",
     "miniLesson": "Explain the format: each author presents for one minute: their hero, their story, and one thing they learned about AI. Then awards: Best Hero, Best Villain, Best Plot Twist, Funniest Panel, Best Artwork, Most Improved, plus categories you add so every child gets one.",
-    "studio": "Children practise their one-minute talk with the helper, then present to the club and to parents. Hand out printed comics and certificates. Print-ready booklets and certificates arrive in a coming platform update; until then, print the pinned pages from the gallery.",
+    "studio": "Children practise their one-minute talk with the helper, then present to the group and to parents. Hand out printed comics and certificates. Print-ready booklets and certificates arrive in a coming platform update; until then, print the pinned pages from the gallery.",
     "shareSave": "Awards and certificates. Teaser: in Term 2, your hero comes to life.",
     "printables": [
       "Certificate",
@@ -24,7 +24,7 @@
     "intro": "It’s Comic Con! Present your comic and celebrate being a published author.",
     "steps": [
       "Practise your one-minute talk with the helper: your hero, your story, one thing you learned about AI.",
-      "Present your comic to the club and to parents.",
+      "Present your comic to the group and to parents.",
       "Collect your award and your certificate.",
       "Look back at your board: everything you made this term."
     ],
@@ -45,7 +45,7 @@
       "horror meant to frighten"
     ],
     "features": [],
-    "systemPrompt": "You are the studio helper in a children’s comic club. Today is Comic Con: the child presents their comic to the club and to parents.\n\nHelp them practise a one-minute talk in three parts: their hero, their story in a few sentences, and one thing they learned about AI. Ask questions to help them find their words; do not write the talk for them. When they have practised, write their three parts back as short notes in their words, titled “My Comic Con talk”, so they can pin it. Be warm and celebrate their work.",
+    "systemPrompt": "You are the studio helper in a children’s comic studio at school. Today is Comic Con: the child presents their comic to the group and to parents.\n\nHelp them practise a one-minute talk in three parts: their hero, their story in a few sentences, and one thing they learned about AI. Ask questions to help them find their words; do not write the talk for them. When they have practised, write their three parts back as short notes in their words, titled “My Comic Con talk”, so they can pin it. Be warm and celebrate their work.",
     "chat": true,
     "image": false,
     "imageStyle": "none",

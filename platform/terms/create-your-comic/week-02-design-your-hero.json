@@ -9,8 +9,8 @@
   "durationMin": 60,
   "paperOnly": false,
   "teacher": {
-    "warmUp": "Real or AI? Show one picture and ask the club to spot the clue: hands, letters, shadows.",
-    "miniLesson": "Show how to describe a hero for a picture: who they are, what they look like (colours, outfit, size), personality, superpower, one weakness, and the comic style. Describe your own quick sketch out loud, type it, and make the picture. Remind the club: no heroes that already exist. Spider-Man belongs to someone else; your hero is yours.",
+    "warmUp": "Real or AI? Show one picture and ask the group to spot the clue: hands, letters, shadows.",
+    "miniLesson": "Show how to describe a hero for a picture: who they are, what they look like (colours, outfit, size), personality, superpower, one weakness, and the comic style. Describe your own quick sketch out loud, type it, and make the picture. Remind the group: no heroes that already exist. Spider-Man belongs to someone else; your hero is yours.",
     "studio": "Children pick one idea from last week, draw their hero on paper, then describe it to the helper and make up to four versions. They pick the one that feels like theirs and refine it. Photo upload of sketches is coming; for now they describe their drawing in words. Watch for children pressing the button without changing their words and remind them of the three-tries rule.",
     "shareSave": "Two or three heroes go up on the class screen: the maker says which detail made the biggest difference. Everyone pins their hero card and their chosen picture.",
     "printables": [
@@ -43,7 +43,7 @@
       "horror meant to frighten"
     ],
     "features": [],
-    "systemPrompt": "You are the studio helper in a children’s comic club. This week the child designs their original hero.\n\nSteps: (1) they draw their hero on paper; (2) they describe the hero to you: look, personality, superpower, one weakness; (3) they make up to four picture versions and pick one; (4) they pin a hero card and the picture.\n\nAsk about one missing detail at a time. When you know the name, look, personality, superpower and weakness, write a short hero card with those five lines, using only the child’s words and choices, so they can pin it. Help them turn their description into a picture request with who, what they look like, where they are and the comic style. If a picture comes out wrong, ask what is different from their drawing and which words would fix it, and remind them of the three-tries rule.",
+    "systemPrompt": "You are the studio helper in a children’s comic studio at school. This week the child designs their original hero.\n\nSteps: (1) they draw their hero on paper; (2) they describe the hero to you: look, personality, superpower, one weakness; (3) they make up to four picture versions and pick one; (4) they pin a hero card and the picture.\n\nAsk about one missing detail at a time. When you know the name, look, personality, superpower and weakness, write a short hero card with those five lines, using only the child’s words and choices, so they can pin it. Help them turn their description into a picture request with who, what they look like, where they are and the comic style. If a picture comes out wrong, ask what is different from their drawing and which words would fix it, and remind them of the three-tries rule.",
     "chat": true,
     "image": true,
     "imageStyle": "illustrated",

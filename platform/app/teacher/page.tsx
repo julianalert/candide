@@ -9,5 +9,5 @@ export default async function TeacherHome() {
 
   const { data } = await supabase.from("classes").select("id").eq("teacher_id", userId).limit(2);
   if (data?.length === 1) redirect(`/teacher/class/${data[0].id}`);
-  redirect("/teacher/clubs");
+  redirect("/teacher/groups");
 }

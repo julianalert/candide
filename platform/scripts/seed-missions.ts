@@ -7,6 +7,16 @@ import type { MissionRow, TermRow } from "../lib/types";
 // A changed mission gets a new version; sessions keep their own snapshot.
 // Missions that are no longer in the repo are unpublished, never deleted (old galleries use them).
 
+/** JSON with sorted keys: Postgres jsonb reorders keys, so plain JSON.stringify always differs. */
+function stable(value: unknown): string {
+  if (Array.isArray(value)) return `[${value.map(stable).join(",")}]`;
+  if (value && typeof value === "object") {
+    const entries = Object.entries(value as Record<string, unknown>).sort(([a], [b]) => a.localeCompare(b));
+    return `{${entries.map(([k, v]) => `${JSON.stringify(k)}:${stable(v)}`).join(",")}}`;
+  }
+  return JSON.stringify(value);
+}
+
 async function main() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_KEY;
@@ -26,7 +36,7 @@ async function main() {
 
   for (const { term, missions } of bundles) {
     const current = existingTerms.get(term.id);
-    if (!current || JSON.stringify(current.json) !== JSON.stringify(term) || current.title !== term.title || current.number !== term.number) {
+    if (!current || stable(current.json) !== stable(term) || current.title !== term.title || current.number !== term.number) {
       const version = current && Object.keys(current.json ?? {}).length ? current.version + 1 : 1;
       const { error } = await db
         .from("terms")
@@ -40,7 +50,7 @@ async function main() {
     for (const mission of missions) {
       const row = existingMissions.get(mission.id);
       const label = `  week ${String(mission.week).padStart(2, "0")} ${mission.title}`;
-      if (row && JSON.stringify(row.json) === JSON.stringify(mission) && row.published) {
+      if (row && stable(row.json) === stable(mission) && row.published) {
         console.log(`${label} (v${row.version}, unchanged)`);
         continue;
       }

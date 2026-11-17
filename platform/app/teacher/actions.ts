@@ -28,7 +28,7 @@ export async function createClub(formData: FormData) {
   const meetsTime = String(formData.get("meets_time") ?? "");
   const startsOn = String(formData.get("starts_on") ?? "");
   const back = (error: string) => redirect(`/teacher/school?club_error=${encodeURIComponent(error)}#new-club`);
-  if (!name) back("Give the club a name.");
+  if (!name) back("Give the group a name.");
   if (!isTrack(track)) back("Pick an age track.");
 
   const { data: term } = await supabase.from("terms").select("id").eq("id", termId).eq("published", true).maybeSingle();
@@ -101,12 +101,12 @@ async function resolveManager(formData: FormData, ctx: { userId: string; schoolI
   if (choice === "invite") {
     const email = String(formData.get("manager_email") ?? "");
     const name = String(formData.get("manager_name") ?? "").trim().slice(0, 60);
-    if (!email.trim()) return { ok: false, error: "Type the email of the teacher who will run the club." };
+    if (!email.trim()) return { ok: false, error: "Type the email of the teacher who will run the group." };
     const result = await inviteOrFindColleague({ schoolId: ctx.schoolId, email, name, role: "teacher" });
     return result.ok ? { ok: true, profileId: result.profileId, invited: true } : result;
   }
   const { data: colleague } = await createServiceSupabase().from("profiles").select("id").eq("id", choice).eq("school_id", ctx.schoolId).maybeSingle();
-  return colleague ? { ok: true, profileId: colleague.id, invited: false } : { ok: false, error: "Pick who runs the club." };
+  return colleague ? { ok: true, profileId: colleague.id, invited: false } : { ok: false, error: "Pick who runs the group." };
 }
 
 /** The admin's welcome screen: confirm the school and who they are. */

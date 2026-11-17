@@ -78,7 +78,7 @@ export function JoinForm() {
         </div>
         {list.names.length === 0 ? (
           <div className="notice notice-warn" style={{ fontSize: 16 }}>
-            <span>Your club list is empty. Ask your teacher to add your name.</span>
+            <span>Your group&rsquo;s list is empty. Ask your teacher to add your name.</span>
           </div>
         ) : (
           <div className="name-grid" role="list">
@@ -104,7 +104,7 @@ export function JoinForm() {
     <form onSubmit={findClub} className="stack card-pad" style={{ gap: 18 }}>
       <div className="field">
         <label className="label" htmlFor="code" style={{ fontSize: 16 }}>
-          Club code
+          Group code
         </label>
         <input
           className="input input-big input-code"
@@ -123,7 +123,7 @@ export function JoinForm() {
       </div>
       {notice}
       <button className="btn btn-primary btn-big" type="submit" disabled={busy !== null || code.length < 6}>
-        {busy ? "Looking…" : "Find my club"}
+        {busy ? "Looking…" : "Find my group"}
       </button>
       <p className="caption">No account, no email. Your teacher has the code.</p>
     </form>

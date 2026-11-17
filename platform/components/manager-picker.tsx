@@ -15,7 +15,7 @@ export function ManagerPicker({ colleagues, defaultValue = "me", meLabel = "I’
     <div className="stack" style={{ gap: 12 }}>
       <div className="field">
         <label className="label" htmlFor="manager">
-          Who runs this club?
+          Who runs this group?
         </label>
         <select className="input" id="manager" name="manager" value={choice} onChange={(e) => setChoice(e.target.value)}>
           <option value="me">{meLabel}</option>
@@ -48,7 +48,7 @@ export function ManagerPicker({ colleagues, defaultValue = "me", meLabel = "I’
           </div>
         </div>
       )}
-      {choice === "invite" && <p className="caption">They get an email to join Candide. When they sign in, they land straight on this club.</p>}
+      {choice === "invite" && <p className="caption">They get an email to join Candide. When they sign in, they land straight on this group.</p>}
     </div>
   );
 }

@@ -50,8 +50,8 @@ export function WelcomeForm({ school, displayName, jobTitle, email, editing, err
           <h1>{editing ? "School details" : `Let’s get ${school?.name ?? "your school"} ready`}</h1>
           <p className="page-sub">
             {editing
-              ? "Your school’s name and city appear on the club descriptions for parents."
-              : "Two things before you start: confirm your school and tell us who you are. Next, you’ll create your club groups, choose who runs each one and when each one starts."}
+              ? "Your school’s name and city appear on the descriptions for parents."
+              : "Two things before you start: confirm your school and tell us who you are. Next, you’ll create your groups of children, choose who runs each one and when each one starts."}
           </p>
         </div>
       </div>
@@ -121,7 +121,7 @@ export function WelcomeForm({ school, displayName, jobTitle, email, editing, err
               </select>
             </div>
           </div>
-          <p className="caption">You sign in as {email}. You&rsquo;re the school admin: you create the clubs and choose who runs them.</p>
+          <p className="caption">You sign in as {email}. You&rsquo;re the school admin: you create the groups and choose who runs them.</p>
         </fieldset>
 
         <div className="actions">

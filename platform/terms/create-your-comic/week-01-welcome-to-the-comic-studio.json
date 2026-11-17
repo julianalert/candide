@@ -9,8 +9,8 @@
   "durationMin": 60,
   "paperOnly": false,
   "teacher": {
-    "warmUp": "Show a “Real or AI?” picture on the class screen and take a show of hands. Then welcome the club: this term, every one of you will publish your own comic.",
-    "miniLesson": "Show a sample comic page and name the parts: panels, speech bubbles, sound effects. Then the demo: ask the AI for “a hero” and show the result. Ask again with a precise description, like “a small fox in a red cape who is scared of heights, on a rope bridge, cartoon style”. Ask the club what changed. Introduce the two club rules: you are the author, and the three-tries rule.",
+    "warmUp": "Show a “Real or AI?” picture on the class screen and take a show of hands. Then welcome the group: this term, every one of you will publish your own comic.",
+    "miniLesson": "Show a sample comic page and name the parts: panels, speech bubbles, sound effects. Then the demo: ask the AI for “a hero” and show the result. Ask again with a precise description, like “a small fox in a red cape who is scared of heights, on a rope bridge, cartoon style”. Ask the group what changed. Introduce the two rules: you are the author, and the three-tries rule.",
     "studio": "On paper, each child writes three hero ideas on the hero idea sheet: who they are, one thing they are brilliant at, one weakness. On the platform they tell the helper their ideas, then make one vague and one precise picture of their favourite and compare them. Circulate and ask: which detail could you add?",
     "shareSave": "Two or three children read out their favourite idea and show their vague and precise pictures side by side. Everyone pins their list of three ideas and their best picture. Preview: next week, you design your hero.",
     "printables": [
@@ -43,7 +43,7 @@
       "horror meant to frighten"
     ],
     "features": [],
-    "systemPrompt": "You are the studio helper in a children’s comic club. This week the child finds three ideas for an original comic hero and discovers that precise words give better pictures.\n\nSteps: (1) they write three hero ideas on paper; (2) they tell you the ideas; (3) they make one vague picture and one precise picture and compare them; (4) they pin their ideas and their best picture.\n\nWhen the child shares an idea, reply with one short question that helps them add a detail: what the hero looks like, their superpower or their weakness. Never invent the hero for them. If they ask you to choose, offer two or three options and ask which feels most like theirs. When they have three ideas, write them back as a tidy list titled “My three hero ideas” so they can pin it. For pictures, encourage a short vague request first, then a detailed one with who, what they look like, where they are and a comic style, and ask what changed.",
+    "systemPrompt": "You are the studio helper in a children’s comic studio at school. This week the child finds three ideas for an original comic hero and discovers that precise words give better pictures.\n\nSteps: (1) they write three hero ideas on paper; (2) they tell you the ideas; (3) they make one vague picture and one precise picture and compare them; (4) they pin their ideas and their best picture.\n\nWhen the child shares an idea, reply with one short question that helps them add a detail: what the hero looks like, their superpower or their weakness. Never invent the hero for them. If they ask you to choose, offer two or three options and ask which feels most like theirs. When they have three ideas, write them back as a tidy list titled “My three hero ideas” so they can pin it. For pictures, encourage a short vague request first, then a detailed one with who, what they look like, where they are and a comic style, and ask what changed.",
     "chat": true,
     "image": true,
     "imageStyle": "illustrated",

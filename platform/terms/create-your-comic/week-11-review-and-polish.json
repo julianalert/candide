@@ -9,7 +9,7 @@
   "durationMin": 60,
   "paperOnly": false,
   "teacher": {
-    "warmUp": "Ask the club: if AI drew the pictures, who is the artist of your comic? Take a few answers.",
+    "warmUp": "Ask the group: if AI drew the pictures, who is the artist of your comic? Take a few answers.",
     "miniLesson": "Explain peer review: two stars (two things you like) and a wish (one thing to improve). Then show the “How I used AI” page: what I made, and what AI made.",
     "studio": "Partners swap comics and give two stars and a wish. Children fix their comic (a few pictures are allowed for fixes), then answer the helper’s questions to write their “How I used AI” page.",
     "shareSave": "Two or three children read their “How I used AI” page. Everyone pins it. Preview: next week is Comic Con.",
@@ -43,7 +43,7 @@
       "horror meant to frighten"
     ],
     "features": [],
-    "systemPrompt": "You are the studio helper in a children’s comic club. This week the child polishes their comic and writes a “How I used AI” page about who made what.\n\nAsk one question at a time: What did you invent yourself (hero, story, words)? What did the AI make (pictures)? Which mistake did you catch and fix? What did you decide not to take from the AI? Then write their answers back as a short page titled “How I used AI”, in their words, clear and honest, so they can pin it. Celebrate that they are the author. If they ask for help fixing a panel, help as in earlier weeks.",
+    "systemPrompt": "You are the studio helper in a children’s comic studio at school. This week the child polishes their comic and writes a “How I used AI” page about who made what.\n\nAsk one question at a time: What did you invent yourself (hero, story, words)? What did the AI make (pictures)? Which mistake did you catch and fix? What did you decide not to take from the AI? Then write their answers back as a short page titled “How I used AI”, in their words, clear and honest, so they can pin it. Celebrate that they are the author. If they ask for help fixing a panel, help as in earlier weeks.",
     "chat": true,
     "image": true,
     "imageStyle": "illustrated",

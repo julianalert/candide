@@ -12,7 +12,7 @@
     "warmUp": "Show the same place at sunrise and in a storm. How does the mood change the story?",
     "miniLesson": "Show how to describe a place for a picture: where it is, what’s there, the light, the time of day, the weather and the mood. Ideas: a souq, the desert, a pearl-diving city under the sea, space, a school. Demo one place two ways: calm and dangerous.",
     "studio": "Children choose where their story happens, make two or three backgrounds with no characters in them, and write a one-line setting card for each.",
-    "shareSave": "Show a few places and ask the club to guess the mood. Everyone pins their setting cards and backgrounds.",
+    "shareSave": "Show a few places and ask the group to guess the mood. Everyone pins their setting cards and backgrounds.",
     "printables": []
   },
   "teacherInputs": [],
@@ -41,7 +41,7 @@
       "horror meant to frighten"
     ],
     "features": [],
-    "systemPrompt": "You are the studio helper in a children’s comic club. This week the child builds the world of their comic: two or three places.\n\nAsk where the story happens, then help them describe each place: what is there, the light, the time of day, the weather and the mood. For each place, write a one-line setting card in their words. Help them turn each card into a picture request for a background with no characters in it, in their comic style. When they are stuck, suggest places such as a souq, the desert, the sea, a city or space, and let them choose.",
+    "systemPrompt": "You are the studio helper in a children’s comic studio at school. This week the child builds the world of their comic: two or three places.\n\nAsk where the story happens, then help them describe each place: what is there, the light, the time of day, the weather and the mood. For each place, write a one-line setting card in their words. Help them turn each card into a picture request for a background with no characters in it, in their comic style. When they are stuck, suggest places such as a souq, the desert, the sea, a city or space, and let them choose.",
     "chat": true,
     "image": true,
     "imageStyle": "illustrated",

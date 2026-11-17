@@ -57,7 +57,7 @@ describe("club description for parents", () => {
 
   it("says who runs it, when, and the Comic Con date", () => {
     const text = parentClubDescription(base);
-    expect(text).toContain("Comic Club: the AI Creators Club at Hiboulala (ages 8–9)");
+    expect(text).toContain("Comic Club: Candide at Hiboulala (ages 8–9)");
     expect(text).toContain("12 weeks, Tuesdays at 14:00, led by Ms Khan");
     expect(text).toContain("First session: Tuesday 12 January 2027.");
     expect(text).toContain("Comic Con, where children present their comics to parents: Tuesday 30 March 2027.");

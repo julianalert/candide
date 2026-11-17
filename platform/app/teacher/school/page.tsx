@@ -85,10 +85,10 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
       href: "/teacher/welcome?edit=1",
       cta: "Edit details",
     },
-    { done: clubs.length > 0, title: "Create your club groups", detail: "One per group of children, each with an age track and a manager who runs it.", href: "#new-club", cta: "Create a club" },
-    { done: clubs.length > 0 && pendingManagers.length === 0, title: "Managers accept their invites", detail: pendingManagers.length ? `Waiting for ${pendingManagers.map(nameOf).join(", ")}.` : clubs.length ? "Everyone who runs a club has joined." : "Teachers you invite to run a club show here until they accept.", href: "#people", cta: "See teachers" },
-    { done: clubs.length > 0 && clubs.every((c) => (kidsPerClub.get(c.id) ?? 0) > 0), title: "Fill each club list", detail: "The manager types the children’s first names once, from the club page.", href: "#clubs", cta: "See clubs" },
-    { done: clubs.length > 0 && clubs.every((c) => c.sessions.length > 0), title: "Start week 1", detail: "Share the club description with parents first, then each manager starts week 1 on the day.", href: "#parents", cta: "For parents" },
+    { done: clubs.length > 0, title: "Create your groups", detail: "One per group of children, each with an age track and the teacher who runs it.", href: "#new-club", cta: "Create a group" },
+    { done: clubs.length > 0 && pendingManagers.length === 0, title: "Teachers accept their invites", detail: pendingManagers.length ? `Waiting for ${pendingManagers.map(nameOf).join(", ")}.` : clubs.length ? "Every teacher who runs a group has joined." : "Teachers you invite to run a group show here until they accept.", href: "#people", cta: "See teachers" },
+    { done: clubs.length > 0 && clubs.every((c) => (kidsPerClub.get(c.id) ?? 0) > 0), title: "Add the children to each group", detail: "The teacher types the children’s first names once, from the group’s page.", href: "#clubs", cta: "See groups" },
+    { done: clubs.length > 0 && clubs.every((c) => c.sessions.length > 0), title: "Start week 1", detail: "Share the description with parents first, then each teacher starts week 1 on the day.", href: "#parents", cta: "For parents" },
   ];
   const doneCount = steps.filter((s) => s.done).length;
   const allDone = doneCount === steps.length;
@@ -101,7 +101,7 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
           <p className="section-label">School{where ? ` · ${where}` : ""}</p>
           <h1>{school?.name ?? "Your school"}</h1>
           <p className="page-sub">
-            Create the club groups, choose who runs each one, and follow every club from here.
+            Create the groups of children, choose who runs each one, and follow every group from here.
           </p>
         </div>
         <div className="actions">
@@ -109,7 +109,7 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
             Edit school details
           </Link>
           <a className="btn btn-primary" href="#new-club">
-            New club
+            New group
           </a>
         </div>
       </div>
@@ -117,7 +117,7 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
       {params.welcome && (
         <div className="notice notice-good">
           <span>
-            {school?.name ?? "Your school"} is set up. Next: create your first club group and choose who runs it.
+            {school?.name ?? "Your school"} is set up. Next: create your first group and choose who runs it.
           </span>
         </div>
       )}
@@ -129,7 +129,7 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
       {params.created && (
         <div className="notice notice-good">
           <span>
-            Club <b>{params.created}</b> created.{params.invited_manager ? " Its manager got an email to join; the club appears for them as soon as they sign in." : ""}
+            Group <b>{params.created}</b> created.{params.invited_manager ? " Its teacher got an email to join; the group appears for them as soon as they sign in." : ""}
           </span>
         </div>
       )}
@@ -198,12 +198,12 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
         <section className="card" id="clubs" aria-labelledby="clubs-title">
           <div className="card-head">
             <h2 className="card-title" id="clubs-title">
-              Club groups
+              Groups
             </h2>
             <span className="meta">{clubs.length}</span>
           </div>
           {clubs.length === 0 ? (
-            <p className="meta card-pad">No clubs yet. Create the first one: it takes a minute.</p>
+            <p className="meta card-pad">No groups yet. Create the first one: it takes a minute.</p>
           ) : (
             <div className="list">
               {clubs.map((club) => {
@@ -248,7 +248,7 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
         </section>
 
         <form action={createClub} className="card card-pad stack" id="new-club">
-          <h2 className="card-title">New club group</h2>
+          <h2 className="card-title">New group</h2>
           {params.club_error && (
             <div className="notice notice-error">
               <span>{params.club_error}</span>
@@ -256,9 +256,9 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
           )}
           <div className="field">
             <label className="label" htmlFor="club_name">
-              Club name
+              Group name
             </label>
-            <input className="input" id="club_name" name="name" required maxLength={60} placeholder="e.g. Comic Club, Tuesday group" />
+            <input className="input" id="club_name" name="name" required maxLength={60} placeholder="e.g. Tuesday group, Year 4 comics" />
           </div>
           <div className="field-row">
             <div className="field">
@@ -314,9 +314,9 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
           <ManagerPicker colleagues={colleagues} />
           <div className="actions">
             <button className="btn btn-primary" type="submit" disabled={terms.length === 0}>
-              Create club
+              Create group
             </button>
-            <span className="meta">You get the club code straight away.</span>
+            <span className="meta">You get the group code straight away.</span>
           </div>
         </form>
       </div>
@@ -328,7 +328,7 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
             <span className="meta">A description for your activities sign-up list</span>
           </div>
           {clubs.length === 0 ? (
-            <p className="meta card-pad">Once you create a club, its description for parents appears here, ready to copy.</p>
+            <p className="meta card-pad">Once you create a group, its description for parents appears here, ready to copy.</p>
           ) : (
             <div className="list">
               {clubs.map((club) => {
@@ -398,7 +398,7 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
 
         <form action={inviteTeacher} className="card card-pad stack">
           <h2 className="card-title">Invite a colleague</h2>
-          <p className="meta">To run a club, choose them when you create the club instead. Use this for another school admin, or a teacher who will run a club later.</p>
+          <p className="meta">To have a teacher run a group, choose them when you create the group instead. Use this for another school admin, or a teacher who will run a group later.</p>
           <div className="field-row">
             <div className="field">
               <label className="label" htmlFor="display_name">
@@ -446,7 +446,7 @@ export default async function SchoolPage({ searchParams }: { searchParams: Promi
                   <div className="grow">
                     <b>{weekLabel(session.week, session.title ?? undefined)}</b>
                     <span className="meta">
-                      {session.class?.name ?? "Club"} · {session.class?.teacher?.display_name ?? "Teacher"} · {formatDateTime(session.started_at)}
+                      {session.class?.name ?? "Group"} · {session.class?.teacher?.display_name ?? "Teacher"} · {formatDateTime(session.started_at)}
                     </span>
                   </div>
                   {sessionIsOver(session) ? <span className="chip">Ended</span> : <span className="chip chip-live">Live</span>}

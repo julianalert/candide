@@ -125,12 +125,12 @@ export default async function WeekPage({
               <input className="input" id={`input_${input.key}`} name={`input_${input.key}`} placeholder={input.placeholder} required maxLength={200} />
             </div>
           ))}
-          <p className="meta">The class screen shows the club code, the warm-up and the mini-lesson. Kids can join as soon as you press start.</p>
+          <p className="meta">The class screen shows the group code, the warm-up and the mini-lesson. Kids can join as soon as you press start.</p>
           <button className="btn btn-primary" type="submit">
             {alreadyRun ? "Run this week again" : "Start the session"}
           </button>
           <p className="caption">
-            Starting ends any session still open for this club.{alreadyRun ? " Children keep what they pinned last time." : ""}
+            Starting ends any session still open for this group.{alreadyRun ? " Children keep what they pinned last time." : ""}
           </p>
         </form>
       </div>

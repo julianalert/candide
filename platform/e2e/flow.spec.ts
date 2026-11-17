@@ -5,8 +5,8 @@ import { config } from "dotenv";
 config({ path: ".env.local" });
 config();
 
-// The school admin confirms the school on first sign-in, creates a club they run
-// themselves, adds children to its club list and starts week 1; a child finds the club,
+// The school admin confirms the school on first sign-in, creates a group they run
+// themselves, adds children to its list and starts week 1; a child finds the group,
 // taps their name, sends a message, pins the reply; the admin sees it in the gallery. Needs a Supabase project with the migrations and seed applied, and the
 // dev server running with AI_MOCK=1 IMAGE_PROVIDER=mock (playwright.config does this).
 
@@ -60,14 +60,14 @@ test("teacher launches, kid builds and pins, gallery shows it", async ({ browser
   await expect(teacher.page.getByText("Getting your school ready")).toBeVisible();
 
   // Create a club the admin runs themselves, then open it.
-  await teacher.page.getByLabel("Club name").fill("E2E Comic Club");
+  await teacher.page.getByLabel("Group name").fill("E2E Comic Group");
   await teacher.page.getByLabel("Meets on").selectOption("Tuesday");
   await teacher.page.getByLabel("First week starts").fill("2027-01-11");
-  await teacher.page.getByRole("button", { name: "Create club" }).click();
-  await expect(teacher.page.getByText("Club E2E Comic Club created.")).toBeVisible();
-  await teacher.page.getByRole("link", { name: "E2E Comic Club" }).first().click();
-  await expect(teacher.page.getByRole("heading", { name: "E2E Comic Club" })).toBeVisible();
-  await expect(teacher.page.getByText("Get your club started")).toBeVisible();
+  await teacher.page.getByRole("button", { name: "Create group" }).click();
+  await expect(teacher.page.getByText("Group E2E Comic Group created.")).toBeVisible();
+  await teacher.page.getByRole("link", { name: "E2E Comic Group" }).first().click();
+  await expect(teacher.page.getByRole("heading", { name: "E2E Comic Group" })).toBeVisible();
+  await expect(teacher.page.getByText("Get your group started")).toBeVisible();
   await expect(teacher.page.getByText("Planned for Tue 12 Jan.")).toBeVisible();
   const code = (await teacher.page.locator(".mono").first().innerText()).trim();
   expect(code).toMatch(/^[A-HJ-NP-Z2-9]{6}$/);
@@ -85,8 +85,8 @@ test("teacher launches, kid builds and pins, gallery shows it", async ({ browser
   const kidContext = await browser.newContext({ viewport: { width: 1024, height: 768 } });
   const kid = await kidContext.newPage();
   await kid.goto(`${base}/join`);
-  await kid.getByLabel("Club code").fill(code);
-  await kid.getByRole("button", { name: "Find my club" }).click();
+  await kid.getByLabel("Group code").fill(code);
+  await kid.getByRole("button", { name: "Find my group" }).click();
   await kid.getByRole("listitem").filter({ hasText: "Sam" }).click();
   await expect(kid.getByRole("heading", { name: "Welcome to the Comic Studio" })).toBeVisible();
   await expect(kid.locator(".kicker")).toHaveText("Sam");
@@ -124,7 +124,7 @@ test("teacher launches, kid builds and pins, gallery shows it", async ({ browser
   await teacher.page.getByRole("button", { name: "End session" }).click();
   await expect(teacher.page.getByText("This session has ended")).toBeVisible();
   await kid.reload();
-  await expect(kid.getByText("Your club gallery →")).toBeVisible();
+  await expect(kid.getByText("Your group gallery →")).toBeVisible();
 
   await kidContext.close();
   await teacher.context.close();

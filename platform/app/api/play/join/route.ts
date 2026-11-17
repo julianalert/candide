@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "Type your club code." }, { status: 400 });
+    return NextResponse.json({ error: "Type your group code." }, { status: 400 });
   }
 
   const code = normaliseCode(String(body.code ?? ""));
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     .limit(1)
     .maybeSingle<SessionRow>();
   if (!sessionRow || sessionIsOver(sessionRow)) {
-    return NextResponse.json({ error: "Your club hasn't started yet. Wait for your teacher." }, { status: 409 });
+    return NextResponse.json({ error: "Your group hasn't started yet. Wait for your teacher." }, { status: 409 });
   }
   const info = snapshotInfo(sessionRow.mission_snapshot);
   const week = sessionRow.week ?? info.week;
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
 
   // Step 2: the child tapped their name.
   const kid = kids.find((k) => k.id === body.kidId);
-  if (!kid) return NextResponse.json({ error: "We couldn't find that name. Ask your teacher to check the club list." }, { status: 404 });
+  if (!kid) return NextResponse.json({ error: "We couldn't find that name. Ask your teacher to check the list." }, { status: 404 });
 
   let participant: Participant | null = null;
   const { data: existing } = await db.from("participants").select("*").eq("session_id", sessionRow.id).eq("kid_id", kid.id).maybeSingle<Participant>();

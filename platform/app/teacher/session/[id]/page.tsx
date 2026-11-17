@@ -68,7 +68,7 @@ export default async function LaunchPage({ params }: { params: Promise<{ id: str
                 This session has ended
               </p>
               <Link className="btn btn-primary" href={`/teacher/session/${session.id}/gallery`}>
-                Open the club gallery
+                Open the group gallery
               </Link>
             </>
           ) : (
@@ -76,7 +76,7 @@ export default async function LaunchPage({ params }: { params: Promise<{ id: str
               <p className="launch-url">
                 Go to <b>{joinUrlForDisplay()}</b>, type the code and tap your name
               </p>
-              <p className="launch-code" aria-label={`Club code ${session.class.code.split("").join(" ")}`}>
+              <p className="launch-code" aria-label={`Group code ${session.class.code.split("").join(" ")}`}>
                 {session.class.code}
               </p>
               <JoinCount sessionId={session.id} initial={count ?? 0} live={!over} />
